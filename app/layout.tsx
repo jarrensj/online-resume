@@ -86,7 +86,7 @@ export default function RootLayout({
               </div>
             </SignedOut>
             <SignedIn>
-              <div className="user-profile-container no-filter">
+              <div>
                 <UserButton />
               </div>
             </SignedIn>

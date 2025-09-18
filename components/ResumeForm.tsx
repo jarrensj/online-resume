@@ -387,18 +387,10 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                   >
                     Preview
                   </label>
-                  <div 
-                    className="border rounded-xl p-4 transition-all duration-200"
-                    style={{
-                      borderColor: 'var(--border-gentle)',
-                      background: 'var(--background-secondary)',
-                    }}
-                  >
-                    <TweetCard
-                      tweetItem={tweet}
-                      index={index}
-                    />
-                  </div>
+                  <TweetCard
+                    tweetItem={tweet}
+                    index={index}
+                  />
                 </div>
               )}
             </div>

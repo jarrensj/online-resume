@@ -142,7 +142,6 @@ input:focus, textarea:focus, select:focus {
   transform: scale(0.65);
   transform-origin: center;
   margin: -15px 0 -35px 0;
-  filter: sepia(10%) saturate(80%) hue-rotate(15deg);
 }
 
 .tweet-card .tweet-note {
@@ -172,7 +171,6 @@ input:focus, textarea:focus, select:focus {
   transform: scale(0.8);
   transform-origin: center top;
   margin: -10px 0 -40px 0;
-  filter: sepia(5%) saturate(90%) hue-rotate(10deg);
   overflow: hidden;
 }
 
@@ -239,10 +237,3 @@ h4 { font-size: 1.5rem; }
   border-color: var(--border-soft);
 }
 
-/* Ensure no filters apply to user profile */
-.no-filter,
-.no-filter *,
-.user-profile-container,
-.user-profile-container * {
-  filter: none !important;
-}
