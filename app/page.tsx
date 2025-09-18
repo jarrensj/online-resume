@@ -115,7 +115,7 @@ export default function Home() {
                 Welcome back, {userProfile.username}!
               </h1>
               <p className="text-lg" style={{ color: 'var(--foreground-secondary)' }}>
-                Your creative space is ready
+                Edit your profile
               </p>
             </div>
 
