@@ -66,7 +66,7 @@ export default function Home() {
               Welcome!
             </h1>
             <p className="text-lg" style={{ color: 'var(--foreground-secondary)' }}>
-              Create your personal resume space
+              Create your resume
             </p>
           </div>
           
