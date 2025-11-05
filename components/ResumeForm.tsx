@@ -60,6 +60,26 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
     setTweets(updatedTweets)
   }
 
+  const moveTweetUp = (index: number) => {
+    if (index > 0) {
+      const newTweets = [...tweets]
+      const temp = newTweets[index]
+      newTweets[index] = newTweets[index - 1]
+      newTweets[index - 1] = temp
+      setTweets(newTweets)
+    }
+  }
+
+  const moveTweetDown = (index: number) => {
+    if (index < tweets.length - 1) {
+      const newTweets = [...tweets]
+      const temp = newTweets[index]
+      newTweets[index] = newTweets[index + 1]
+      newTweets[index + 1] = temp
+      setTweets(newTweets)
+    }
+  }
+
   const handleDragStart = (e: React.DragEvent, index: number) => {
     setDraggedIndex(index)
     e.dataTransfer.effectAllowed = 'move'
@@ -295,23 +315,85 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                   Tweet #{index + 1}
                 </h3>
               </div>
-              {tweets.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeTweet(index)}
-                  className="text-sm px-3 py-1 rounded-lg transition-colors"
-                  style={{ color: '#dc3545', background: '#f8d7da', border: '1px solid #f5c6cb' }}
-                  disabled={loading}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#f1b0b7';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#f8d7da';
-                  }}
-                >
-                  Remove
-                </button>
-              )}
+              <div className="flex items-center gap-2">
+                {tweets.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => moveTweetUp(index)}
+                      disabled={loading || index === 0}
+                      className="p-2 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+                      style={{ 
+                        background: 'var(--background-secondary)', 
+                        border: '1.5px solid var(--border-soft)',
+                        color: 'var(--foreground)'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!e.currentTarget.disabled) {
+                          e.currentTarget.style.background = 'var(--hover-bg)';
+                          e.currentTarget.style.borderColor = 'var(--accent-green)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!e.currentTarget.disabled) {
+                          e.currentTarget.style.background = 'var(--background-secondary)';
+                          e.currentTarget.style.borderColor = 'var(--border-soft)';
+                        }
+                      }}
+                      title="Move up"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 3.5l-4 4h8l-4-4z"/>
+                        <path d="M4 10h8v1H4v-1z"/>
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => moveTweetDown(index)}
+                      disabled={loading || index === tweets.length - 1}
+                      className="p-2 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+                      style={{ 
+                        background: 'var(--background-secondary)', 
+                        border: '1.5px solid var(--border-soft)',
+                        color: 'var(--foreground)'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!e.currentTarget.disabled) {
+                          e.currentTarget.style.background = 'var(--hover-bg)';
+                          e.currentTarget.style.borderColor = 'var(--accent-green)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!e.currentTarget.disabled) {
+                          e.currentTarget.style.background = 'var(--background-secondary)';
+                          e.currentTarget.style.borderColor = 'var(--border-soft)';
+                        }
+                      }}
+                      title="Move down"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M4 5h8v1H4V5z"/>
+                        <path d="M8 12.5l4-4H4l4 4z"/>
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => removeTweet(index)}
+                      className="text-sm px-3 py-1 rounded-lg transition-colors"
+                      style={{ color: '#dc3545', background: '#f8d7da', border: '1px solid #f5c6cb' }}
+                      disabled={loading}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = '#f1b0b7';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = '#f8d7da';
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
             
             <div className="space-y-5">
