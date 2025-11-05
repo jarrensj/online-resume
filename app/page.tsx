@@ -60,20 +60,65 @@ export default function Home() {
   return (
     <main className="min-h-screen px-6 py-12 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
       <SignedOut>
-        <div className="text-center max-w-md mx-auto">
-          <div className="mb-8">
-            <h1 className="text-5xl font-bold mb-4" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-handwritten)' }}>
-              Welcome!
+        <div className="text-center max-w-3xl mx-auto px-4">
+          <div className="mb-12">
+            <h1 className="text-6xl font-bold mb-6" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-handwritten)', lineHeight: '1.2' }}>
+              Your Expertise, Tweet by Tweet
             </h1>
-            <p className="text-lg" style={{ color: 'var(--foreground-secondary)' }}>
-              Create your resume
+            <p className="text-xl mb-4" style={{ color: 'var(--foreground)', fontWeight: '500' }}>
+              Build your street cred with the tweets that matter
             </p>
+            <p className="text-lg leading-relaxed" style={{ color: 'var(--foreground-secondary)' }}>
+              Showcase the tweets that prove your expertise—whether you wrote them, or others mentioned your work. 
+              Create a living resume of your accomplishments, one tweet at a time.
+            </p>
+          </div>
+
+          <div className="card p-8 mb-10 text-left">
+            <h2 className="text-2xl font-semibold mb-6 text-center" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-handwritten)' }}>
+              Why Tweet Cred?
+            </h2>
+            <div className="space-y-5">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 text-2xl">🐦</div>
+                <div>
+                  <h3 className="font-semibold mb-2" style={{ color: 'var(--foreground)' }}>
+                    Your Tweets
+                  </h3>
+                  <p style={{ color: 'var(--foreground-secondary)' }}>
+                    Collect tweets where you share knowledge, insights, and expertise in your field
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 text-2xl">🌟</div>
+                <div>
+                  <h3 className="font-semibold mb-2" style={{ color: 'var(--foreground)' }}>
+                    Mentions & Shoutouts
+                  </h3>
+                  <p style={{ color: 'var(--foreground-secondary)' }}>
+                    Include tweets from others that highlight your work, projects, or contributions
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 text-2xl">💼</div>
+                <div>
+                  <h3 className="font-semibold mb-2" style={{ color: 'var(--foreground)' }}>
+                    Street Cred Matters
+                  </h3>
+                  <p style={{ color: 'var(--foreground-secondary)' }}>
+                    Social proof is powerful. Turn your social media presence into a compelling portfolio
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
           
           <div className="space-y-4">
             <SignInButton>
               <button 
-                className="w-full px-8 py-3 text-white font-medium rounded-xl transition-all duration-200"
+                className="w-full max-w-md mx-auto px-8 py-4 text-white font-semibold rounded-xl transition-all duration-200 text-lg"
                 style={{ 
                   background: 'var(--accent-green)',
                   border: '1.5px solid var(--accent-green)'
@@ -89,9 +134,12 @@ export default function Home() {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                Sign In to Start
+                Start Building Your Tweet Resume
               </button>
             </SignInButton>
+            <p className="text-sm" style={{ color: 'var(--foreground-light)' }}>
+              Free to use • Takes 2 minutes to set up
+            </p>
           </div>
         </div>
       </SignedOut>

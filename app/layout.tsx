@@ -21,8 +21,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "hi",
-  description: "hi",
+  title: "Tweet Cred - Your Expertise, Tweet by Tweet",
+  description: "Build your street cred with tweets that document your expertise. Showcase tweets you wrote and mentions from others to create a living resume of your accomplishments.",
 };
 
 export default function RootLayout({
