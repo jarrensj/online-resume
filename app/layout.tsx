@@ -23,6 +23,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "hi",
   description: "hi",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({
@@ -37,16 +42,16 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           style={{ background: 'var(--background)', color: 'var(--foreground)' }}
         >
-          <header className="flex justify-end items-center px-6 py-4 gap-4 h-20">
+          <header className="flex justify-end items-center px-3 sm:px-6 py-3 sm:py-4 gap-2 sm:gap-4 min-h-[60px] sm:h-20">
             <SignedOut>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <SignInButton mode="modal">
-                  <button className="px-4 py-2 font-medium rounded-lg transition-all duration-200" style={{ color: 'var(--foreground)', background: 'transparent', border: '1.5px solid var(--border-gentle)' }}>
+                  <button className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base font-medium rounded-lg transition-all duration-200" style={{ color: 'var(--foreground)', background: 'transparent', border: '1.5px solid var(--border-gentle)' }}>
                     Sign In
                   </button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button className="px-5 py-2 font-medium rounded-lg transition-all duration-200 text-white" style={{ background: 'var(--accent-green)', border: '1.5px solid var(--accent-green)' }}>
+                  <button className="px-3 sm:px-5 py-1.5 sm:py-2 text-sm sm:text-base font-medium rounded-lg transition-all duration-200 text-white" style={{ background: 'var(--accent-green)', border: '1.5px solid var(--accent-green)' }}>
                     Sign Up
                   </button>
                 </SignUpButton>

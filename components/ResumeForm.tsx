@@ -200,29 +200,29 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
 
   if (fetchingResume) {
     return (
-      <div className="max-w-2xl mx-auto card p-8">
+      <div className="max-w-2xl mx-auto card p-4 sm:p-6 md:p-8">
         <div className="text-center">
           <div 
             className="animate-spin rounded-full h-8 w-8 border-2 mx-auto loading-spinner"
             style={{ borderTopColor: 'var(--accent-green)', borderColor: 'var(--border-soft)' }}
           ></div>
-          <p className="mt-3 text-lg" style={{ color: 'var(--foreground-secondary)' }}>Loading resume...</p>
+          <p className="mt-3 text-base sm:text-lg" style={{ color: 'var(--foreground-secondary)' }}>Loading resume...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="max-w-2xl mx-auto card p-8">
-      <div className="flex justify-between items-start mb-8">
+    <div className="max-w-2xl mx-auto card p-4 sm:p-6 md:p-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-0 mb-6 sm:mb-8">
         <div>
           <h2 
-            className="text-3xl font-bold mb-3"
+            className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3"
             style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
           >
             {resume ? 'Edit Resume' : 'Create Resume'}
           </h2>
-          <p style={{ color: 'var(--foreground-secondary)' }}>
+          <p className="text-sm sm:text-base" style={{ color: 'var(--foreground-secondary)' }}>
             Add tweet links to showcase your thoughts and insights
           </p>
         </div>
@@ -230,7 +230,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
           <button
             onClick={handleDelete}
             disabled={loading}
-            className="px-4 py-2 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 text-white"
+            className="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base font-medium rounded-xl transition-all duration-200 disabled:opacity-50 text-white"
             style={{ background: '#dc3545', border: '1.5px solid #dc3545' }}
             onMouseEnter={(e) => {
               if (!e.currentTarget.disabled) {
@@ -250,7 +250,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
         {tweets.map((tweet, index) => (
           <div 
             key={`tweet-${index}`}
@@ -260,7 +260,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
             onDragLeave={handleDragLeave}
             onDrop={(e) => handleDrop(e, index)}
             onDragEnd={handleDragEnd}
-            className={`border rounded-2xl p-6 transition-all duration-200 ${
+            className={`border rounded-2xl p-4 sm:p-6 transition-all duration-200 ${
               !loading && tweets.length > 1 ? 'cursor-move' : ''
             }`}
             style={{
@@ -279,8 +279,8 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
               boxShadow: dragOverIndex === index ? 'var(--shadow-soft)' : 'var(--shadow-gentle)'
             }}
           >
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center gap-3">
+            <div className="flex justify-between items-center mb-3 sm:mb-4">
+              <div className="flex items-center gap-2 sm:gap-3">
                 {tweets.length > 1 && !loading && (
                   <div style={{ color: 'var(--foreground-light)' }}>
                     <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
@@ -289,7 +289,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                   </div>
                 )}
                 <h3 
-                  className="text-xl font-medium"
+                  className="text-lg sm:text-xl font-medium"
                   style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
                 >
                   Tweet #{index + 1}
@@ -299,7 +299,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                 <button
                   type="button"
                   onClick={() => removeTweet(index)}
-                  className="text-sm px-3 py-1 rounded-lg transition-colors"
+                  className="text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-lg transition-colors whitespace-nowrap"
                   style={{ color: '#dc3545', background: '#f8d7da', border: '1px solid #f5c6cb' }}
                   disabled={loading}
                   onMouseEnter={(e) => {
@@ -314,7 +314,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
               )}
             </div>
             
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               <div>
                 <label 
                   className="block text-sm font-medium mb-2"
@@ -327,7 +327,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                   value={tweet.tweet_link}
                   onChange={(e) => updateTweet(index, 'tweet_link', e.target.value)}
                   placeholder="https://twitter.com/username/status/..."
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-200"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl transition-all duration-200"
                   style={{
                     border: '1.5px solid var(--border-gentle)',
                     background: 'var(--background-card)',
@@ -358,7 +358,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                   onChange={(e) => updateTweet(index, 'notes', e.target.value)}
                   placeholder="Add your thoughts about this tweet..."
                   rows={3}
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl transition-all duration-200 resize-none"
                   style={{
                     border: '1.5px solid var(--border-gentle)',
                     background: 'var(--background-card)',
@@ -397,11 +397,11 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
           </div>
         ))}
 
-        <div className="flex justify-between items-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-4">
           <button
             type="button"
             onClick={addTweet}
-            className="px-5 py-2.5 font-medium rounded-xl transition-all duration-200 text-white"
+            className="w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base font-medium rounded-xl transition-all duration-200 text-white"
             style={{ background: 'var(--accent-brown)', border: '1.5px solid var(--accent-brown)' }}
             disabled={loading}
             onMouseEnter={(e) => {
@@ -423,7 +423,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
           <button
             type="submit"
             disabled={loading}
-            className="px-8 py-2.5 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-white"
+            className="w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-2.5 text-sm sm:text-base font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-white"
             style={{
               background: loading ? 'var(--foreground-light)' : 'var(--accent-green)',
               border: '1.5px solid transparent'

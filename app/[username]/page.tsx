@@ -59,7 +59,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   if (loading) {
     return (
-      <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
+      <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
         <div className="text-center">
           <div 
             className="animate-spin rounded-full h-10 w-10 border-2 mx-auto loading-spinner"
@@ -73,7 +73,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   if (error) {
     return (
-      <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
+      <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
         <div className="text-center">
           <h1 
             className="text-3xl font-bold mb-4"
@@ -92,21 +92,21 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   }
 
   return (
-    <main className="min-h-screen px-6 py-12" style={{ background: 'var(--background)' }}>
+    <main className="min-h-screen px-4 sm:px-6 py-8 sm:py-12" style={{ background: 'var(--background)' }}>
       <div className="max-w-4xl mx-auto">
         {/* Profile Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <h1 
-            className="text-5xl font-bold mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4"
             style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
           >
             {profile.username}
           </h1>
-          <div className="w-24 h-0.5 mx-auto" style={{ background: 'var(--accent-sage)' }}></div>
+          <div className="w-16 sm:w-24 h-0.5 mx-auto" style={{ background: 'var(--accent-sage)' }}></div>
         </div>
 
         {/* Tweets Section */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {profile.tweets && profile.tweets.length > 0 ? (
             <>
               <div className="flex flex-col gap-4">
@@ -120,21 +120,21 @@ export default function ProfilePage({ params }: ProfilePageProps) {
               </div>
             </>
           ) : (
-            <div className="text-center py-16">
+            <div className="text-center py-8 sm:py-16">
               <div 
-                className="card p-12 max-w-lg mx-auto"
+                className="card p-6 sm:p-8 md:p-12 max-w-lg mx-auto"
                 style={{ background: 'var(--background-secondary)' }}
               >
                 <h2 
-                  className="text-3xl font-semibold mb-3"
+                  className="text-2xl sm:text-3xl font-semibold mb-2 sm:mb-3"
                   style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
                 >
                   No tweets yet
                 </h2>
-                <p style={{ color: 'var(--foreground-secondary)', fontSize: '1.1rem' }}>
+                <p style={{ color: 'var(--foreground-secondary)', fontSize: '0.95rem' }} className="sm:text-lg">
                   {profile.username} hasn&apos;t shared any thoughts yet.
                 </p>
-                <div className="mt-6 w-16 h-0.5 mx-auto" style={{ background: 'var(--accent-sage)' }}></div>
+                <div className="mt-4 sm:mt-6 w-12 sm:w-16 h-0.5 mx-auto" style={{ background: 'var(--accent-sage)' }}></div>
               </div>
             </div>
           )}

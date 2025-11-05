@@ -68,24 +68,24 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
   }
 
   return (
-    <div className="max-w-md mx-auto card p-8">
-      <div className="text-center mb-8">
+    <div className="max-w-md mx-auto card p-4 sm:p-6 md:p-8">
+      <div className="text-center mb-6 sm:mb-8">
         <h2 
-          className="text-3xl font-bold mb-3"
+          className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3"
           style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
         >
           {mode === 'update' ? 'Update Username' : `Welcome${user?.firstName ? `, ${user.firstName}` : ''}!`}
         </h2>
-        <p style={{ color: 'var(--foreground-secondary)' }}>
+        <p className="text-sm sm:text-base" style={{ color: 'var(--foreground-secondary)' }}>
           {mode === 'update' ? 'Change your username below' : 'Choose a username to complete your profile'}
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div>
           <label 
             htmlFor="username" 
-            className="block text-sm font-medium mb-3"
+            className="block text-sm font-medium mb-2 sm:mb-3"
             style={{ color: 'var(--foreground)' }}
           >
             Username
@@ -96,7 +96,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter your username"
-            className="w-full px-4 py-3 rounded-xl transition-all duration-200"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl transition-all duration-200"
             style={{
               border: '1.5px solid var(--border-gentle)',
               background: 'var(--background-card)',
@@ -145,7 +145,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
         <button
           type="submit"
           disabled={loading || !username.trim() || (mode === 'update' && username.trim() === currentUsername)}
-          className="w-full py-3 px-6 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-white"
+          className="w-full py-2.5 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-white"
           style={{
             background: loading || !username.trim() || (mode === 'update' && username.trim() === currentUsername) 
               ? 'var(--foreground-light)' 

@@ -58,14 +58,14 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen px-6 py-12 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
+    <main className="min-h-screen px-4 sm:px-6 py-8 sm:py-12 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
       <SignedOut>
         <div className="text-center max-w-md mx-auto">
-          <div className="mb-8">
-            <h1 className="text-5xl font-bold mb-4" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-handwritten)' }}>
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-handwritten)' }}>
               Welcome!
             </h1>
-            <p className="text-lg" style={{ color: 'var(--foreground-secondary)' }}>
+            <p className="text-base sm:text-lg" style={{ color: 'var(--foreground-secondary)' }}>
               Create your resume
             </p>
           </div>
@@ -110,32 +110,32 @@ export default function Home() {
         ) : userProfile ? (
           // User has a profile - show dashboard
           <div className="text-center max-w-3xl mx-auto w-full">
-            <div className="mb-10">
-              <h1 className="text-5xl font-bold mb-3" style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}>
+            <div className="mb-6 sm:mb-10">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}>
                 Welcome back, {userProfile.username}!
               </h1>
-              <p className="text-lg" style={{ color: 'var(--foreground-secondary)' }}>
+              <p className="text-base sm:text-lg" style={{ color: 'var(--foreground-secondary)' }}>
                 Edit your profile
               </p>
             </div>
 
-            <div className="card p-8 mb-8">
-              <h2 className="text-2xl font-semibold mb-6" style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}>
+            <div className="card p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6" style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}>
                 Your Profile
               </h2>
-              <div className="text-left space-y-4 mb-8">
-                <div className="flex items-center space-x-3">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Username:</span>
-                  <span style={{ color: 'var(--foreground-secondary)' }}>{userProfile.username}</span>
+              <div className="text-left space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3">
+                  <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--foreground)' }}>Username:</span>
+                  <span className="text-sm sm:text-base" style={{ color: 'var(--foreground-secondary)' }}>{userProfile.username}</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Member since:</span>
-                  <span style={{ color: 'var(--foreground-secondary)' }}>
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3">
+                  <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--foreground)' }}>Member since:</span>
+                  <span className="text-sm sm:text-base" style={{ color: 'var(--foreground-secondary)' }}>
                     {new Date(userProfile.created_at).toLocaleDateString()}
                   </span>
                 </div>
-                <div className="flex items-center space-x-3 flex-wrap">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Profile URL:</span>
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3 flex-wrap">
+                  <span className="font-medium text-sm sm:text-base" style={{ color: 'var(--foreground)' }}>Profile URL:</span>
                   <a 
                     href={`/${userProfile.username}`}
                     className="underline decoration-2 underline-offset-4 transition-colors"
@@ -150,13 +150,13 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="flex gap-3 flex-wrap justify-center">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
                 <button
                   onClick={() => {
                     setShowUpdateForm(!showUpdateForm);
                     if (!showUpdateForm) setShowResumeForm(false); // Close resume form when opening username form
                   }}
-                  className="px-6 py-2.5 text-white font-medium rounded-xl transition-all duration-200"
+                  className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base text-white font-medium rounded-xl transition-all duration-200"
                   style={{ 
                     background: 'var(--accent-brown)',
                     border: '1.5px solid var(--accent-brown)'
@@ -177,7 +177,7 @@ export default function Home() {
                     setShowResumeForm(!showResumeForm);
                     if (!showResumeForm) setShowUpdateForm(false); // Close username form when opening resume form
                   }}
-                  className="px-6 py-2.5 text-white font-medium rounded-xl transition-all duration-200"
+                  className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base text-white font-medium rounded-xl transition-all duration-200"
                   style={{ 
                     background: 'var(--accent-green)',
                     border: '1.5px solid var(--accent-green)'
@@ -197,7 +197,7 @@ export default function Home() {
                   href={`/${userProfile.username}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-2.5 text-white font-medium rounded-xl transition-all duration-200 no-underline"
+                  className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base text-white font-medium rounded-xl transition-all duration-200 no-underline"
                   style={{ 
                     background: 'var(--accent-sage)',
                     border: '1.5px solid var(--accent-sage)'
@@ -217,7 +217,7 @@ export default function Home() {
             </div>
 
             {showUpdateForm && (
-              <div className="mb-8">
+              <div className="mb-6 sm:mb-8">
                 <UsernameForm
                   mode="update"
                   currentUsername={userProfile.username}
@@ -227,7 +227,7 @@ export default function Home() {
             )}
 
             {showResumeForm && (
-              <div className="mb-8">
+              <div className="mb-6 sm:mb-8">
                 <ResumeForm
                   onResumeUpdated={() => {
                     // Optionally refresh or show success message
