@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   description: "antiresume",
 };
 
+// Force dynamic rendering to ensure auth state is always fresh
+export const dynamic = 'force-dynamic'
+
 export default function RootLayout({
   children,
 }: Readonly<{
