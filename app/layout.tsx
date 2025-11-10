@@ -38,7 +38,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           style={{ background: 'var(--background)', color: 'var(--foreground)' }}
         >
-          <header className="flex justify-end items-center px-6 py-4 gap-4 h-20">
+          <header className="fixed top-0 right-0 left-0 flex justify-end items-center px-6 py-4 gap-4 h-20 z-50" style={{ background: 'var(--background)' }}>
             <SignedOut>
               <div className="flex items-center gap-3">
                 <SignInButton mode="modal">
@@ -59,7 +59,9 @@ export default function RootLayout({
               </div>
             </SignedIn>
           </header>
-          {children}
+          <div className="pt-20">
+            {children}
+          </div>
           <Analytics />
         </body>
       </html>
