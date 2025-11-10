@@ -1,9 +1,7 @@
-'use client'
-
-import { useState, useEffect, use } from 'react'
 import { notFound } from 'next/navigation'
 import PublicTweetCard from '@/components/PublicTweetCard'
 import { Linkedin, Twitter, Instagram, Globe } from 'lucide-react'
+import { createClerkSupabaseClient } from '@/app/lib/db'
 
 interface TweetItem {
   tweet_link: string
@@ -28,72 +26,46 @@ interface ProfilePageProps {
   }>
 }
 
-export default function ProfilePage({ params }: ProfilePageProps) {
-  const resolvedParams = use(params)
-  const [profile, setProfile] = useState<UserProfile | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+async function getProfile(username: string): Promise<UserProfile | null> {
+  try {
+    const supabase = createClerkSupabaseClient()
+    
+    // Get public profile data by username
+    const { data: profile, error } = await supabase
+      .from('user_profiles')
+      .select('id, username, linkedin, twitter_handle, ig_handle, website, created_at')
+      .eq('username', username.trim())
+      .single()
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch(`/api/profile/${resolvedParams.username}`)
-        
-        if (response.status === 404) {
-          notFound()
-          return
-        }
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch profile')
-        }
-        
-        const data = await response.json()
-        setProfile(data.profile)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
-      } finally {
-        setLoading(false)
-      }
+    if (error) {
+      console.error('Error fetching profile:', error)
+      return null
     }
 
-    if (resolvedParams.username) {
-      fetchProfile()
+    // Get user's resume/tweets
+    const { data: resume } = await supabase
+      .from('resumes')
+      .select('tweets, created_at')
+      .eq('user_profile_id', profile.id)
+      .single()
+
+    return {
+      ...profile,
+      tweets: resume?.tweets || [],
+      resume_created_at: resume?.created_at
     }
-  }, [resolvedParams.username])
-
-  if (loading) {
-    return (
-      <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
-        <div className="text-center">
-          <div 
-            className="animate-spin rounded-full h-10 w-10 border-2 mx-auto loading-spinner"
-            style={{ borderTopColor: 'var(--accent-green)', borderColor: 'var(--border-soft)' }}
-          ></div>
-          <p className="mt-4 text-lg" style={{ color: 'var(--foreground-secondary)' }}>Loading profile...</p>
-        </div>
-      </main>
-    )
+  } catch (error) {
+    console.error('Error fetching profile:', error)
+    return null
   }
+}
 
-  if (error) {
-    return (
-      <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
-        <div className="text-center">
-          <h1 
-            className="text-3xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-handwritten)', color: '#c53030' }}
-          >
-            Oops!
-          </h1>
-          <p style={{ color: 'var(--foreground-secondary)' }}>{error}</p>
-        </div>
-      </main>
-    )
-  }
+export default async function ProfilePage({ params }: ProfilePageProps) {
+  const resolvedParams = await params
+  const profile = await getProfile(resolvedParams.username)
 
   if (!profile) {
-    return notFound()
+    notFound()
   }
 
   const getSocialLinks = () => {
@@ -171,30 +143,6 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                     rel="noopener noreferrer"
                     aria-label={link.ariaLabel}
                     className="social-icon-link"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '12px',
-                      border: '1.5px solid var(--border-gentle)',
-                      background: 'var(--background-card)',
-                      color: 'var(--foreground-secondary)',
-                      transition: 'all 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--accent-green)'
-                      e.currentTarget.style.color = 'var(--accent-green)'
-                      e.currentTarget.style.transform = 'translateY(-2px)'
-                      e.currentTarget.style.boxShadow = 'var(--shadow-soft)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--border-gentle)'
-                      e.currentTarget.style.color = 'var(--foreground-secondary)'
-                      e.currentTarget.style.transform = 'translateY(0)'
-                      e.currentTarget.style.boxShadow = 'none'
-                    }}
                   >
                     <Icon size={20} strokeWidth={2} />
                   </a>

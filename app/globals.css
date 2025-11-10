@@ -370,3 +370,24 @@ h4 { font-size: 1.5rem; }
   border-color: var(--border-soft);
 }
 
+/* Social icon links */
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-gentle);
+  background: var(--background-card);
+  color: var(--foreground-secondary);
+  transition: all 0.2s ease;
+}
+
+.social-icon-link:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
