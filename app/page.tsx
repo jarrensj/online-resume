@@ -7,6 +7,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import EmailForm from '@/components/EmailForm'
+import WalletAddressesForm from '@/components/WalletAddressesForm'
 
 interface UserProfile {
   id: string
@@ -24,6 +25,7 @@ export default function Home() {
   const [showResumeForm, setShowResumeForm] = useState(false)
   const [showSocialForm, setShowSocialForm] = useState(false)
   const [showEmailForm, setShowEmailForm] = useState(false)
+  const [showWalletForm, setShowWalletForm] = useState(false)
   const [showResetDialog, setShowResetDialog] = useState(false)
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
@@ -54,6 +56,7 @@ export default function Home() {
     setShowUpdateForm(false)
     setShowSocialForm(false)
     setShowEmailForm(false)
+    setShowWalletForm(false)
     setLoading(true)
     
     // Refetch to get updated profile
@@ -89,6 +92,7 @@ export default function Home() {
       setShowResumeForm(false)
       setShowSocialForm(false)
       setShowEmailForm(false)
+      setShowWalletForm(false)
       
     } catch (err) {
       setResetError(err instanceof Error ? err.message : 'An error occurred')
@@ -176,6 +180,7 @@ export default function Home() {
                       setShowResumeForm(false);
                       setShowSocialForm(false);
                       setShowEmailForm(false);
+                      setShowWalletForm(false);
                     }
                   }}
                   className="btn-base btn-secondary"
@@ -189,6 +194,7 @@ export default function Home() {
                       setShowUpdateForm(false);
                       setShowSocialForm(false);
                       setShowEmailForm(false);
+                      setShowWalletForm(false);
                     }
                   }}
                   className="btn-base btn-primary"
@@ -202,6 +208,7 @@ export default function Home() {
                       setShowUpdateForm(false);
                       setShowResumeForm(false);
                       setShowSocialForm(false);
+                      setShowWalletForm(false);
                     }
                   }}
                   className="btn-base btn-info"
@@ -215,11 +222,26 @@ export default function Home() {
                       setShowUpdateForm(false);
                       setShowResumeForm(false);
                       setShowEmailForm(false);
+                      setShowWalletForm(false);
                     }
                   }}
                   className="btn-base btn-info"
                 >
                   {showSocialForm ? 'Cancel' : 'Manage Social Links'}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowWalletForm(!showWalletForm);
+                    if (!showWalletForm) {
+                      setShowUpdateForm(false);
+                      setShowResumeForm(false);
+                      setShowSocialForm(false);
+                      setShowEmailForm(false);
+                    }
+                  }}
+                  className="btn-base btn-info"
+                >
+                  {showWalletForm ? 'Cancel' : 'Manage Wallet Addresses'}
                 </button>
                 <a
                   href={`/${userProfile.username}`}
@@ -268,6 +290,12 @@ export default function Home() {
             {showSocialForm && (
               <div className="mb-8">
                 <SocialLinksForm />
+              </div>
+            )}
+
+            {showWalletForm && (
+              <div className="mb-8">
+                <WalletAddressesForm />
               </div>
             )}
 
