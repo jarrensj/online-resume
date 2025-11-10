@@ -134,7 +134,7 @@ export default function WalletAddressesForm({ onWalletsUpdated }: WalletAddresse
               id="evm_wallet_address"
               value={wallets.evm_wallet_address}
               onChange={handleChange('evm_wallet_address')}
-              placeholder="0x..."
+              placeholder="0x…"
               className="input-field font-mono text-sm"
               disabled={submitting}
             />
