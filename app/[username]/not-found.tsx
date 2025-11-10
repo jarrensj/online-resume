@@ -79,14 +79,14 @@ export default function NotFound() {
               >
                 Looking for someone specific?
               </h3>
-              <ul 
+              <div 
                 className="space-y-1 text-sm"
                 style={{ color: 'var(--foreground-secondary)' }}
               >
-                <li>• Double-check the username spelling</li>
-                <li>• Usernames are case-sensitive</li>
-                <li>• The profile might not be created yet</li>
-              </ul>
+                <div>Double-check the username spelling</div>
+                <div>Usernames are case-sensitive</div>
+                <div>The profile might not be created yet</div>
+              </div>
             </div>
           </div>
         </div>
