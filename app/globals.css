@@ -112,17 +112,15 @@ input:focus, textarea:focus, select:focus {
 .tweet-card {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 1.5rem;
-  margin: 0 auto 2.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
   position: relative;
-  padding: 2rem;
+  padding: 1.5rem;
   background: var(--background-card);
   border: 1.5px solid var(--border-soft);
-  border-radius: 22px;
+  border-radius: 20px;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-gentle);
-  max-width: 680px;
 }
 
 .tweet-card:hover {
@@ -141,16 +139,68 @@ input:focus, textarea:focus, select:focus {
 }
 
 .tweet-card .tweet-embed {
+  transform: scale(0.65);
+  transform-origin: center;
+  margin: -15px 0 -35px 0;
+}
+
+.tweet-card .tweet-note {
+  margin-top: -90px;
+  padding: 0.75rem 1rem;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--foreground-secondary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-weight: 400;
+  max-width: 28rem;
+  text-align: center;
+  line-height: 1.5;
+  box-shadow: var(--shadow-gentle);
+}
+
+.public-tweet-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin: 0 auto 2.5rem;
+  position: relative;
+  padding: 2rem;
+  background: var(--background-card);
+  border: 1.5px solid var(--border-soft);
+  border-radius: 22px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-gentle);
+  max-width: 680px;
+}
+
+.public-tweet-card:hover {
+  border-color: var(--border-gentle);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
+}
+
+.public-tweet-card:nth-child(odd) {
+  background: var(--background-card);
+}
+
+.public-tweet-card:nth-child(even) {
+  background: var(--background-secondary);
+}
+
+.public-tweet-card__embed {
   width: 100%;
   max-width: 560px;
   margin: 0 auto;
 }
 
-.tweet-card .tweet-embed [data-tweet-id] {
+.public-tweet-card__embed [data-tweet-id] {
   width: 100%;
 }
 
-.tweet-card .tweet-note {
+.public-tweet-note {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -164,7 +214,7 @@ input:focus, textarea:focus, select:focus {
   box-shadow: var(--shadow-gentle);
 }
 
-.tweet-note__label {
+.public-tweet-note__label {
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -172,17 +222,17 @@ input:focus, textarea:focus, select:focus {
   font-weight: 600;
 }
 
-.tweet-note__content {
+.public-tweet-note__content {
   font-size: 0.95rem;
   color: var(--foreground-secondary);
 }
 
-.tweet-card__footer {
+.public-tweet-card__footer {
   display: flex;
   justify-content: flex-end;
 }
 
-.tweet-card__link {
+.public-tweet-card__link {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent-brown);
@@ -192,17 +242,38 @@ input:focus, textarea:focus, select:focus {
   gap: 0.35rem;
 }
 
-.tweet-card__link:hover {
+.public-tweet-card__link:hover {
   color: var(--accent-green);
 }
 
+.public-tweet-card--error {
+  border-color: #feb2b2;
+  background: #fef2f2;
+  color: #c53030;
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.public-tweet-card__error-title {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.public-tweet-card__error-body {
+  font-size: 0.9rem;
+  color: #c53030;
+  word-break: break-all;
+}
+
 @media (max-width: 640px) {
-  .tweet-card {
+  .public-tweet-card {
     padding: 1.5rem;
     gap: 1.25rem;
   }
 
-  .tweet-card .tweet-embed {
+  .public-tweet-card__embed {
     max-width: 100%;
   }
 }

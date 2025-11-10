@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use } from 'react'
 import { notFound } from 'next/navigation'
-import TweetCard from '@/components/TweetCard'
+import PublicTweetCard from '@/components/PublicTweetCard'
 
 interface TweetItem {
   tweet_link: string
@@ -111,11 +111,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
             <>
               <div className="flex flex-col gap-4">
                 {profile.tweets.map((tweetItem, index) => (
-                  <TweetCard
-                    key={index}
-                    tweetItem={tweetItem}
-                    index={index}
-                  />
+                  <PublicTweetCard key={index} tweetItem={tweetItem} />
                 ))}
               </div>
             </>
