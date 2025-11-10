@@ -183,18 +183,9 @@ export default function ProfilePage({ params }: ProfilePageProps) {
             </>
           ) : (
             <div className="text-center py-16">
-              <div 
-                className="card p-12 max-w-lg mx-auto"
-                style={{ background: 'var(--background-secondary)' }}
-              >
-                <h2 className="text-3xl font-semibold mb-3 heading-handwritten">
-                  No tweets yet
-                </h2>
-                <p className="text-secondary" style={{ fontSize: '1.1rem' }}>
-                  {profile.username} hasn&apos;t shared any thoughts yet.
-                </p>
-                <div className="divider"></div>
-              </div>
+              <p className="text-secondary" style={{ fontSize: '1.1rem' }}>
+                nothing yet
+              </p>
             </div>
           )}
         </div>
