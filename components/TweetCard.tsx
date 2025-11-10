@@ -21,34 +21,19 @@ export default function TweetCard({ tweetItem, variant = 'default' }: TweetCardP
   if (!tweetId) {
     if (variant === 'compact') {
       return (
-        <div
-          className="rounded-lg border px-3 py-2 text-xs"
-          style={{
-            borderColor: '#feb2b2',
-            background: '#fef2f2',
-            color: '#c53030',
-            fontFamily: 'var(--font-sans)'
-          }}
-        >
+        <div className="alert alert-error text-xs">
           Invalid tweet URL
         </div>
       )
     }
 
     return (
-      <div 
-        className="border rounded-2xl p-6"
-        style={{
-          background: '#fed7d7',
-          borderColor: '#feb2b2',
-          color: '#c53030'
-        }}
-      >
+      <div className="alert alert-error">
         <p className="text-sm font-medium">
           Invalid tweet URL: {tweetItem.tweet_link}
         </p>
         {tweetItem.notes && (
-          <p className="text-sm mt-3" style={{ color: 'var(--foreground-secondary)' }}>
+          <p className="text-sm mt-3 text-secondary">
             <strong>Note:</strong> {tweetItem.notes}
           </p>
         )}

@@ -66,11 +66,8 @@ export default function ProfilePage({ params }: ProfilePageProps) {
     return (
       <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
         <div className="text-center">
-          <div 
-            className="animate-spin rounded-full h-10 w-10 border-2 mx-auto loading-spinner"
-            style={{ borderTopColor: 'var(--accent-green)', borderColor: 'var(--border-soft)' }}
-          ></div>
-          <p className="mt-4 text-lg" style={{ color: 'var(--foreground-secondary)' }}>Loading profile...</p>
+          <div className="animate-spin rounded-full h-10 w-10 border-2 mx-auto loading-spinner"></div>
+          <p className="mt-4 text-lg loading-text">Loading profile...</p>
         </div>
       </main>
     )
@@ -80,13 +77,10 @@ export default function ProfilePage({ params }: ProfilePageProps) {
     return (
       <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
         <div className="text-center">
-          <h1 
-            className="text-3xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-handwritten)', color: '#c53030' }}
-          >
+          <h1 className="text-3xl font-bold mb-4 heading-handwritten" style={{ color: '#c53030' }}>
             Oops!
           </h1>
-          <p style={{ color: 'var(--foreground-secondary)' }}>{error}</p>
+          <p className="text-secondary">{error}</p>
         </div>
       </main>
     )
@@ -151,10 +145,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
       <div className="max-w-4xl mx-auto">
         {/* Profile Header */}
         <div className="text-center mb-12">
-          <h1
-            className="text-5xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
-          >
+          <h1 className="text-5xl font-bold mb-4 heading-handwritten">
             {profile.username}
           </h1>
 
@@ -171,30 +162,6 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                     rel="noopener noreferrer"
                     aria-label={link.ariaLabel}
                     className="social-icon-link"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '12px',
-                      border: '1.5px solid var(--border-gentle)',
-                      background: 'var(--background-card)',
-                      color: 'var(--foreground-secondary)',
-                      transition: 'all 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--accent-green)'
-                      e.currentTarget.style.color = 'var(--accent-green)'
-                      e.currentTarget.style.transform = 'translateY(-2px)'
-                      e.currentTarget.style.boxShadow = 'var(--shadow-soft)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--border-gentle)'
-                      e.currentTarget.style.color = 'var(--foreground-secondary)'
-                      e.currentTarget.style.transform = 'translateY(0)'
-                      e.currentTarget.style.boxShadow = 'none'
-                    }}
                   >
                     <Icon size={20} strokeWidth={2} />
                   </a>
@@ -220,13 +187,10 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                 className="card p-12 max-w-lg mx-auto"
                 style={{ background: 'var(--background-secondary)' }}
               >
-                <h2 
-                  className="text-3xl font-semibold mb-3"
-                  style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
-                >
+                <h2 className="text-3xl font-semibold mb-3 heading-handwritten">
                   No tweets yet
                 </h2>
-                <div className="mt-6 w-16 h-0.5 mx-auto" style={{ background: 'var(--accent-sage)' }}></div>
+                <div className="divider"></div>
               </div>
             </div>
           )}
@@ -235,4 +199,3 @@ export default function ProfilePage({ params }: ProfilePageProps) {
     </main>
   )
 }
-
