@@ -126,7 +126,7 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-2 mx-auto loading-spinner"></div>
           <p className="mt-4 text-sm loading-text">
-            Loading social links...
+            Loading social links…
           </p>
         </div>
       ) : (
@@ -211,7 +211,7 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
               disabled={submitting}
               className="flex-1 btn-base btn-primary"
             >
-              {submitting ? 'Saving...' : 'Save Social Links'}
+              {submitting ? 'Saving…' : 'Save Social Links'}
             </button>
             <button
               type="button"

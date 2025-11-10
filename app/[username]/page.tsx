@@ -67,7 +67,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
       <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-10 w-10 border-2 mx-auto loading-spinner"></div>
-          <p className="mt-4 text-lg loading-text">Loading profile...</p>
+          <p className="mt-4 text-lg loading-text">Loading profile…</p>
         </div>
       </main>
     )

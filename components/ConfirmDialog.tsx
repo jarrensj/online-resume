@@ -125,7 +125,7 @@ export default function ConfirmDialog({
             disabled={isLoading}
             className={`btn-base ${getButtonClass()}`}
           >
-            {isLoading ? 'Processing...' : confirmText}
+            {isLoading ? 'Processing…' : confirmText}
           </button>
         </div>
       </div>
