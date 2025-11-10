@@ -30,8 +30,8 @@ export default function PublicTweetCard({ tweetItem }: PublicTweetCardProps) {
   return (
     <article className="public-tweet-card">
       {tweetItem.notes && (
-        <section className="public-tweet-note" aria-label="Creator note">
-          <span className="public-tweet-note__label">Creator note</span>
+        <section className="public-tweet-note" aria-label="Note">
+          <span className="public-tweet-note__label">Note</span>
           <p className="public-tweet-note__content">{tweetItem.notes}</p>
         </section>
       )}
