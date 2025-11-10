@@ -3,6 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import { notFound } from 'next/navigation'
 import PublicTweetCard from '@/components/PublicTweetCard'
+import { Linkedin, Twitter, Instagram, Globe } from 'lucide-react'
 
 interface TweetItem {
   tweet_link: string
@@ -15,6 +16,10 @@ interface UserProfile {
   created_at: string
   tweets: TweetItem[]
   resume_created_at?: string
+  linkedin?: string | null
+  twitter_handle?: string | null
+  ig_handle?: string | null
+  website?: string | null
 }
 
 interface ProfilePageProps {
@@ -91,6 +96,56 @@ export default function ProfilePage({ params }: ProfilePageProps) {
     return notFound()
   }
 
+  const getSocialLinks = () => {
+    const links = []
+    
+    if (profile.linkedin) {
+      links.push({
+        href: profile.linkedin,
+        icon: Linkedin,
+        label: 'LinkedIn',
+        ariaLabel: 'Visit LinkedIn profile'
+      })
+    }
+    
+    if (profile.twitter_handle) {
+      const handle = profile.twitter_handle.startsWith('@') 
+        ? profile.twitter_handle.slice(1) 
+        : profile.twitter_handle
+      links.push({
+        href: `https://twitter.com/${handle}`,
+        icon: Twitter,
+        label: 'Twitter',
+        ariaLabel: 'Visit Twitter profile'
+      })
+    }
+    
+    if (profile.ig_handle) {
+      const handle = profile.ig_handle.startsWith('@') 
+        ? profile.ig_handle.slice(1) 
+        : profile.ig_handle
+      links.push({
+        href: `https://instagram.com/${handle}`,
+        icon: Instagram,
+        label: 'Instagram',
+        ariaLabel: 'Visit Instagram profile'
+      })
+    }
+    
+    if (profile.website) {
+      links.push({
+        href: profile.website,
+        icon: Globe,
+        label: 'Website',
+        ariaLabel: 'Visit website'
+      })
+    }
+    
+    return links
+  }
+
+  const socialLinks = getSocialLinks()
+
   return (
     <main className="min-h-screen px-6 py-12" style={{ background: 'var(--background)' }}>
       <div className="max-w-4xl mx-auto">
@@ -102,6 +157,51 @@ export default function ProfilePage({ params }: ProfilePageProps) {
           >
             {profile.username}
           </h1>
+          
+          {/* Social Links */}
+          {socialLinks.length > 0 && (
+            <div className="flex justify-center gap-4 mt-6">
+              {socialLinks.map((link) => {
+                const Icon = link.icon
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.ariaLabel}
+                    className="social-icon-link"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
+                      border: '1.5px solid var(--border-gentle)',
+                      background: 'var(--background-card)',
+                      color: 'var(--foreground-secondary)',
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--accent-green)'
+                      e.currentTarget.style.color = 'var(--accent-green)'
+                      e.currentTarget.style.transform = 'translateY(-2px)'
+                      e.currentTarget.style.boxShadow = 'var(--shadow-soft)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-gentle)'
+                      e.currentTarget.style.color = 'var(--foreground-secondary)'
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = 'none'
+                    }}
+                  >
+                    <Icon size={20} strokeWidth={2} />
+                  </a>
+                )
+              })}
+            </div>
+          )}
         </div>
 
         {/* Tweets Section */}
