@@ -10,11 +10,11 @@ CREATE OR REPLACE VIEW public_user_profiles AS
 SELECT 
     id,
     username,
+    created_at,
     linkedin,
     twitter_handle,
     ig_handle,
-    website,
-    created_at
+    website
 FROM user_profiles;
 
 -- Refresh grants on the updated view
