@@ -61,18 +61,30 @@ export default function TweetCard({ tweetItem, variant = 'default' }: TweetCardP
   }
 
   return (
-    <div className="tweet-card">
+    <article className="tweet-card">
+      {/* User's note (if exists) */}
+      {tweetItem.notes && (
+        <div className="tweet-note" aria-label="Note">
+          <span className="tweet-note__label">Note</span>
+          <p className="tweet-note__content">{tweetItem.notes}</p>
+        </div>
+      )}
+
       {/* Tweet embed */}
       <div className="tweet-embed">
         <Tweet id={tweetId} />
       </div>
-      
-      {/* User's note (if exists) */}
-      {tweetItem.notes && (
-        <div className="tweet-note">
-          {tweetItem.notes}
-        </div>
-      )}
-    </div>
+
+      <div className="tweet-card__footer">
+        <a
+          className="tweet-card__link"
+          href={tweetItem.tweet_link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View on X ↗
+        </a>
+      </div>
+    </article>
   )
 }
