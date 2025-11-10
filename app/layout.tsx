@@ -59,9 +59,7 @@ export default function RootLayout({
               </div>
             </SignedIn>
           </header>
-          <div className="pt-20">
-            {children}
-          </div>
+          {children}
           <Analytics />
         </body>
       </html>

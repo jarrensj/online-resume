@@ -67,7 +67,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   if (loading) {
     return (
-      <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
+      <main className="min-h-screen p-8 pt-32 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-10 w-10 border-2 mx-auto loading-spinner"></div>
           <p className="mt-4 text-lg loading-text">Loading profile…</p>
@@ -78,7 +78,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   if (error) {
     return (
-      <main className="min-h-screen p-8 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
+      <main className="min-h-screen p-8 pt-32 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4 heading-handwritten" style={{ color: '#c53030' }}>
             Oops!
@@ -159,7 +159,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   }
 
   return (
-    <main className="min-h-screen px-6 py-12" style={{ background: 'var(--background)' }}>
+    <main className="profile-page min-h-screen px-6 py-12" style={{ background: 'var(--background)' }}>
       <div className="max-w-4xl mx-auto">
         {/* Profile Header */}
         <div className="text-center mb-12">
