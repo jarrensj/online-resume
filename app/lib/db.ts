@@ -30,6 +30,7 @@ export interface UserProfile {
   website?: string
   created_at: string
   updated_at: string
+  username_last_changed_at?: string
 }
 
 export interface Resume {
