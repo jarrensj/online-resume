@@ -1,24 +1,15 @@
 'use client'
 
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import UsernameForm from '@/components/UsernameForm'
 import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
-
-interface UserProfile {
-  id: string
-  clerk_user_id: string
-  username: string
-  email?: string
-  created_at: string
-  updated_at: string
-}
+import { useUserProfile, revalidateUserProfile } from '@/app/lib/hooks'
 
 export default function Home() {
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
-  const [loading, setLoading] = useState(true)
+  const { userProfile, isLoading: loading, revalidate } = useUserProfile()
   const [showUpdateForm, setShowUpdateForm] = useState(false)
   const [showResumeForm, setShowResumeForm] = useState(false)
   const [showSocialForm, setShowSocialForm] = useState(false)
@@ -26,42 +17,11 @@ export default function Home() {
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
 
-  // Fetch user profile when component mounts
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await fetch('/api/username')
-        const data = await response.json()
-        
-        if (response.ok && data.profile) {
-          setUserProfile(data.profile)
-        }
-      } catch (error) {
-        console.error('Error fetching user profile:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchUserProfile()
-  }, [])
-
-  const handleUsernameSet = (username: string) => {
-    // Refresh the profile data
-    setUserProfile(prev => prev ? { ...prev, username } : null)
+  const handleUsernameSet = () => {
+    // Revalidate the cache to get updated profile
+    revalidate()
     setShowUpdateForm(false)
     setShowSocialForm(false)
-    setLoading(true)
-    
-    // Refetch to get updated profile
-    fetch('/api/username')
-      .then(res => res.json())
-      .then(data => {
-        if (data.profile) {
-          setUserProfile(data.profile)
-        }
-      })
-      .finally(() => setLoading(false))
   }
 
   const handleResetProfile = async () => {
@@ -79,8 +39,8 @@ export default function Home() {
         throw new Error(data.error || 'Failed to reset profile')
       }
 
-      // Success! Reset the local state
-      setUserProfile(null)
+      // Success! Reset the local state and revalidate cache
+      revalidateUserProfile()
       setShowResetDialog(false)
       setShowUpdateForm(false)
       setShowResumeForm(false)

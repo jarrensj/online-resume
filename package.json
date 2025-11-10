@@ -16,7 +16,8 @@
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-tweet": "^3.2.2"
+    "react-tweet": "^3.2.2",
+    "swr": "^2.3.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

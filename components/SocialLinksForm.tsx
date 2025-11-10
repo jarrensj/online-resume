@@ -1,6 +1,7 @@
 'use client'
 
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useUserSocials, revalidateUserSocials } from '@/app/lib/hooks'
 
 type SocialFieldKey = 'linkedin' | 'twitter_handle' | 'ig_handle' | 'website'
 
@@ -18,44 +19,31 @@ const defaultState: SocialLinksState = {
 }
 
 export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormProps) {
+  const { socials: cachedSocials, isLoading: loading, isError } = useUserSocials()
   const [socials, setSocials] = useState<SocialLinksState>({ ...defaultState })
-  const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const hasAnyValue = Object.values(socials).some((value) => value.trim().length > 0)
 
+  // Update local state when cached data changes
   useEffect(() => {
-    const fetchSocials = async () => {
-      setLoading(true)
-      setError('')
-
-      try {
-        const response = await fetch('/api/socials')
-        const data = await response.json()
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to load social links')
-        }
-
-        if (data.socials) {
-          setSocials({
-            linkedin: data.socials.linkedin ?? '',
-            twitter_handle: data.socials.twitter_handle ?? '',
-            ig_handle: data.socials.ig_handle ?? '',
-            website: data.socials.website ?? '',
-          })
-        }
-      } catch (err) {
-        console.error('Error fetching social links:', err)
-        setError(err instanceof Error ? err.message : 'An error occurred while loading social links')
-      } finally {
-        setLoading(false)
-      }
+    if (cachedSocials) {
+      setSocials({
+        linkedin: cachedSocials.linkedin ?? '',
+        twitter_handle: cachedSocials.twitter_handle ?? '',
+        ig_handle: cachedSocials.ig_handle ?? '',
+        website: cachedSocials.website ?? '',
+      })
     }
+  }, [cachedSocials])
 
-    fetchSocials()
-  }, [])
+  // Handle load errors
+  useEffect(() => {
+    if (isError) {
+      setError('Failed to load social links')
+    }
+  }, [isError])
 
   const handleChange = (field: SocialFieldKey) => (event: ChangeEvent<HTMLInputElement>) => {
     setSocials((prev) => ({
@@ -100,6 +88,8 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
         website: data.socials.website ?? '',
       }
 
+      // Revalidate cache
+      revalidateUserSocials()
       setSocials(updatedSocials)
       setSuccess('Social links updated successfully!')
       onSocialsUpdated?.(updatedSocials)
