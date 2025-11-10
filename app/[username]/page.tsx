@@ -201,7 +201,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                       <div className="text-sm font-medium text-secondary mb-1">EVM</div>
                       <button
                         onClick={() => copyToClipboard(profile.evm_wallet_address!, 'evm')}
-                        className="w-full text-left group relative focus:outline-none"
+                        className="w-full text-left group relative"
                         title="Click to copy full address"
                       >
                         <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
@@ -220,7 +220,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                       <div className="text-sm font-medium text-secondary mb-1">Solana</div>
                       <button
                         onClick={() => copyToClipboard(profile.solana_wallet_address!, 'solana')}
-                        className="w-full text-left group relative focus:outline-none"
+                        className="w-full text-left group relative"
                         title="Click to copy full address"
                       >
                         <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
