@@ -224,7 +224,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
       <div className="max-w-2xl mx-auto card p-8">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-2 mx-auto loading-spinner"></div>
-          <p className="mt-3 text-lg loading-text">Loading resume...</p>
+          <p className="mt-3 text-lg loading-text">Loading resume…</p>
         </div>
       </div>
     )
@@ -335,7 +335,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                     type="url"
                     value={tweet.tweet_link}
                     onChange={(e) => updateTweet(index, 'tweet_link', e.target.value)}
-                    placeholder="https://twitter.com/username/status/..."
+                    placeholder="https://twitter.com/username/status/…"
                     className="input-field"
                     disabled={loading}
                   />
@@ -348,7 +348,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                   <textarea
                     value={tweet.notes || ''}
                     onChange={(e) => updateTweet(index, 'notes', e.target.value)}
-                    placeholder="Add your thoughts about this tweet..."
+                    placeholder="Add your thoughts about this tweet…"
                     rows={3}
                     className="textarea-field"
                     disabled={loading}
@@ -404,7 +404,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
             className="btn-base btn-primary px-8"
           >
             {loading 
-              ? (resume ? 'Updating...' : 'Creating...') 
+              ? (resume ? 'Updating…' : 'Creating…') 
               : (resume ? 'Update Resume' : 'Create Resume')
             }
           </button>

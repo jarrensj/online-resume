@@ -115,7 +115,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
           className="w-full btn-base btn-primary"
         >
           {loading 
-            ? (mode === 'update' ? 'Updating...' : 'Saving...') 
+            ? (mode === 'update' ? 'Updating…' : 'Saving…') 
             : (mode === 'update' ? 'Update Username' : 'Save Username')
           }
         </button>
