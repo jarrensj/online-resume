@@ -24,6 +24,10 @@ export interface UserProfile {
   clerk_user_id: string
   username: string
   email?: string
+  linkedin?: string
+  twitter_handle?: string
+  ig_handle?: string
+  website?: string
   created_at: string
   updated_at: string
 }

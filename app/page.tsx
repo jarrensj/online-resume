@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import UsernameForm from '@/components/UsernameForm'
 import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
+import SocialLinksForm from '@/components/SocialLinksForm'
 
 interface UserProfile {
   id: string
@@ -20,6 +21,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [showUpdateForm, setShowUpdateForm] = useState(false)
   const [showResumeForm, setShowResumeForm] = useState(false)
+  const [showSocialForm, setShowSocialForm] = useState(false)
   const [showResetDialog, setShowResetDialog] = useState(false)
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
@@ -48,6 +50,7 @@ export default function Home() {
     // Refresh the profile data
     setUserProfile(prev => prev ? { ...prev, username } : null)
     setShowUpdateForm(false)
+    setShowSocialForm(false)
     setLoading(true)
     
     // Refetch to get updated profile
@@ -81,6 +84,7 @@ export default function Home() {
       setShowResetDialog(false)
       setShowUpdateForm(false)
       setShowResumeForm(false)
+      setShowSocialForm(false)
       
     } catch (err) {
       setResetError(err instanceof Error ? err.message : 'An error occurred')
@@ -186,7 +190,10 @@ export default function Home() {
                 <button
                   onClick={() => {
                     setShowUpdateForm(!showUpdateForm);
-                    if (!showUpdateForm) setShowResumeForm(false); // Close resume form when opening username form
+                    if (!showUpdateForm) {
+                      setShowResumeForm(false);
+                      setShowSocialForm(false);
+                    }
                   }}
                   className="px-6 py-2.5 text-white font-medium rounded-xl transition-all duration-200"
                   style={{ 
@@ -207,7 +214,10 @@ export default function Home() {
                 <button
                   onClick={() => {
                     setShowResumeForm(!showResumeForm);
-                    if (!showResumeForm) setShowUpdateForm(false); // Close username form when opening resume form
+                    if (!showResumeForm) {
+                      setShowUpdateForm(false);
+                      setShowSocialForm(false);
+                    }
                   }}
                   className="px-6 py-2.5 text-white font-medium rounded-xl transition-all duration-200"
                   style={{ 
@@ -224,6 +234,30 @@ export default function Home() {
                   }}
                 >
                   {showResumeForm ? 'Cancel' : 'Manage Resume'}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowSocialForm(!showSocialForm);
+                    if (!showSocialForm) {
+                      setShowUpdateForm(false);
+                      setShowResumeForm(false);
+                    }
+                  }}
+                  className="px-6 py-2.5 text-white font-medium rounded-xl transition-all duration-200"
+                  style={{ 
+                    background: '#1da1f2',
+                    border: '1.5px solid #1da1f2'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#1782c5';
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#1da1f2';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  {showSocialForm ? 'Cancel' : 'Manage Social Links'}
                 </button>
                 <a
                   href={`/${userProfile.username}`}
@@ -284,6 +318,12 @@ export default function Home() {
                     console.log('Resume updated!')
                   }}
                 />
+              </div>
+            )}
+
+            {showSocialForm && (
+              <div className="mb-8">
+                <SocialLinksForm />
               </div>
             )}
 
