@@ -102,7 +102,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen px-6 py-12 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
+    <main className="min-h-screen px-6 pt-32 pb-12 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
       <SignedOut>
         <div className="text-center max-w-md mx-auto">
           <div className="mb-8">
