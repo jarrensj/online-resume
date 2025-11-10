@@ -370,3 +370,336 @@ h4 { font-size: 1.5rem; }
   border-color: var(--border-soft);
 }
 
+/* ========================================
+   REUSABLE COMPONENT STYLES
+   ======================================== */
+
+/* Form Input Styles */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1.5px solid var(--border-gentle);
+  background: var(--background-card);
+  color: var(--foreground);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
+
+.input-field:hover {
+  border-color: var(--accent-sage);
+}
+
+.input-field:focus {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(157, 181, 161, 0.15);
+  outline: none;
+}
+
+.input-field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Textarea Styles */
+.textarea-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1.5px solid var(--border-gentle);
+  background: var(--background-card);
+  color: var(--foreground);
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  transition: all 0.2s ease;
+  resize: none;
+}
+
+.textarea-field:hover {
+  border-color: var(--accent-sage);
+}
+
+.textarea-field:focus {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(157, 181, 161, 0.15);
+  outline: none;
+}
+
+.textarea-field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button Base Styles */
+.btn-base {
+  padding: 0.625rem 1.5rem;
+  font-weight: 500;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-base:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-base:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Primary Button (Green) */
+.btn-primary {
+  background: var(--accent-green);
+  color: white;
+  border-color: transparent;
+}
+
+.btn-primary:not(:disabled):hover {
+  background: var(--accent-sage);
+}
+
+.btn-primary:disabled {
+  background: var(--foreground-light);
+}
+
+/* Secondary Button (Brown) */
+.btn-secondary {
+  background: var(--accent-brown);
+  color: white;
+  border-color: transparent;
+}
+
+.btn-secondary:not(:disabled):hover {
+  background: var(--accent-warm);
+}
+
+/* Danger Button (Red) */
+.btn-danger {
+  background: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.btn-danger:not(:disabled):hover {
+  background: #c82333;
+  border-color: #c82333;
+}
+
+/* Outline Button */
+.btn-outline {
+  background: var(--background-card);
+  border: 1.5px solid var(--border-gentle);
+  color: var(--foreground-secondary);
+}
+
+.btn-outline:not(:disabled):hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+/* Info Button (Blue) */
+.btn-info {
+  background: #1da1f2;
+  color: white;
+  border-color: #1da1f2;
+}
+
+.btn-info:not(:disabled):hover {
+  background: #1782c5;
+  border-color: #1782c5;
+}
+
+/* Sage Button */
+.btn-sage {
+  background: var(--accent-sage);
+  color: white;
+  border-color: var(--accent-sage);
+}
+
+.btn-sage:not(:disabled):hover {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+}
+
+/* Small icon button */
+.btn-icon {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--background-secondary);
+  border: 1.5px solid var(--border-soft);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:not(:disabled):hover {
+  background: var(--hover-bg);
+  border-color: var(--accent-green);
+}
+
+.btn-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Alert/Message Styles */
+.alert {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid;
+  font-size: 0.875rem;
+}
+
+.alert-error {
+  color: #c53030;
+  background: #fed7d7;
+  border-color: #feb2b2;
+}
+
+.alert-success {
+  color: var(--accent-green);
+  background: #f0fff4;
+  border-color: var(--accent-sage);
+}
+
+.alert-warning {
+  color: #d97706;
+  background: #fef3c7;
+  border-color: #fcd34d;
+}
+
+/* Label Styles */
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: var(--foreground);
+}
+
+/* Heading Styles */
+.heading-handwritten {
+  font-family: var(--font-handwritten);
+  color: var(--foreground);
+}
+
+.text-secondary {
+  color: var(--foreground-secondary);
+}
+
+/* Loading States */
+.loading-text {
+  color: var(--foreground-secondary);
+  font-size: 1rem;
+}
+
+/* Remove button style */
+.btn-remove {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #dc3545;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background: #f1b0b7;
+}
+
+.btn-remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Social icon link */
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-gentle);
+  background: var(--background-card);
+  color: var(--foreground-secondary);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.social-icon-link:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Draggable card states */
+.drag-item {
+  cursor: move;
+  transition: all 0.2s ease;
+}
+
+.drag-item.dragging {
+  opacity: 0.7;
+  transform: scale(0.98);
+  border-color: var(--accent-sage) !important;
+  background: var(--background-secondary) !important;
+}
+
+.drag-item.drag-over {
+  transform: scale(1.02);
+  border-color: var(--accent-green) !important;
+  background: var(--hover-bg) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+/* Tweet card in resume form */
+.tweet-form-card {
+  border-radius: 2rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-soft);
+  background: var(--background-card);
+  box-shadow: var(--shadow-gentle);
+}
+
+.tweet-form-card:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+/* Profile link styles */
+.profile-link {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  color: var(--accent-brown);
+  transition: color 0.2s ease;
+}
+
+.profile-link:hover {
+  color: var(--accent-green);
+}
+
+/* Divider */
+.divider {
+  width: 4rem;
+  height: 2px;
+  margin: 1.5rem auto;
+  background: var(--accent-sage);
+}
+
