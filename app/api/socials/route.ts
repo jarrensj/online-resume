@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { getAuth } from "@clerk/nextjs/server"
 import { createClerkSupabaseClient } from "@/app/lib/db"
 import { sanitizeSocialFields, SOCIAL_FIELD_KEYS, emptySocialFields } from "@/app/lib/socials"
+import { getCachedUserSocials } from "@/app/lib/cache"
+import { revalidateUserSocials, revalidateUserProfile } from "@/app/lib/revalidate"
 
 const SOCIAL_SELECT = SOCIAL_FIELD_KEYS.join(", ")
 
@@ -13,21 +15,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const supabase = createClerkSupabaseClient()
+    // Use cached social links
+    const data = await getCachedUserSocials(userId)
 
-    const { data, error } = await supabase
-      .from("user_profiles")
-      .select(SOCIAL_SELECT)
-      .eq("clerk_user_id", userId)
-      .single()
-
-    if (error) {
-      if (error.code === "PGRST116") {
-        return NextResponse.json({ socials: emptySocialFields() }, { status: 200 })
-      }
-
-      console.error("Error fetching social links:", error)
-      return NextResponse.json({ error: "Failed to fetch social links" }, { status: 500 })
+    if (!data) {
+      return NextResponse.json({ socials: emptySocialFields() }, { status: 200 })
     }
 
     return NextResponse.json({ socials: data })
@@ -83,6 +75,10 @@ export async function PUT(request: NextRequest) {
       console.error("Error updating social links:", error)
       return NextResponse.json({ error: "Failed to update social links" }, { status: 500 })
     }
+
+    // Revalidate caches
+    revalidateUserSocials(userId)
+    revalidateUserProfile(userId)
 
     return NextResponse.json({ success: true, socials: data })
   } catch (error) {

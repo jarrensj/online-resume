@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getAuth } from "@clerk/nextjs/server"
 import { createClerkSupabaseClient } from "@/app/lib/db"
+import { getCachedUserProfileId, getCachedUserResume } from "@/app/lib/cache"
+import { revalidateUserResume, revalidateUserProfile } from "@/app/lib/revalidate"
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,25 +27,21 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Create Supabase client
-    const supabase = createClerkSupabaseClient()
-    
-    // First, get the user profile ID
-    const { data: userProfile, error: profileError } = await supabase
-      .from('user_profiles')
-      .select('id')
-      .eq('clerk_user_id', userId)
-      .single()
+    // Get the user profile ID from cache
+    const profileId = await getCachedUserProfileId(userId)
 
-    if (profileError || !userProfile) {
+    if (!profileId) {
       return NextResponse.json({ error: "User profile not found" }, { status: 404 })
     }
+
+    // Create Supabase client
+    const supabase = createClerkSupabaseClient()
 
     // Check if user already has a resume
     const { data: existingResume } = await supabase
       .from('resumes')
       .select('id')
-      .eq('user_profile_id', userProfile.id)
+      .eq('user_profile_id', profileId)
       .single()
 
     if (existingResume) {
@@ -54,7 +52,7 @@ export async function POST(request: NextRequest) {
     const { data, error } = await supabase
       .from('resumes')
       .insert({
-        user_profile_id: userProfile.id,
+        user_profile_id: profileId,
         tweets: tweets,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
@@ -66,6 +64,10 @@ export async function POST(request: NextRequest) {
       console.error('Error creating resume:', error)
       return NextResponse.json({ error: "Failed to create resume" }, { status: 500 })
     }
+
+    // Revalidate caches
+    revalidateUserResume(userId)
+    revalidateUserProfile(userId)
 
     return NextResponse.json({ success: true, resume: data })
 
@@ -84,31 +86,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Create Supabase client
-    const supabase = createClerkSupabaseClient()
-    
-    // Get the user profile ID
-    const { data: userProfile, error: profileError } = await supabase
-      .from('user_profiles')
-      .select('id')
-      .eq('clerk_user_id', userId)
-      .single()
-
-    if (profileError || !userProfile) {
-      return NextResponse.json({ error: "User profile not found" }, { status: 404 })
-    }
-
-    // Get user's resume
-    const { data: resume, error } = await supabase
-      .from('resumes')
-      .select('*')
-      .eq('user_profile_id', userProfile.id)
-      .single()
-
-    if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
-      console.error('Error fetching resume:', error)
-      return NextResponse.json({ error: "Failed to fetch resume" }, { status: 500 })
-    }
+    // Use cached resume
+    const resume = await getCachedUserResume(userId)
 
     return NextResponse.json({ resume })
 
@@ -141,19 +120,15 @@ export async function PUT(request: NextRequest) {
       }
     }
 
-    // Create Supabase client
-    const supabase = createClerkSupabaseClient()
-    
-    // Get the user profile ID
-    const { data: userProfile, error: profileError } = await supabase
-      .from('user_profiles')
-      .select('id')
-      .eq('clerk_user_id', userId)
-      .single()
+    // Get the user profile ID from cache
+    const profileId = await getCachedUserProfileId(userId)
 
-    if (profileError || !userProfile) {
+    if (!profileId) {
       return NextResponse.json({ error: "User profile not found" }, { status: 404 })
     }
+
+    // Create Supabase client
+    const supabase = createClerkSupabaseClient()
 
     // Update the resume
     const { data, error } = await supabase
@@ -162,7 +137,7 @@ export async function PUT(request: NextRequest) {
         tweets: tweets,
         updated_at: new Date().toISOString()
       })
-      .eq('user_profile_id', userProfile.id)
+      .eq('user_profile_id', profileId)
       .select()
       .single()
 
@@ -173,6 +148,10 @@ export async function PUT(request: NextRequest) {
       console.error('Error updating resume:', error)
       return NextResponse.json({ error: "Failed to update resume" }, { status: 500 })
     }
+
+    // Revalidate caches
+    revalidateUserResume(userId)
+    revalidateUserProfile(userId)
 
     return NextResponse.json({ success: true, resume: data, message: "Resume updated successfully" })
 
@@ -191,30 +170,30 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Create Supabase client
-    const supabase = createClerkSupabaseClient()
-    
-    // Get the user profile ID
-    const { data: userProfile, error: profileError } = await supabase
-      .from('user_profiles')
-      .select('id')
-      .eq('clerk_user_id', userId)
-      .single()
+    // Get the user profile ID from cache
+    const profileId = await getCachedUserProfileId(userId)
 
-    if (profileError || !userProfile) {
+    if (!profileId) {
       return NextResponse.json({ error: "User profile not found" }, { status: 404 })
     }
+
+    // Create Supabase client
+    const supabase = createClerkSupabaseClient()
 
     // Delete the resume
     const { error } = await supabase
       .from('resumes')
       .delete()
-      .eq('user_profile_id', userProfile.id)
+      .eq('user_profile_id', profileId)
 
     if (error) {
       console.error('Error deleting resume:', error)
       return NextResponse.json({ error: "Failed to delete resume" }, { status: 500 })
     }
+
+    // Revalidate caches
+    revalidateUserResume(userId)
+    revalidateUserProfile(userId)
 
     return NextResponse.json({ success: true, message: "Resume deleted successfully" })
 
@@ -223,4 +202,3 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
-

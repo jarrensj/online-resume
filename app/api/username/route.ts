@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { getAuth } from "@clerk/nextjs/server"
 import { createClerkSupabaseClient } from "@/app/lib/db"
 import { sanitizeSocialFields } from "@/app/lib/socials"
+import { getCachedUserProfile } from "@/app/lib/cache"
+import { revalidateUserProfile, revalidatePublicProfile } from "@/app/lib/revalidate"
 
 export async function POST(request: NextRequest) {
   try {
@@ -65,6 +67,15 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Failed to update username" }, { status: 500 })
       }
 
+      // Revalidate caches
+      revalidateUserProfile(userId)
+      if (userProfile.username) {
+        revalidatePublicProfile(userProfile.username)
+      }
+      if (data.username) {
+        revalidatePublicProfile(data.username)
+      }
+
       return NextResponse.json({ success: true, profile: data })
     } else {
       // Create new profile
@@ -87,6 +98,12 @@ export async function POST(request: NextRequest) {
       if (error) {
         console.error('Error creating user profile:', error)
         return NextResponse.json({ error: "Failed to create username" }, { status: 500 })
+      }
+
+      // Revalidate caches
+      revalidateUserProfile(userId)
+      if (data.username) {
+        revalidatePublicProfile(data.username)
       }
 
       return NextResponse.json({ success: true, profile: data })
@@ -169,6 +186,15 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Failed to update profile" }, { status: 500 })
     }
 
+    // Revalidate caches
+    revalidateUserProfile(userId)
+    if (existingProfile.username) {
+      revalidatePublicProfile(existingProfile.username)
+    }
+    if (data.username) {
+      revalidatePublicProfile(data.username)
+    }
+
     return NextResponse.json({ success: true, profile: data, message: "Profile updated successfully" })
 
   } catch (error) {
@@ -186,20 +212,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Create Supabase client
-    const supabase = createClerkSupabaseClient()
-    
-    // Get user profile
-    const { data: userProfile, error } = await supabase
-      .from('user_profiles')
-      .select('*')
-      .eq('clerk_user_id', userId)
-      .single()
-
-    if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
-      console.error('Error fetching user profile:', error)
-      return NextResponse.json({ error: "Failed to fetch profile" }, { status: 500 })
-    }
+    // Use cached user profile
+    const userProfile = await getCachedUserProfile(userId)
 
     return NextResponse.json({ profile: userProfile })
 
@@ -248,6 +262,11 @@ export async function DELETE(request: NextRequest) {
       console.error('Error deleting user profile:', error)
       return NextResponse.json({ error: "Failed to delete profile" }, { status: 500 })
     }
+
+    // Revalidate caches
+    revalidateUserProfile(userId)
+    // Note: We can't easily get the username here to revalidate public profile,
+    // but the profile is deleted so it will return 404 anyway
 
     return NextResponse.json({ success: true, message: "Profile deleted successfully" })
 

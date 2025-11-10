@@ -1,48 +1,30 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Tweet, Resume } from '@/app/lib/db'
+import { Tweet } from '@/app/lib/db'
 import TweetCard from '@/components/TweetCard'
+import { useUserResume, revalidateUserResume } from '@/app/lib/hooks'
 
 interface ResumeFormProps {
   onResumeUpdated?: () => void
 }
 
 export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
-  const [resume, setResume] = useState<Resume | null>(null)
+  const { resume: cachedResume, isLoading: fetchingResume } = useUserResume()
   const [tweets, setTweets] = useState<Tweet[]>([{ tweet_link: '', notes: '' }])
   const [loading, setLoading] = useState(false)
-  const [fetchingResume, setFetchingResume] = useState(true)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
 
-  // Fetch existing resume on component mount
+  // Update tweets when resume data changes from cache
   useEffect(() => {
-    const fetchResume = async () => {
-      try {
-        const response = await fetch('/api/resume')
-        const data = await response.json()
-        
-        if (response.ok && data.resume) {
-          setResume(data.resume)
-          const fetchedTweets = data.resume.tweets.length > 0 ? data.resume.tweets : [{ tweet_link: '', notes: '' }]
-          setTweets(fetchedTweets)
-        } else {
-          // No resume exists, start with empty form
-          setTweets([{ tweet_link: '', notes: '' }])
-        }
-      } catch (err) {
-        console.error('Error fetching resume:', err)
-        setError('Failed to load resume')
-      } finally {
-        setFetchingResume(false)
-      }
+    if (cachedResume && cachedResume.tweets) {
+      const fetchedTweets = cachedResume.tweets.length > 0 ? cachedResume.tweets : [{ tweet_link: '', notes: '' }]
+      setTweets(fetchedTweets)
     }
-
-    fetchResume()
-  }, [])
+  }, [cachedResume])
 
   const addTweet = () => {
     setTweets([...tweets, { tweet_link: '', notes: '' }])
@@ -159,7 +141,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
       // Filter out empty tweets
       const validTweets = tweets.filter(tweet => tweet.tweet_link.trim() !== '')
       
-      const method = resume ? 'PUT' : 'POST'
+      const method = cachedResume ? 'PUT' : 'POST'
       const response = await fetch('/api/resume', {
         method,
         headers: {
@@ -174,9 +156,9 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
         throw new Error(data.error || 'Failed to save resume')
       }
 
-      // Success!
-      setResume(data.resume)
-      setSuccess(resume ? 'Resume updated successfully!' : 'Resume created successfully!')
+      // Success! Revalidate cache
+      revalidateUserResume()
+      setSuccess(cachedResume ? 'Resume updated successfully!' : 'Resume created successfully!')
       onResumeUpdated?.()
       
     } catch (err) {
@@ -187,7 +169,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
   }
 
   const handleDelete = async () => {
-    if (!resume || !confirm('Are you sure you want to delete your entire resume? This cannot be undone.')) {
+    if (!cachedResume || !confirm('Are you sure you want to delete your entire resume? This cannot be undone.')) {
       return
     }
 
@@ -206,8 +188,8 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
         throw new Error(data.error || 'Failed to delete resume')
       }
 
-      // Success!
-      setResume(null)
+      // Success! Revalidate cache
+      revalidateUserResume()
       setTweets([{ tweet_link: '', notes: '' }])
       setSuccess('Resume deleted successfully!')
       onResumeUpdated?.()
@@ -241,13 +223,13 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
             className="text-3xl font-bold mb-3"
             style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
           >
-            {resume ? 'Edit Resume' : 'Create Resume'}
+            {cachedResume ? 'Edit Resume' : 'Create Resume'}
           </h2>
           <p style={{ color: 'var(--foreground-secondary)' }}>
             Add tweet links to showcase your thoughts and insights
           </p>
         </div>
-        {resume && (
+        {cachedResume && (
           <button
             onClick={handleDelete}
             disabled={loading}
@@ -551,8 +533,8 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
             }}
           >
             {loading 
-              ? (resume ? 'Updating...' : 'Creating...') 
-              : (resume ? 'Update Resume' : 'Create Resume')
+              ? (cachedResume ? 'Updating...' : 'Creating...') 
+              : (cachedResume ? 'Update Resume' : 'Create Resume')
             }
           </button>
         </div>
