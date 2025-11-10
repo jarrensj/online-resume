@@ -27,7 +27,8 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
         
         if (response.ok && data.resume) {
           setResume(data.resume)
-          setTweets(data.resume.tweets.length > 0 ? data.resume.tweets : [{ tweet_link: '', notes: '' }])
+          const fetchedTweets = data.resume.tweets.length > 0 ? data.resume.tweets : [{ tweet_link: '', notes: '' }]
+          setTweets(fetchedTweets)
         } else {
           // No resume exists, start with empty form
           setTweets([{ tweet_link: '', notes: '' }])
@@ -396,85 +397,109 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
               </div>
             </div>
             
-            <div className="space-y-5">
-              <div>
-                <label 
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: 'var(--foreground)' }}
-                >
-                  Tweet Link *
-                </label>
-                <input
-                  type="url"
-                  value={tweet.tweet_link}
-                  onChange={(e) => updateTweet(index, 'tweet_link', e.target.value)}
-                  placeholder="https://twitter.com/username/status/..."
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-200"
-                  style={{
-                    border: '1.5px solid var(--border-gentle)',
-                    background: 'var(--background-card)',
-                    color: 'var(--foreground)',
-                    fontSize: '0.95rem'
-                  }}
-                  disabled={loading}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = 'var(--accent-green)';
-                    e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = 'var(--border-gentle)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                />
-              </div>
-              
-              <div>
-                <label 
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: 'var(--foreground)' }}
-                >
-                  Notes (optional)
-                </label>
-                <textarea
-                  value={tweet.notes || ''}
-                  onChange={(e) => updateTweet(index, 'notes', e.target.value)}
-                  placeholder="Add your thoughts about this tweet..."
-                  rows={3}
-                  className="w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none"
-                  style={{
-                    border: '1.5px solid var(--border-gentle)',
-                    background: 'var(--background-card)',
-                    color: 'var(--foreground)',
-                    fontSize: '0.95rem',
-                    fontFamily: 'var(--font-sans)'
-                  }}
-                  disabled={loading}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = 'var(--accent-green)';
-                    e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = 'var(--border-gentle)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                />
-              </div>
-
-              {/* Tweet Preview */}
-              {tweet.tweet_link.trim() && (
-                <div>
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+              <div className="flex-1 min-w-0 space-y-4">
+                <div className="space-y-3">
                   <label 
-                    className="block text-sm font-medium mb-3"
+                    className="block text-sm font-medium"
                     style={{ color: 'var(--foreground)' }}
                   >
-                    Preview
+                    Tweet Link *
                   </label>
-                  <TweetCard
-                    tweetItem={tweet}
-                    index={index}
+                  <input
+                    type="url"
+                    value={tweet.tweet_link}
+                    onChange={(e) => updateTweet(index, 'tweet_link', e.target.value)}
+                    placeholder="https://twitter.com/username/status/..."
+                    className="w-full px-4 py-3 rounded-xl transition-all duration-200"
+                    style={{
+                      border: '1.5px solid var(--border-gentle)',
+                      background: 'var(--background-card)',
+                      color: 'var(--foreground)',
+                      fontSize: '0.95rem'
+                    }}
+                    disabled={loading}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = 'var(--accent-green)';
+                      e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border-gentle)';
+                      e.target.style.boxShadow = 'none';
+                    }}
                   />
                 </div>
-              )}
+
+                <div className="space-y-3">
+                  <label 
+                    className="block text-sm font-medium"
+                    style={{ color: 'var(--foreground)' }}
+                  >
+                    Notes (optional)
+                  </label>
+                  <textarea
+                    value={tweet.notes || ''}
+                    onChange={(e) => updateTweet(index, 'notes', e.target.value)}
+                    placeholder="Add your thoughts about this tweet..."
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none"
+                    style={{
+                      border: '1.5px solid var(--border-gentle)',
+                      background: 'var(--background-card)',
+                      color: 'var(--foreground)',
+                      fontSize: '0.95rem',
+                      fontFamily: 'var(--font-sans)'
+                    }}
+                    disabled={loading}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = 'var(--accent-green)';
+                      e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border-gentle)';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="lg:w-72 flex flex-col gap-3">
+                <label 
+                  className="block text-sm font-medium"
+                  style={{ color: 'var(--foreground)' }}
+                >
+                  Preview
+                </label>
+                {tweet.tweet_link.trim() ? (
+                  <div
+                    className="rounded-2xl border px-3 py-4"
+                    style={{
+                      borderColor: 'var(--border-gentle)',
+                      background: 'var(--background-secondary)',
+                      boxShadow: 'var(--shadow-gentle)'
+                    }}
+                  >
+                    <div className="tweet-preview-container">
+                      <TweetCard
+                        tweetItem={tweet}
+                        index={index}
+                        variant="compact"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="rounded-2xl border border-dashed px-4 py-6 text-sm text-center"
+                    style={{
+                      borderColor: 'var(--border-gentle)',
+                      background: 'var(--background-card)',
+                      color: 'var(--foreground-secondary)'
+                    }}
+                  >
+                    Add a tweet link to see the preview
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}
