@@ -226,9 +226,6 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                 >
                   No tweets yet
                 </h2>
-                <p style={{ color: 'var(--foreground-secondary)', fontSize: '1.1rem' }}>
-                  {profile.username} hasn&apos;t shared any thoughts yet.
-                </p>
                 <div className="mt-6 w-16 h-0.5 mx-auto" style={{ background: 'var(--accent-sage)' }}></div>
               </div>
             </div>
