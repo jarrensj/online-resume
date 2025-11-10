@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import { notFound } from 'next/navigation'
 import PublicTweetCard from '@/components/PublicTweetCard'
-import { Linkedin, Twitter, Instagram, Globe } from 'lucide-react'
+import { Linkedin, Twitter, Instagram, Globe, Copy, Check } from 'lucide-react'
 
 interface TweetItem {
   tweet_link: string
@@ -35,6 +35,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [copiedWallet, setCopiedWallet] = useState<'evm' | 'solana' | null>(null)
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -142,6 +143,16 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   const socialLinks = getSocialLinks()
 
+  const copyToClipboard = async (text: string, walletType: 'evm' | 'solana') => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedWallet(walletType)
+      setTimeout(() => setCopiedWallet(null), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
+  }
+
   return (
     <main className="min-h-screen px-6 py-12" style={{ background: 'var(--background)' }}>
       <div className="max-w-4xl mx-auto">
@@ -181,19 +192,41 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                 </h2>
                 <div className="space-y-3">
                   {profile.evm_wallet_address && (
-                    <div className="break-all">
+                    <div>
                       <div className="text-sm font-medium text-secondary mb-1">EVM</div>
-                      <code className="text-sm bg-opacity-50 px-2 py-1 rounded" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                        {profile.evm_wallet_address}
-                      </code>
+                      <button
+                        onClick={() => copyToClipboard(profile.evm_wallet_address!, 'evm')}
+                        className="w-full text-left break-all group relative"
+                        title="Click to copy"
+                      >
+                        <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
+                          <span className="flex-1">{profile.evm_wallet_address}</span>
+                          {copiedWallet === 'evm' ? (
+                            <Check size={16} className="text-green-500 flex-shrink-0" />
+                          ) : (
+                            <Copy size={16} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                          )}
+                        </code>
+                      </button>
                     </div>
                   )}
                   {profile.solana_wallet_address && (
-                    <div className="break-all">
+                    <div>
                       <div className="text-sm font-medium text-secondary mb-1">Solana</div>
-                      <code className="text-sm bg-opacity-50 px-2 py-1 rounded" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                        {profile.solana_wallet_address}
-                      </code>
+                      <button
+                        onClick={() => copyToClipboard(profile.solana_wallet_address!, 'solana')}
+                        className="w-full text-left break-all group relative"
+                        title="Click to copy"
+                      >
+                        <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
+                          <span className="flex-1">{profile.solana_wallet_address}</span>
+                          {copiedWallet === 'solana' ? (
+                            <Check size={16} className="text-green-500 flex-shrink-0" />
+                          ) : (
+                            <Copy size={16} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                          )}
+                        </code>
+                      </button>
                     </div>
                   )}
                 </div>
