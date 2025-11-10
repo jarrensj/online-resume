@@ -84,7 +84,6 @@ export default function NotFound() {
                 style={{ color: 'var(--foreground-secondary)' }}
               >
                 <div>Double-check the username spelling</div>
-                <div>Usernames are case-sensitive</div>
                 <div>The profile might not be created yet</div>
               </div>
             </div>

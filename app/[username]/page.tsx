@@ -30,11 +30,11 @@ async function getProfile(username: string): Promise<UserProfile | null> {
   try {
     const supabase = createClerkSupabaseClient()
     
-    // Get public profile data by username
+    // Get public profile data by username (case-insensitive)
     const { data: profile, error } = await supabase
       .from('user_profiles')
       .select('id, username, linkedin, twitter_handle, ig_handle, website, created_at')
-      .eq('username', username.trim())
+      .ilike('username', username.trim())
       .single()
 
     if (error) {
