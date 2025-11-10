@@ -11,13 +11,30 @@ interface TweetItem {
 interface TweetCardProps {
   tweetItem: TweetItem
   index: number
+  variant?: 'default' | 'compact'
 }
 
-export default function TweetCard({ tweetItem, index }: TweetCardProps) {
+export default function TweetCard({ tweetItem, variant = 'default' }: TweetCardProps) {
   const tweetId = extractTweetId(tweetItem.tweet_link)
   
   // Handle invalid tweet URL
   if (!tweetId) {
+    if (variant === 'compact') {
+      return (
+        <div
+          className="rounded-lg border px-3 py-2 text-xs"
+          style={{
+            borderColor: '#feb2b2',
+            background: '#fef2f2',
+            color: '#c53030',
+            fontFamily: 'var(--font-sans)'
+          }}
+        >
+          Invalid tweet URL
+        </div>
+      )
+    }
+
     return (
       <div 
         className="border rounded-2xl p-6"
@@ -39,6 +56,10 @@ export default function TweetCard({ tweetItem, index }: TweetCardProps) {
     )
   }
   
+  if (variant === 'compact') {
+    return <Tweet id={tweetId} />
+  }
+
   return (
     <div className="tweet-card">
       {/* Tweet embed */}
