@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getAuth } from "@clerk/nextjs/server"
 import { createClerkSupabaseClient } from "@/app/lib/db"
+import { sanitizeSocialFields } from "@/app/lib/socials"
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,12 +12,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Parse the request body
-    const { username, linkedin, twitter_handle, ig_handle, website } = await request.json()
+    const body = await request.json() as Record<string, unknown>
+    const rawUsername = typeof body.username === "string" ? body.username : ""
+    const trimmedUsername = rawUsername.trim()
     
-    if (!username || typeof username !== 'string' || username.trim().length === 0) {
+    if (!trimmedUsername) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 })
     }
+
+    const socialFields = sanitizeSocialFields(body)
 
     // Create Supabase client
     const supabase = createClerkSupabaseClient()
@@ -25,7 +29,7 @@ export async function POST(request: NextRequest) {
     const { data: existingUser } = await supabase
       .from('user_profiles')
       .select('username')
-      .eq('username', username.trim())
+      .eq('username', trimmedUsername)
       .single()
     
     if (existingUser) {
@@ -41,16 +45,17 @@ export async function POST(request: NextRequest) {
 
     if (userProfile) {
       // Update existing profile
+      const timestamp = new Date().toISOString()
+      const updateData: Record<string, string | null> = {
+        username: trimmedUsername,
+        updated_at: timestamp,
+      }
+
+      Object.assign(updateData, socialFields)
+
       const { data, error } = await supabase
         .from('user_profiles')
-        .update({ 
-          username: username.trim(),
-          linkedin: linkedin?.trim() || null,
-          twitter_handle: twitter_handle?.trim() || null,
-          ig_handle: ig_handle?.trim() || null,
-          website: website?.trim() || null,
-          updated_at: new Date().toISOString()
-        })
+        .update(updateData)
         .eq('clerk_user_id', userId)
         .select()
         .single()
@@ -63,18 +68,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: true, profile: data })
     } else {
       // Create new profile
+      const timestamp = new Date().toISOString()
+      const insertData: Record<string, string | null> = {
+        clerk_user_id: userId,
+        username: trimmedUsername,
+        created_at: timestamp,
+        updated_at: timestamp,
+      }
+
+      Object.assign(insertData, socialFields)
+
       const { data, error } = await supabase
         .from('user_profiles')
-        .insert({
-          clerk_user_id: userId,
-          username: username.trim(),
-          linkedin: linkedin?.trim() || null,
-          twitter_handle: twitter_handle?.trim() || null,
-          ig_handle: ig_handle?.trim() || null,
-          website: website?.trim() || null,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
+        .insert(insertData)
         .select()
         .single()
 
@@ -101,12 +107,15 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Parse the request body
-    const { username, linkedin, twitter_handle, ig_handle, website } = await request.json()
+    const body = await request.json() as Record<string, unknown>
+    const rawUsername = typeof body.username === "string" ? body.username : ""
+    const trimmedUsername = rawUsername.trim()
     
-    if (!username || typeof username !== 'string' || username.trim().length === 0) {
+    if (!trimmedUsername) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 })
     }
+
+    const socialFields = sanitizeSocialFields(body)
 
     // Create Supabase client
     const supabase = createClerkSupabaseClient()
@@ -123,7 +132,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Check if the new username is different from current username
-    if (existingProfile.username === username.trim()) {
+    if (existingProfile.username === trimmedUsername) {
       return NextResponse.json({ error: "New username must be different from current username" }, { status: 400 })
     }
     
@@ -131,7 +140,7 @@ export async function PUT(request: NextRequest) {
     const { data: usernameExists } = await supabase
       .from('user_profiles')
       .select('username')
-      .eq('username', username.trim())
+      .eq('username', trimmedUsername)
       .neq('clerk_user_id', userId)
       .single()
     
@@ -140,16 +149,17 @@ export async function PUT(request: NextRequest) {
     }
 
     // Update the username and social media fields
+    const timestamp = new Date().toISOString()
+    const updateData: Record<string, string | null> = {
+      username: trimmedUsername,
+      updated_at: timestamp,
+    }
+
+    Object.assign(updateData, socialFields)
+
     const { data, error } = await supabase
       .from('user_profiles')
-      .update({ 
-        username: username.trim(),
-        linkedin: linkedin?.trim() || null,
-        twitter_handle: twitter_handle?.trim() || null,
-        ig_handle: ig_handle?.trim() || null,
-        website: website?.trim() || null,
-        updated_at: new Date().toISOString()
-      })
+      .update(updateData)
       .eq('clerk_user_id', userId)
       .select()
       .single()

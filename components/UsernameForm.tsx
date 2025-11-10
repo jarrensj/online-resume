@@ -11,10 +11,6 @@ interface UsernameFormProps {
 
 export default function UsernameForm({ onUsernameSet, mode = 'create', currentUsername = '' }: UsernameFormProps) {
   const [username, setUsername] = useState(currentUsername)
-  const [linkedin, setLinkedin] = useState('')
-  const [twitterHandle, setTwitterHandle] = useState('')
-  const [igHandle, setIgHandle] = useState('')
-  const [website, setWebsite] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -22,28 +18,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
 
   useEffect(() => {
     setUsername(currentUsername)
-    // Fetch existing profile data when in update mode
-    if (mode === 'update') {
-      fetchProfileData()
-    }
   }, [currentUsername, mode])
-
-  const fetchProfileData = async () => {
-    try {
-      const response = await fetch('/api/username')
-      if (response.ok) {
-        const data = await response.json()
-        if (data.profile) {
-          setLinkedin(data.profile.linkedin || '')
-          setTwitterHandle(data.profile.twitter_handle || '')
-          setIgHandle(data.profile.ig_handle || '')
-          setWebsite(data.profile.website || '')
-        }
-      }
-    } catch (err) {
-      console.error('Error fetching profile data:', err)
-    }
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -70,11 +45,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          username: username.trim(),
-          linkedin: linkedin.trim(),
-          twitter_handle: twitterHandle.trim(),
-          ig_handle: igHandle.trim(),
-          website: website.trim()
+          username: username.trim()
         }),
       })
 
@@ -136,140 +107,6 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
             }}
             disabled={loading}
             maxLength={50}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--accent-green)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--border-gentle)';
-              e.target.style.boxShadow = 'none';
-            }}
-          />
-        </div>
-
-        <div>
-          <label 
-            htmlFor="linkedin" 
-            className="block text-sm font-medium mb-3"
-            style={{ color: 'var(--foreground)' }}
-          >
-            LinkedIn
-          </label>
-          <input
-            type="url"
-            id="linkedin"
-            value={linkedin}
-            onChange={(e) => setLinkedin(e.target.value)}
-            placeholder="https://linkedin.com/in/yourprofile"
-            className="w-full px-4 py-3 rounded-xl transition-all duration-200"
-            style={{
-              border: '1.5px solid var(--border-gentle)',
-              background: 'var(--background-card)',
-              color: 'var(--foreground)',
-              fontSize: '1rem'
-            }}
-            disabled={loading}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--accent-green)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--border-gentle)';
-              e.target.style.boxShadow = 'none';
-            }}
-          />
-        </div>
-
-        <div>
-          <label 
-            htmlFor="twitter_handle" 
-            className="block text-sm font-medium mb-3"
-            style={{ color: 'var(--foreground)' }}
-          >
-            Twitter Handle
-          </label>
-          <input
-            type="text"
-            id="twitter_handle"
-            value={twitterHandle}
-            onChange={(e) => setTwitterHandle(e.target.value)}
-            placeholder="@yourhandle"
-            className="w-full px-4 py-3 rounded-xl transition-all duration-200"
-            style={{
-              border: '1.5px solid var(--border-gentle)',
-              background: 'var(--background-card)',
-              color: 'var(--foreground)',
-              fontSize: '1rem'
-            }}
-            disabled={loading}
-            maxLength={50}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--accent-green)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--border-gentle)';
-              e.target.style.boxShadow = 'none';
-            }}
-          />
-        </div>
-
-        <div>
-          <label 
-            htmlFor="ig_handle" 
-            className="block text-sm font-medium mb-3"
-            style={{ color: 'var(--foreground)' }}
-          >
-            Instagram Handle
-          </label>
-          <input
-            type="text"
-            id="ig_handle"
-            value={igHandle}
-            onChange={(e) => setIgHandle(e.target.value)}
-            placeholder="@yourhandle"
-            className="w-full px-4 py-3 rounded-xl transition-all duration-200"
-            style={{
-              border: '1.5px solid var(--border-gentle)',
-              background: 'var(--background-card)',
-              color: 'var(--foreground)',
-              fontSize: '1rem'
-            }}
-            disabled={loading}
-            maxLength={50}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--accent-green)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--border-gentle)';
-              e.target.style.boxShadow = 'none';
-            }}
-          />
-        </div>
-
-        <div>
-          <label 
-            htmlFor="website" 
-            className="block text-sm font-medium mb-3"
-            style={{ color: 'var(--foreground)' }}
-          >
-            Website
-          </label>
-          <input
-            type="url"
-            id="website"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            placeholder="https://yourwebsite.com"
-            className="w-full px-4 py-3 rounded-xl transition-all duration-200"
-            style={{
-              border: '1.5px solid var(--border-gentle)',
-              background: 'var(--background-card)',
-              color: 'var(--foreground)',
-              fontSize: '1rem'
-            }}
-            disabled={loading}
             onFocus={(e) => {
               e.target.style.borderColor = 'var(--accent-green)';
               e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
