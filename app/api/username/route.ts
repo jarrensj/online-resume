@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Parse the request body
-    const { username } = await request.json()
+    const { username, linkedin, twitter_handle, ig_handle, website } = await request.json()
     
     if (!username || typeof username !== 'string' || username.trim().length === 0) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 })
@@ -45,6 +45,10 @@ export async function POST(request: NextRequest) {
         .from('user_profiles')
         .update({ 
           username: username.trim(),
+          linkedin: linkedin?.trim() || null,
+          twitter_handle: twitter_handle?.trim() || null,
+          ig_handle: ig_handle?.trim() || null,
+          website: website?.trim() || null,
           updated_at: new Date().toISOString()
         })
         .eq('clerk_user_id', userId)
@@ -64,6 +68,10 @@ export async function POST(request: NextRequest) {
         .insert({
           clerk_user_id: userId,
           username: username.trim(),
+          linkedin: linkedin?.trim() || null,
+          twitter_handle: twitter_handle?.trim() || null,
+          ig_handle: ig_handle?.trim() || null,
+          website: website?.trim() || null,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         })
@@ -94,7 +102,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Parse the request body
-    const { username } = await request.json()
+    const { username, linkedin, twitter_handle, ig_handle, website } = await request.json()
     
     if (!username || typeof username !== 'string' || username.trim().length === 0) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 })
@@ -131,11 +139,15 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Username already taken" }, { status: 409 })
     }
 
-    // Update the username
+    // Update the username and social media fields
     const { data, error } = await supabase
       .from('user_profiles')
       .update({ 
         username: username.trim(),
+        linkedin: linkedin?.trim() || null,
+        twitter_handle: twitter_handle?.trim() || null,
+        ig_handle: ig_handle?.trim() || null,
+        website: website?.trim() || null,
         updated_at: new Date().toISOString()
       })
       .eq('clerk_user_id', userId)
@@ -143,11 +155,11 @@ export async function PUT(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error('Error updating username:', error)
-      return NextResponse.json({ error: "Failed to update username" }, { status: 500 })
+      console.error('Error updating profile:', error)
+      return NextResponse.json({ error: "Failed to update profile" }, { status: 500 })
     }
 
-    return NextResponse.json({ success: true, profile: data, message: "Username updated successfully" })
+    return NextResponse.json({ success: true, profile: data, message: "Profile updated successfully" })
 
   } catch (error) {
     console.error('Error in username PUT API:', error)

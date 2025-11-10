@@ -19,7 +19,7 @@ export async function GET(
     // We only return public information, not sensitive data like clerk_user_id or email
     const { data: profile, error } = await supabase
       .from('user_profiles')
-      .select('id, username, created_at')
+      .select('id, username, linkedin, twitter_handle, ig_handle, website, created_at')
       .eq('username', username.trim())
       .single()
 
