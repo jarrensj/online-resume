@@ -251,7 +251,7 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
               id="website"
               value={socials.website}
               onChange={handleChange('website')}
-              placeholder="https://yourwebsite.com"
+              placeholder="https://antiresume.com"
               className="w-full px-4 py-3 rounded-xl transition-all duration-200"
               style={{
                 border: '1.5px solid var(--border-gentle)',

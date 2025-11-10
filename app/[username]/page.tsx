@@ -151,13 +151,13 @@ export default function ProfilePage({ params }: ProfilePageProps) {
       <div className="max-w-4xl mx-auto">
         {/* Profile Header */}
         <div className="text-center mb-12">
-          <h1 
+          <h1
             className="text-5xl font-bold mb-4"
             style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
           >
             {profile.username}
           </h1>
-          
+
           {/* Social Links */}
           {socialLinks.length > 0 && (
             <div className="flex justify-center gap-4 mt-6">
