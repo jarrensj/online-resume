@@ -143,6 +143,11 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   const socialLinks = getSocialLinks()
 
+  const truncateWalletAddress = (address: string) => {
+    if (address.length <= 16) return address
+    return `${address.slice(0, 8)}…${address.slice(-8)}`
+  }
+
   const copyToClipboard = async (text: string, walletType: 'evm' | 'solana') => {
     try {
       await navigator.clipboard.writeText(text)
@@ -196,11 +201,11 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                       <div className="text-sm font-medium text-secondary mb-1">EVM</div>
                       <button
                         onClick={() => copyToClipboard(profile.evm_wallet_address!, 'evm')}
-                        className="w-full text-left break-all group relative"
-                        title="Click to copy"
+                        className="w-full text-left group relative"
+                        title="Click to copy full address"
                       >
                         <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                          <span className="flex-1">{profile.evm_wallet_address}</span>
+                          <span className="flex-1">{truncateWalletAddress(profile.evm_wallet_address)}</span>
                           {copiedWallet === 'evm' ? (
                             <Check size={16} className="text-green-500 flex-shrink-0" />
                           ) : (
@@ -215,11 +220,11 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                       <div className="text-sm font-medium text-secondary mb-1">Solana</div>
                       <button
                         onClick={() => copyToClipboard(profile.solana_wallet_address!, 'solana')}
-                        className="w-full text-left break-all group relative"
-                        title="Click to copy"
+                        className="w-full text-left group relative"
+                        title="Click to copy full address"
                       >
                         <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                          <span className="flex-1">{profile.solana_wallet_address}</span>
+                          <span className="flex-1">{truncateWalletAddress(profile.solana_wallet_address)}</span>
                           {copiedWallet === 'solana' ? (
                             <Check size={16} className="text-green-500 flex-shrink-0" />
                           ) : (
