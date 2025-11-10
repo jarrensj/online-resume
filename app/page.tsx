@@ -6,6 +6,7 @@ import UsernameForm from '@/components/UsernameForm'
 import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
+import EmailForm from '@/components/EmailForm'
 
 interface UserProfile {
   id: string
@@ -22,6 +23,7 @@ export default function Home() {
   const [showUpdateForm, setShowUpdateForm] = useState(false)
   const [showResumeForm, setShowResumeForm] = useState(false)
   const [showSocialForm, setShowSocialForm] = useState(false)
+  const [showEmailForm, setShowEmailForm] = useState(false)
   const [showResetDialog, setShowResetDialog] = useState(false)
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
@@ -51,6 +53,7 @@ export default function Home() {
     setUserProfile(prev => prev ? { ...prev, username } : null)
     setShowUpdateForm(false)
     setShowSocialForm(false)
+    setShowEmailForm(false)
     setLoading(true)
     
     // Refetch to get updated profile
@@ -85,6 +88,7 @@ export default function Home() {
       setShowUpdateForm(false)
       setShowResumeForm(false)
       setShowSocialForm(false)
+      setShowEmailForm(false)
       
     } catch (err) {
       setResetError(err instanceof Error ? err.message : 'An error occurred')
@@ -171,6 +175,7 @@ export default function Home() {
                     if (!showUpdateForm) {
                       setShowResumeForm(false);
                       setShowSocialForm(false);
+                      setShowEmailForm(false);
                     }
                   }}
                   className="btn-base btn-secondary"
@@ -183,6 +188,7 @@ export default function Home() {
                     if (!showResumeForm) {
                       setShowUpdateForm(false);
                       setShowSocialForm(false);
+                      setShowEmailForm(false);
                     }
                   }}
                   className="btn-base btn-primary"
@@ -191,10 +197,24 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => {
+                    setShowEmailForm(!showEmailForm);
+                    if (!showEmailForm) {
+                      setShowUpdateForm(false);
+                      setShowResumeForm(false);
+                      setShowSocialForm(false);
+                    }
+                  }}
+                  className="btn-base btn-info"
+                >
+                  {showEmailForm ? 'Cancel' : 'Manage Email'}
+                </button>
+                <button
+                  onClick={() => {
                     setShowSocialForm(!showSocialForm);
                     if (!showSocialForm) {
                       setShowUpdateForm(false);
                       setShowResumeForm(false);
+                      setShowEmailForm(false);
                     }
                   }}
                   className="btn-base btn-info"
@@ -236,6 +256,12 @@ export default function Home() {
                     console.log('Resume updated!')
                   }}
                 />
+              </div>
+            )}
+
+            {showEmailForm && (
+              <div className="mb-8">
+                <EmailForm />
               </div>
             )}
 
