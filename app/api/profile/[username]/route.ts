@@ -33,7 +33,7 @@ export async function GET(
     }
 
     // Get user's resume/tweets (public data)
-    const { data: resume, error: resumeError } = await supabase
+    const { data: resume } = await supabase
       .from('resumes')
       .select('tweets, created_at')
       .eq('user_profile_id', profile.id)
