@@ -4,6 +4,7 @@ import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
 import { useState, useEffect } from 'react'
 import UsernameForm from '@/components/UsernameForm'
 import ResumeForm from '@/components/ResumeForm'
+import ConfirmDialog from '@/components/ConfirmDialog'
 
 interface UserProfile {
   id: string
@@ -19,6 +20,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [showUpdateForm, setShowUpdateForm] = useState(false)
   const [showResumeForm, setShowResumeForm] = useState(false)
+  const [showResetDialog, setShowResetDialog] = useState(false)
+  const [resetLoading, setResetLoading] = useState(false)
+  const [resetError, setResetError] = useState('')
 
   // Fetch user profile when component mounts
   useEffect(() => {
@@ -55,6 +59,34 @@ export default function Home() {
         }
       })
       .finally(() => setLoading(false))
+  }
+
+  const handleResetProfile = async () => {
+    setResetLoading(true)
+    setResetError('')
+
+    try {
+      const response = await fetch('/api/username', {
+        method: 'DELETE',
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to reset profile')
+      }
+
+      // Success! Reset the local state
+      setUserProfile(null)
+      setShowResetDialog(false)
+      setShowUpdateForm(false)
+      setShowResumeForm(false)
+      
+    } catch (err) {
+      setResetError(err instanceof Error ? err.message : 'An error occurred')
+    } finally {
+      setResetLoading(false)
+    }
   }
 
   return (
@@ -213,6 +245,24 @@ export default function Home() {
                 >
                   View Public Profile
                 </a>
+                <button
+                  onClick={() => setShowResetDialog(true)}
+                  className="px-6 py-2.5 font-medium rounded-xl transition-all duration-200 text-white"
+                  style={{ 
+                    background: '#dc3545',
+                    border: '1.5px solid #dc3545'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#c82333';
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#dc3545';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  Reset Profile
+                </button>
               </div>
             </div>
 
@@ -236,6 +286,19 @@ export default function Home() {
                 />
               </div>
             )}
+
+            {resetError && (
+              <div 
+                className="mt-4 text-sm p-4 rounded-xl border max-w-md mx-auto"
+                style={{ 
+                  color: '#c53030',
+                  background: '#fed7d7',
+                  borderColor: '#feb2b2'
+                }}
+              >
+                {resetError}
+              </div>
+            )}
           </div>
         ) : (
           // User doesn't have a profile - show username creation form
@@ -244,6 +307,22 @@ export default function Home() {
           </div>
         )}
       </SignedIn>
+
+      {/* Reset Profile Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={showResetDialog}
+        title="Reset Profile?"
+        message="Are you sure you want to reset your profile? This will permanently delete your username, resume, and all associated data. This action cannot be undone."
+        confirmText="Yes, Reset Profile"
+        cancelText="Cancel"
+        onConfirm={handleResetProfile}
+        onCancel={() => {
+          setShowResetDialog(false)
+          setResetError('')
+        }}
+        isLoading={resetLoading}
+        variant="danger"
+      />
     </main>
   );
 }

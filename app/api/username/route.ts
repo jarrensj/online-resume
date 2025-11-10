@@ -198,3 +198,51 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    // Get the authenticated user from Clerk
+    const { userId } = getAuth(request)
+    
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    // Create Supabase client
+    const supabase = createClerkSupabaseClient()
+    
+    // Get the user profile ID first
+    const { data: userProfile, error: profileError } = await supabase
+      .from('user_profiles')
+      .select('id')
+      .eq('clerk_user_id', userId)
+      .single()
+
+    if (profileError || !userProfile) {
+      return NextResponse.json({ error: "User profile not found" }, { status: 404 })
+    }
+
+    // Delete the user's resume first (if exists)
+    await supabase
+      .from('resumes')
+      .delete()
+      .eq('user_profile_id', userProfile.id)
+
+    // Delete the user profile
+    const { error } = await supabase
+      .from('user_profiles')
+      .delete()
+      .eq('clerk_user_id', userId)
+
+    if (error) {
+      console.error('Error deleting user profile:', error)
+      return NextResponse.json({ error: "Failed to delete profile" }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true, message: "Profile deleted successfully" })
+
+  } catch (error) {
+    console.error('Error in username DELETE API:', error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  }
+}
