@@ -20,6 +20,8 @@ interface UserProfile {
   twitter_handle?: string | null
   ig_handle?: string | null
   website?: string | null
+  evm_wallet_address?: string | null
+  solana_wallet_address?: string | null
 }
 
 interface ProfilePageProps {
@@ -167,6 +169,35 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                   </a>
                 )
               })}
+            </div>
+          )}
+
+          {/* Wallet Addresses */}
+          {(profile.evm_wallet_address || profile.solana_wallet_address) && (
+            <div className="mt-8 max-w-2xl mx-auto">
+              <div className="card p-6" style={{ background: 'var(--background-secondary)' }}>
+                <h2 className="text-xl font-semibold mb-4 text-center heading-handwritten">
+                  Wallet Addresses
+                </h2>
+                <div className="space-y-3">
+                  {profile.evm_wallet_address && (
+                    <div className="break-all">
+                      <div className="text-sm font-medium text-secondary mb-1">EVM</div>
+                      <code className="text-sm bg-opacity-50 px-2 py-1 rounded" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
+                        {profile.evm_wallet_address}
+                      </code>
+                    </div>
+                  )}
+                  {profile.solana_wallet_address && (
+                    <div className="break-all">
+                      <div className="text-sm font-medium text-secondary mb-1">Solana</div>
+                      <code className="text-sm bg-opacity-50 px-2 py-1 rounded" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
+                        {profile.solana_wallet_address}
+                      </code>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           )}
         </div>
