@@ -18,7 +18,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
 
   useEffect(() => {
     setUsername(currentUsername)
-  }, [currentUsername])
+  }, [currentUsername, mode])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,7 +44,9 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: username.trim() }),
+        body: JSON.stringify({ 
+          username: username.trim()
+        }),
       })
 
       const data = await response.json()
@@ -88,7 +90,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
             className="block text-sm font-medium mb-3"
             style={{ color: 'var(--foreground)' }}
           >
-            Username
+            Username *
           </label>
           <input
             type="text"

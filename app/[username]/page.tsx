@@ -102,7 +102,6 @@ export default function ProfilePage({ params }: ProfilePageProps) {
           >
             {profile.username}
           </h1>
-          <div className="w-24 h-0.5 mx-auto" style={{ background: 'var(--accent-sage)' }}></div>
         </div>
 
         {/* Tweets Section */}
