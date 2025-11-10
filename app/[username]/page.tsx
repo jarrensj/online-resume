@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import { notFound } from 'next/navigation'
 import PublicTweetCard from '@/components/PublicTweetCard'
-import { Linkedin, Twitter, Instagram, Globe } from 'lucide-react'
+import { Linkedin, Twitter, Instagram, Globe, Copy, Check } from 'lucide-react'
 
 interface TweetItem {
   tweet_link: string
@@ -35,6 +35,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -90,6 +91,16 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   if (!profile) {
     return notFound()
+  }
+
+  const handleCopyToClipboard = async (address: string, type: string) => {
+    try {
+      await navigator.clipboard.writeText(address)
+      setCopiedAddress(type)
+      setTimeout(() => setCopiedAddress(null), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+    }
   }
 
   const getSocialLinks = () => {
@@ -181,19 +192,59 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                 </h2>
                 <div className="space-y-3">
                   {profile.evm_wallet_address && (
-                    <div className="break-all">
+                    <div>
                       <div className="text-sm font-medium text-secondary mb-1">EVM</div>
-                      <code className="text-sm bg-opacity-50 px-2 py-1 rounded" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                        {profile.evm_wallet_address}
-                      </code>
+                      <button
+                        onClick={() => handleCopyToClipboard(profile.evm_wallet_address!, 'evm')}
+                        className="w-full text-left group relative"
+                        aria-label="Copy EVM wallet address to clipboard"
+                      >
+                        <div className="flex items-center gap-2 bg-opacity-50 px-3 py-2 rounded transition-colors hover:bg-opacity-70" style={{ background: 'var(--background)' }}>
+                          <code className="text-sm break-all flex-1" style={{ color: 'var(--foreground)' }}>
+                            {profile.evm_wallet_address}
+                          </code>
+                          <div className="flex-shrink-0">
+                            {copiedAddress === 'evm' ? (
+                              <Check size={16} className="text-green-500" />
+                            ) : (
+                              <Copy size={16} className="text-secondary group-hover:text-foreground transition-colors" />
+                            )}
+                          </div>
+                        </div>
+                        {copiedAddress === 'evm' && (
+                          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                            Copied!
+                          </span>
+                        )}
+                      </button>
                     </div>
                   )}
                   {profile.solana_wallet_address && (
-                    <div className="break-all">
+                    <div>
                       <div className="text-sm font-medium text-secondary mb-1">Solana</div>
-                      <code className="text-sm bg-opacity-50 px-2 py-1 rounded" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                        {profile.solana_wallet_address}
-                      </code>
+                      <button
+                        onClick={() => handleCopyToClipboard(profile.solana_wallet_address!, 'solana')}
+                        className="w-full text-left group relative"
+                        aria-label="Copy Solana wallet address to clipboard"
+                      >
+                        <div className="flex items-center gap-2 bg-opacity-50 px-3 py-2 rounded transition-colors hover:bg-opacity-70" style={{ background: 'var(--background)' }}>
+                          <code className="text-sm break-all flex-1" style={{ color: 'var(--foreground)' }}>
+                            {profile.solana_wallet_address}
+                          </code>
+                          <div className="flex-shrink-0">
+                            {copiedAddress === 'solana' ? (
+                              <Check size={16} className="text-green-500" />
+                            ) : (
+                              <Copy size={16} className="text-secondary group-hover:text-foreground transition-colors" />
+                            )}
+                          </div>
+                        </div>
+                        {copiedAddress === 'solana' && (
+                          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                            Copied!
+                          </span>
+                        )}
+                      </button>
                     </div>
                   )}
                 </div>
