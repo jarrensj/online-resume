@@ -72,24 +72,17 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
   return (
     <div className="max-w-md mx-auto card p-8">
       <div className="text-center mb-8">
-        <h2 
-          className="text-3xl font-bold mb-3"
-          style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
-        >
+        <h2 className="text-3xl font-bold mb-3 heading-handwritten">
           {mode === 'update' ? 'Update Username' : `Welcome${user?.firstName ? `, ${user.firstName}` : ''}!`}
         </h2>
-        <p style={{ color: 'var(--foreground-secondary)' }}>
+        <p className="text-secondary">
           {mode === 'update' ? 'Change your username below' : 'Choose a username to complete your profile'}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label 
-            htmlFor="username" 
-            className="block text-sm font-medium mb-3"
-            style={{ color: 'var(--foreground)' }}
-          >
+          <label htmlFor="username" className="form-label">
             Username *
           </label>
           <input
@@ -98,48 +91,20 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter your username"
-            className="w-full px-4 py-3 rounded-xl transition-all duration-200"
-            style={{
-              border: '1.5px solid var(--border-gentle)',
-              background: 'var(--background-card)',
-              color: 'var(--foreground)',
-              fontSize: '1rem'
-            }}
+            className="input-field"
             disabled={loading}
             maxLength={50}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--accent-green)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--border-gentle)';
-              e.target.style.boxShadow = 'none';
-            }}
           />
         </div>
 
         {error && (
-          <div 
-            className="text-sm p-4 rounded-xl border"
-            style={{ 
-              color: '#c53030',
-              background: '#fed7d7',
-              borderColor: '#feb2b2'
-            }}
-          >
+          <div className="alert alert-error">
             {error}
           </div>
         )}
 
         {success && (
-          <div 
-            className="text-sm p-4 rounded-xl border"
-            style={{ 
-              color: 'var(--accent-green)',
-              background: '#f0fff4',
-              borderColor: 'var(--accent-sage)'
-            }}
-          >
+          <div className="alert alert-success">
             {success}
           </div>
         )}
@@ -147,30 +112,10 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
         <button
           type="submit"
           disabled={loading || !username.trim() || (mode === 'update' && username.trim() === currentUsername)}
-          className="w-full py-3 px-6 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-white"
-          style={{
-            background: loading || !username.trim() || (mode === 'update' && username.trim() === currentUsername) 
-              ? 'var(--foreground-light)' 
-              : 'var(--accent-green)',
-            border: '1.5px solid transparent'
-          }}
-          onMouseEnter={(e) => {
-            if (!e.currentTarget.disabled) {
-              e.currentTarget.style.background = 'var(--accent-sage)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-soft)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!e.currentTarget.disabled) {
-              e.currentTarget.style.background = 'var(--accent-green)';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }
-          }}
+          className="w-full btn-base btn-primary"
         >
           {loading 
-            ? (mode === 'update' ? 'Updating...' : 'Saving...') 
+            ? (mode === 'update' ? 'Updating…' : 'Saving…') 
             : (mode === 'update' ? 'Update Username' : 'Save Username')
           }
         </button>
@@ -178,4 +123,3 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
     </div>
   )
 }
-

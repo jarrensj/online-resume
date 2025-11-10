@@ -223,27 +223,29 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
     return (
       <div className="max-w-2xl mx-auto card p-8">
         <div className="text-center">
-          <div 
-            className="animate-spin rounded-full h-8 w-8 border-2 mx-auto loading-spinner"
-            style={{ borderTopColor: 'var(--accent-green)', borderColor: 'var(--border-soft)' }}
-          ></div>
-          <p className="mt-3 text-lg" style={{ color: 'var(--foreground-secondary)' }}>Loading resume...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-2 mx-auto loading-spinner"></div>
+          <p className="mt-3 text-lg loading-text">Loading resume…</p>
         </div>
       </div>
     )
+  }
+
+  const getDragClassName = (index: number) => {
+    let className = 'tweet-form-card'
+    if (!loading && tweets.length > 1) className += ' drag-item'
+    if (draggedIndex === index) className += ' dragging'
+    if (dragOverIndex === index) className += ' drag-over'
+    return className
   }
 
   return (
     <div className="max-w-2xl mx-auto card p-8">
       <div className="flex justify-between items-start mb-8">
         <div>
-          <h2 
-            className="text-3xl font-bold mb-3"
-            style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
-          >
+          <h2 className="text-3xl font-bold mb-3 heading-handwritten">
             {resume ? 'Edit Resume' : 'Create Resume'}
           </h2>
-          <p style={{ color: 'var(--foreground-secondary)' }}>
+          <p className="text-secondary">
             Add tweet links to showcase your thoughts and insights
           </p>
         </div>
@@ -251,20 +253,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
           <button
             onClick={handleDelete}
             disabled={loading}
-            className="px-4 py-2 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 text-white"
-            style={{ background: '#dc3545', border: '1.5px solid #dc3545' }}
-            onMouseEnter={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = '#c82333';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = '#dc3545';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }
-            }}
+            className="btn-base btn-danger"
           >
             Delete Resume
           </button>
@@ -281,38 +270,18 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
             onDragLeave={handleDragLeave}
             onDrop={(e) => handleDrop(e, index)}
             onDragEnd={handleDragEnd}
-            className={`border rounded-2xl p-6 transition-all duration-200 ${
-              !loading && tweets.length > 1 ? 'cursor-move' : ''
-            }`}
-            style={{
-              borderColor: draggedIndex === index 
-                ? 'var(--accent-sage)' 
-                : dragOverIndex === index 
-                ? 'var(--accent-green)' 
-                : 'var(--border-soft)',
-              background: draggedIndex === index 
-                ? 'var(--background-secondary)' 
-                : dragOverIndex === index 
-                ? 'var(--hover-bg)' 
-                : 'var(--background-card)',
-              opacity: draggedIndex === index ? 0.7 : 1,
-              transform: draggedIndex === index ? 'scale(0.98)' : dragOverIndex === index ? 'scale(1.02)' : 'scale(1)',
-              boxShadow: dragOverIndex === index ? 'var(--shadow-soft)' : 'var(--shadow-gentle)'
-            }}
+            className={getDragClassName(index)}
           >
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-3">
                 {tweets.length > 1 && !loading && (
-                  <div style={{ color: 'var(--foreground-light)' }}>
+                  <div className="text-muted">
                     <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
                       <path d="M10 13a1 1 0 100-2 1 1 0 000 2zM10 8a1 1 0 100-2 1 1 0 000 2zM10 5a1 1 0 100-2 1 1 0 000 2zM6 13a1 1 0 100-2 1 1 0 000 2zM6 8a1 1 0 100-2 1 1 0 000 2zM6 5a1 1 0 100-2 1 1 0 000 2z"/>
                     </svg>
                   </div>
                 )}
-                <h3 
-                  className="text-xl font-medium"
-                  style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
-                >
+                <h3 className="text-xl font-medium heading-handwritten">
                   Tweet #{index + 1}
                 </h3>
               </div>
@@ -323,24 +292,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                       type="button"
                       onClick={() => moveTweetUp(index)}
                       disabled={loading || index === 0}
-                      className="p-2 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
-                      style={{ 
-                        background: 'var(--background-secondary)', 
-                        border: '1.5px solid var(--border-soft)',
-                        color: 'var(--foreground)'
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!e.currentTarget.disabled) {
-                          e.currentTarget.style.background = 'var(--hover-bg)';
-                          e.currentTarget.style.borderColor = 'var(--accent-green)';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!e.currentTarget.disabled) {
-                          e.currentTarget.style.background = 'var(--background-secondary)';
-                          e.currentTarget.style.borderColor = 'var(--border-soft)';
-                        }
-                      }}
+                      className="btn-icon"
                       title="Move up"
                     >
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -352,24 +304,7 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                       type="button"
                       onClick={() => moveTweetDown(index)}
                       disabled={loading || index === tweets.length - 1}
-                      className="p-2 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
-                      style={{ 
-                        background: 'var(--background-secondary)', 
-                        border: '1.5px solid var(--border-soft)',
-                        color: 'var(--foreground)'
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!e.currentTarget.disabled) {
-                          e.currentTarget.style.background = 'var(--hover-bg)';
-                          e.currentTarget.style.borderColor = 'var(--accent-green)';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!e.currentTarget.disabled) {
-                          e.currentTarget.style.background = 'var(--background-secondary)';
-                          e.currentTarget.style.borderColor = 'var(--border-soft)';
-                        }
-                      }}
+                      className="btn-icon"
                       title="Move down"
                     >
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -380,15 +315,8 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                     <button
                       type="button"
                       onClick={() => removeTweet(index)}
-                      className="text-sm px-3 py-1 rounded-lg transition-colors"
-                      style={{ color: '#dc3545', background: '#f8d7da', border: '1px solid #f5c6cb' }}
+                      className="btn-remove"
                       disabled={loading}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = '#f1b0b7';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = '#f8d7da';
-                      }}
                     >
                       Remove
                     </button>
@@ -400,85 +328,44 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
               <div className="flex-1 min-w-0 space-y-4">
                 <div className="space-y-3">
-                  <label 
-                    className="block text-sm font-medium"
-                    style={{ color: 'var(--foreground)' }}
-                  >
+                  <label className="form-label">
                     Tweet Link *
                   </label>
                   <input
                     type="url"
                     value={tweet.tweet_link}
                     onChange={(e) => updateTweet(index, 'tweet_link', e.target.value)}
-                    placeholder="https://twitter.com/username/status/..."
-                    className="w-full px-4 py-3 rounded-xl transition-all duration-200"
-                    style={{
-                      border: '1.5px solid var(--border-gentle)',
-                      background: 'var(--background-card)',
-                      color: 'var(--foreground)',
-                      fontSize: '0.95rem'
-                    }}
+                    placeholder="https://twitter.com/username/status/…"
+                    className="input-field"
                     disabled={loading}
-                    onFocus={(e) => {
-                      e.target.style.borderColor = 'var(--accent-green)';
-                      e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.borderColor = 'var(--border-gentle)';
-                      e.target.style.boxShadow = 'none';
-                    }}
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <label 
-                    className="block text-sm font-medium"
-                    style={{ color: 'var(--foreground)' }}
-                  >
+                  <label className="form-label">
                     Notes (optional)
                   </label>
                   <textarea
                     value={tweet.notes || ''}
                     onChange={(e) => updateTweet(index, 'notes', e.target.value)}
-                    placeholder="Add your thoughts about this tweet..."
+                    placeholder="Add your thoughts about this tweet…"
                     rows={3}
-                    className="w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none"
-                    style={{
-                      border: '1.5px solid var(--border-gentle)',
-                      background: 'var(--background-card)',
-                      color: 'var(--foreground)',
-                      fontSize: '0.95rem',
-                      fontFamily: 'var(--font-sans)'
-                    }}
+                    className="textarea-field"
                     disabled={loading}
-                    onFocus={(e) => {
-                      e.target.style.borderColor = 'var(--accent-green)';
-                      e.target.style.boxShadow = '0 0 0 3px rgba(157, 181, 161, 0.15)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.borderColor = 'var(--border-gentle)';
-                      e.target.style.boxShadow = 'none';
-                    }}
                   />
                 </div>
               </div>
 
               <div className="lg:w-72 flex flex-col gap-3">
-                <label 
-                  className="block text-sm font-medium"
-                  style={{ color: 'var(--foreground)' }}
-                >
+                <label className="form-label">
                   Preview
                 </label>
                 {tweet.tweet_link.trim() ? (
-                  <div
-                    className="rounded-2xl border px-3 py-4"
-                    style={{
-                      borderColor: 'var(--border-gentle)',
-                      background: 'var(--background-secondary)',
-                      boxShadow: 'var(--shadow-gentle)'
-                    }}
-                  >
+                  <div className="rounded-2xl border px-3 py-4" style={{
+                    borderColor: 'var(--border-gentle)',
+                    background: 'var(--background-secondary)',
+                    boxShadow: 'var(--shadow-gentle)'
+                  }}>
                     <div className="tweet-preview-container">
                       <TweetCard
                         tweetItem={tweet}
@@ -488,14 +375,11 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
                     </div>
                   </div>
                 ) : (
-                  <div
-                    className="rounded-2xl border border-dashed px-4 py-6 text-sm text-center"
-                    style={{
-                      borderColor: 'var(--border-gentle)',
-                      background: 'var(--background-card)',
-                      color: 'var(--foreground-secondary)'
-                    }}
-                  >
+                  <div className="rounded-2xl border border-dashed px-4 py-6 text-sm text-center" style={{
+                    borderColor: 'var(--border-gentle)',
+                    background: 'var(--background-card)',
+                    color: 'var(--foreground-secondary)'
+                  }}>
                     Add a tweet link to see the preview
                   </div>
                 )}
@@ -508,21 +392,8 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
           <button
             type="button"
             onClick={addTweet}
-            className="px-5 py-2.5 font-medium rounded-xl transition-all duration-200 text-white"
-            style={{ background: 'var(--accent-brown)', border: '1.5px solid var(--accent-brown)' }}
+            className="btn-base btn-secondary"
             disabled={loading}
-            onMouseEnter={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = 'var(--accent-warm)';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = 'var(--accent-brown)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }
-            }}
           >
             Add Another Tweet
           </button>
@@ -530,55 +401,23 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
           <button
             type="submit"
             disabled={loading}
-            className="px-8 py-2.5 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-white"
-            style={{
-              background: loading ? 'var(--foreground-light)' : 'var(--accent-green)',
-              border: '1.5px solid transparent'
-            }}
-            onMouseEnter={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = 'var(--accent-sage)';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-soft)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = 'var(--accent-green)';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }
-            }}
+            className="btn-base btn-primary px-8"
           >
             {loading 
-              ? (resume ? 'Updating...' : 'Creating...') 
+              ? (resume ? 'Updating…' : 'Creating…') 
               : (resume ? 'Update Resume' : 'Create Resume')
             }
           </button>
         </div>
 
         {error && (
-          <div 
-            className="text-sm p-4 rounded-xl border"
-            style={{ 
-              color: '#c53030',
-              background: '#fed7d7',
-              borderColor: '#feb2b2'
-            }}
-          >
+          <div className="alert alert-error">
             {error}
           </div>
         )}
 
         {success && (
-          <div 
-            className="text-sm p-4 rounded-xl border"
-            style={{ 
-              color: 'var(--accent-green)',
-              background: '#f0fff4',
-              borderColor: 'var(--accent-sage)'
-            }}
-          >
+          <div className="alert alert-success">
             {success}
           </div>
         )}
@@ -586,5 +425,4 @@ export default function ResumeForm({ onResumeUpdated }: ResumeFormProps) {
     </div>
   )
 }
-
 

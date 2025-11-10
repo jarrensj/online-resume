@@ -9,6 +9,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,8 +22,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "hi",
-  description: "hi",
+  title: "antiresume",
+  description: "antiresume",
 };
 
 export default function RootLayout({
@@ -37,7 +38,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           style={{ background: 'var(--background)', color: 'var(--foreground)' }}
         >
-          <header className="flex justify-end items-center px-6 py-4 gap-4 h-20">
+          <header className="fixed top-0 right-0 left-0 flex justify-end items-center px-6 py-4 gap-4 h-20 z-50" style={{ background: 'var(--background)' }}>
             <SignedOut>
               <div className="flex items-center gap-3">
                 <SignInButton mode="modal">
@@ -59,6 +60,7 @@ export default function RootLayout({
             </SignedIn>
           </header>
           {children}
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>

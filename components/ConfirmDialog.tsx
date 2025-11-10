@@ -25,25 +25,33 @@ export default function ConfirmDialog({
 }: ConfirmDialogProps) {
   if (!isOpen) return null
 
-  const variantColors = {
-    danger: {
-      button: '#dc3545',
-      buttonHover: '#c82333',
-      icon: '#dc3545'
-    },
-    warning: {
-      button: '#ff9800',
-      buttonHover: '#f57c00',
-      icon: '#ff9800'
-    },
-    info: {
-      button: 'var(--accent-green)',
-      buttonHover: 'var(--accent-sage)',
-      icon: 'var(--accent-green)'
+  const getButtonClass = () => {
+    switch (variant) {
+      case 'danger':
+        return 'btn-danger'
+      case 'warning':
+        return 'btn-secondary'
+      case 'info':
+        return 'btn-primary'
+      default:
+        return 'btn-primary'
     }
   }
 
-  const colors = variantColors[variant]
+  const getIconColor = () => {
+    switch (variant) {
+      case 'danger':
+        return '#dc3545'
+      case 'warning':
+        return '#ff9800'
+      case 'info':
+        return 'var(--accent-green)'
+      default:
+        return 'var(--accent-green)'
+    }
+  }
+
+  const iconColor = getIconColor()
 
   return (
     <div 
@@ -59,14 +67,14 @@ export default function ConfirmDialog({
         <div className="flex items-start gap-4 mb-5">
           <div 
             className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
-            style={{ background: `${colors.icon}20` }}
+            style={{ background: `${iconColor}20` }}
           >
             <svg 
               width="24" 
               height="24" 
               viewBox="0 0 24 24" 
               fill="none" 
-              stroke={colors.icon}
+              stroke={iconColor}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -95,16 +103,10 @@ export default function ConfirmDialog({
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 
-              className="text-2xl font-bold mb-2"
-              style={{ fontFamily: 'var(--font-handwritten)', color: 'var(--foreground)' }}
-            >
+            <h3 className="text-2xl font-bold mb-2 heading-handwritten">
               {title}
             </h3>
-            <p 
-              className="text-base leading-relaxed"
-              style={{ color: 'var(--foreground-secondary)' }}
-            >
+            <p className="text-base leading-relaxed text-secondary">
               {message}
             </p>
           </div>
@@ -114,49 +116,16 @@ export default function ConfirmDialog({
           <button
             onClick={onCancel}
             disabled={isLoading}
-            className="px-5 py-2.5 font-medium rounded-xl transition-all duration-200 disabled:opacity-50"
-            style={{ 
-              background: 'var(--background-secondary)', 
-              border: '1.5px solid var(--border-soft)',
-              color: 'var(--foreground)'
-            }}
-            onMouseEnter={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = 'var(--hover-bg)';
-                e.currentTarget.style.borderColor = 'var(--accent-green)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = 'var(--background-secondary)';
-                e.currentTarget.style.borderColor = 'var(--border-soft)';
-              }
-            }}
+            className="btn-base btn-outline"
           >
             {cancelText}
           </button>
           <button
             onClick={onConfirm}
             disabled={isLoading}
-            className="px-5 py-2.5 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 text-white"
-            style={{ 
-              background: isLoading ? 'var(--foreground-light)' : colors.button,
-              border: `1.5px solid ${colors.button}`
-            }}
-            onMouseEnter={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = colors.buttonHover;
-                e.currentTarget.style.transform = 'translateY(-1px)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!e.currentTarget.disabled) {
-                e.currentTarget.style.background = colors.button;
-                e.currentTarget.style.transform = 'translateY(0)';
-              }
-            }}
+            className={`btn-base ${getButtonClass()}`}
           >
-            {isLoading ? 'Processing...' : confirmText}
+            {isLoading ? 'Processing…' : confirmText}
           </button>
         </div>
       </div>
