@@ -54,42 +54,6 @@ export default function NotFound() {
           or the user might have changed their username.
         </p>
 
-        {/* Info card */}
-        <div 
-          className="card p-6 mb-8 text-left"
-          style={{ 
-            background: 'var(--background-secondary)',
-            maxWidth: '480px',
-            margin: '0 auto 2rem'
-          }}
-        >
-          <div className="flex items-start gap-3 mb-4">
-            <Search 
-              size={20} 
-              style={{ 
-                color: 'var(--accent-green)',
-                marginTop: '2px',
-                flexShrink: 0
-              }} 
-            />
-            <div>
-              <h3 
-                className="font-semibold mb-2"
-                style={{ color: 'var(--foreground)' }}
-              >
-                Looking for someone specific?
-              </h3>
-              <div 
-                className="space-y-1 text-sm"
-                style={{ color: 'var(--foreground-secondary)' }}
-              >
-                <div>Double-check the username spelling</div>
-                <div>The profile might not be created yet</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
