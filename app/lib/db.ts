@@ -28,6 +28,8 @@ export interface UserProfile {
   twitter_handle?: string
   ig_handle?: string
   website?: string
+  evm_wallet_address?: string
+  solana_wallet_address?: string
   created_at: string
   updated_at: string
 }
