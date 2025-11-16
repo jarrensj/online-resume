@@ -210,7 +210,7 @@ export default function Home() {
                   Real Projects
                 </h3>
                 <p className="text-charcoal-600 leading-relaxed">
-                  Display what you&apos;ve actually built. Link to your demo posts, the product launches, and just what you&apos;ve shipped.
+                  Display what you&apos;ve actually built. Link to your demo posts, the product launches, and just what you&apos;ve shipped. In a normal resume, you can&apos;t link to the actual product announcement post where someone could easily see your video demo or media — here you can.
                 </p>
               </div>
 
