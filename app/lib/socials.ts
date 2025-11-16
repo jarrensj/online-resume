@@ -1,16 +1,10 @@
+import { ensureHttpsProtocol } from './utils'
+
 export type SocialFieldKey = 'linkedin' | 'twitter_handle' | 'ig_handle' | 'website'
 
 export const SOCIAL_FIELD_KEYS: SocialFieldKey[] = ['linkedin', 'twitter_handle', 'ig_handle', 'website']
 
 export type SanitizedSocialFields = Partial<Record<SocialFieldKey, string | null>>
-
-const ensureHttpsProtocol = (url: string): string => {
-  // If the URL doesn't start with a protocol, add https://
-  if (!url.match(/^https?:\/\//i)) {
-    return `https://${url}`
-  }
-  return url
-}
 
 export const sanitizeSocialFields = (payload: Record<string, unknown>): SanitizedSocialFields => {
   const result: SanitizedSocialFields = {}

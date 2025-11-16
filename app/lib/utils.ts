@@ -13,3 +13,18 @@ export function extractTweetId(url: string): string | null {
   const match = url.match(regex)
   return match ? match[1] : null
 }
+
+/**
+ * Ensures a URL has an HTTPS protocol prefix
+ * @param url - The URL string to normalize
+ * @returns The URL with https:// prefix if it didn't have a protocol
+ */
+export function ensureHttpsProtocol(url: string): string {
+  const trimmed = url.trim()
+  if (!trimmed) return trimmed
+  // If the URL doesn't start with a protocol, add https://
+  if (!trimmed.match(/^https?:\/\//i)) {
+    return `https://${trimmed}`
+  }
+  return trimmed
+}

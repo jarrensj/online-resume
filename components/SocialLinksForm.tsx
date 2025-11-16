@@ -1,6 +1,7 @@
 'use client'
 
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ensureHttpsProtocol } from '@/app/lib/utils'
 
 type SocialFieldKey = 'linkedin' | 'twitter_handle' | 'ig_handle' | 'website'
 
@@ -56,16 +57,6 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
 
     fetchSocials()
   }, [])
-
-  const ensureHttpsProtocol = (url: string): string => {
-    const trimmed = url.trim()
-    if (!trimmed) return trimmed
-    // If the URL doesn't start with a protocol, add https://
-    if (!trimmed.match(/^https?:\/\//i)) {
-      return `https://${trimmed}`
-    }
-    return trimmed
-  }
 
   const handleChange = (field: SocialFieldKey) => (event: ChangeEvent<HTMLInputElement>) => {
     setSocials((prev) => ({
