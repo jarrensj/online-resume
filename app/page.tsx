@@ -7,7 +7,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -244,7 +244,7 @@ export default function Home() {
               <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">📈</span>
+                    <TrendingUp className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
