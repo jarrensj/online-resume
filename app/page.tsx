@@ -232,7 +232,7 @@ export default function Home() {
                       For Designers
                     </h3>
                     <p className="text-charcoal-600 leading-relaxed mb-3">
-                      Traditional portfolios are static and boring. Share the tweets where people are geeking out over your designs, screenshots of your work going viral, and testimonials from clients who couldn&apos;t be happier.
+                      Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral, and public online testimonials posted from clients who couldn&apos;t be happier.
                     </p>
                     <p className="text-charcoal-600 leading-relaxed font-medium">
                       Show the <span className="text-sage-500 font-semibold">real reactions</span> to your work, not just mockups.
@@ -252,7 +252,7 @@ export default function Home() {
                       For Traders
                     </h3>
                     <p className="text-charcoal-600 leading-relaxed mb-3">
-                      Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you. The transparency is what makes you credible — not just cherry-picked screenshots.
+                      Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you but show it all with real post evidence online where you shared it all in real-time and with the post receipts. That can&apos;t be faked. 
                     </p>
                     <p className="text-charcoal-600 leading-relaxed font-medium">
                       This is your <span className="text-sage-500 font-semibold">proof of work</span> — the good, the bad, and the legendary.
