@@ -134,6 +134,35 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Example Antiresumes Section */}
+        <section className="py-12 px-6 bg-sage-50/50">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl font-noto font-light text-charcoal-800 mb-6">
+              View Example Antiresumes
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="/jarrensj"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </a>
+              <a
+                href="/jarrensj"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </a>
+              <a
+                href="/jarrensj"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* What is an antiresume Section */}
         <section className="py-16 px-6">
           <div className="max-w-3xl mx-auto">
