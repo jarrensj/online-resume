@@ -212,7 +212,7 @@ export default function Home() {
                       For Developers
                     </h3>
                     <p className="text-charcoal-600 leading-relaxed mb-3">
-                      Stop hiding your best work in a PDF. Share the tweets about your side projects blowing up, the GitHub stars rolling in, and the DMs from people saying your code changed their life.
+                      Stop hiding your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
                     </p>
                     <p className="text-charcoal-600 leading-relaxed font-medium">
                       Your portfolio should be as dynamic as your builds. This is how you flex <span className="text-sage-500 font-semibold">real impact</span>.
