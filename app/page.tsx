@@ -215,7 +215,7 @@ export default function Home() {
                       Stop hiding your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
                     </p>
                     <p className="text-charcoal-600 leading-relaxed font-medium">
-                      Your portfolio should be as dynamic as your builds. This is how you flex <span className="text-sage-500 font-semibold">real impact</span>.
+                      Flex <span className="text-sage-500 font-semibold">the product launches</span> that you were a part of and the numbers that it did online.
                     </p>
                   </div>
                 </div>
@@ -235,7 +235,7 @@ export default function Home() {
                       Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral, and public online testimonials posted from clients who couldn&apos;t be happier.
                     </p>
                     <p className="text-charcoal-600 leading-relaxed font-medium">
-                      Show the <span className="text-sage-500 font-semibold">real reactions</span> to your work, not just mockups.
+                      Show your work and the numbers that it did online and the <span className="text-sage-500 font-semibold">real reactions</span> from amazing people.
                     </p>
                   </div>
                 </div>
@@ -255,7 +255,7 @@ export default function Home() {
                       Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you but show it all with real post evidence online where you shared it all in real-time and with the post receipts. That can&apos;t be faked. 
                     </p>
                     <p className="text-charcoal-600 leading-relaxed font-medium">
-                      This is your <span className="text-sage-500 font-semibold">proof of work</span> — the good, the bad, and the legendary.
+                      <span className="text-sage-500 font-semibold">Flex your online receipts</span> where you were right on a thesis so early. 
                     </p>
                   </div>
                 </div>
