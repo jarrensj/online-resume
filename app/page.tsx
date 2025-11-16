@@ -190,6 +190,79 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="py-16 px-6 bg-sage-100/40">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
+              Portfolio
+            </h2>
+            <p className="text-center text-charcoal-600 mb-12 max-w-2xl mx-auto">
+              Whether you&apos;re building, designing, or trading — show your wins (and losses) the way they deserve to be shared.
+            </p>
+
+            <div className="space-y-6">
+              {/* Developers Card */}
+              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
+                    <span className="text-2xl">💻</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
+                      For Developers
+                    </h3>
+                    <p className="text-charcoal-600 leading-relaxed mb-3">
+                      Stop hiding your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
+                    </p>
+                    <p className="text-charcoal-600 leading-relaxed font-medium">
+                      Flex <span className="text-sage-500 font-semibold">the product launches</span> that you were a part of and the numbers that it did online.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Designers Card */}
+              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
+                    <span className="text-2xl">🎨</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
+                      For Designers
+                    </h3>
+                    <p className="text-charcoal-600 leading-relaxed mb-3">
+                      Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral, and public online testimonials posted from clients who couldn&apos;t be happier.
+                    </p>
+                    <p className="text-charcoal-600 leading-relaxed font-medium">
+                      Show your work and the numbers that it did online and the <span className="text-sage-500 font-semibold">real reactions</span> from amazing people.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Traders Card */}
+              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
+                    <span className="text-2xl">📈</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
+                      For Traders
+                    </h3>
+                    <p className="text-charcoal-600 leading-relaxed mb-3">
+                      Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you but show it all with real post evidence online where you shared it all in real-time and with the post receipts. That can&apos;t be faked. 
+                    </p>
+                    <p className="text-charcoal-600 leading-relaxed font-medium">
+                      <span className="text-sage-500 font-semibold">Flex your online receipts</span> where you were right on a thesis so early. 
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="py-16 px-6 bg-matcha-light/30">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
