@@ -135,7 +135,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* What is an antiresume Section */
+        {/* What is an antiresume Section */}
         <section className="py-16 px-6">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-12">
