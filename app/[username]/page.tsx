@@ -51,7 +51,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
           return
         }
         const data = await response.json()
-        setProfile(data)
+        setProfile(data.profile)        
       } catch (err) {
         console.error('Error fetching profile:', err)
         setError('Failed to load profile')
