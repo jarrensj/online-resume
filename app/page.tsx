@@ -190,11 +190,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Who This Is For Section */}
         <section className="py-16 px-6 bg-sage-100/40">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
-              Who is this for?
+              Portfolio
             </h2>
             <p className="text-center text-charcoal-600 mb-12 max-w-2xl mx-auto">
               Whether you&apos;re building, designing, or trading — show your wins (and losses) the way they deserve to be shared.
