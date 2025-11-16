@@ -328,18 +328,24 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 /jarrensj
               </Link>
               <Link
                 href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 /jarrensj
               </Link>
               <Link
                 href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 /jarrensj
