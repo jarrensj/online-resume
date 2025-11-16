@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
 import { Analytics } from "@vercel/analytics/next"
+import Header from '@/components/Header'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,27 +32,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           style={{ background: 'var(--background)', color: 'var(--foreground)' }}
         >
-          <header className="fixed top-0 right-0 left-0 flex justify-end items-center px-6 py-4 gap-4 h-20 z-50" style={{ background: 'var(--background)' }}>
-            <SignedOut>
-              <div className="flex items-center gap-3">
-                <SignInButton mode="modal">
-                  <button className="px-4 py-2 font-medium rounded-lg transition-all duration-200" style={{ color: 'var(--foreground)', background: 'transparent', border: '1.5px solid var(--border-gentle)' }}>
-                    Sign In
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button className="px-5 py-2 font-medium rounded-lg transition-all duration-200 text-white" style={{ background: 'var(--accent-green)', border: '1.5px solid var(--accent-green)' }}>
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </div>
-            </SignedOut>
-            <SignedIn>
-              <div>
-                <UserButton />
-              </div>
-            </SignedIn>
-          </header>
+          <Header />
           {children}
           <Analytics />
         </body>
