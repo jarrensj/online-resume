@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
 import { useState, useEffect } from 'react'
 import UsernameForm from '@/components/UsernameForm'
@@ -314,6 +315,41 @@ export default function Home() {
                   Your online presence is verifiable. No inflated titles, just real work and real impact.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Example antiresumes Section */}
+        <section className="py-12 px-6 bg-sage-50/50">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl font-noto font-light text-charcoal-800 mb-6">
+              Example antiresumes
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </Link>
+              <Link
+                href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </Link>
+              <Link
+                href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </Link>
             </div>
           </div>
         </section>
