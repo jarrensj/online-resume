@@ -8,7 +8,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -194,25 +194,25 @@ export default function Home() {
         <section className="py-16 px-6 bg-sage-100/40">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
-              Portfolio
+              For Builders
             </h2>
             <p className="text-center text-charcoal-600 mb-12 max-w-2xl mx-auto">
-              Whether you&apos;re building, designing, or trading — show your wins (and losses) the way they deserve to be shared.
+              Whether you&apos;re engineering, designing, or trading — show your wins (and losses) the way they deserve to be shared.
             </p>
 
             <div className="space-y-6">
-              {/* Developers Card */}
+              {/* Engineers Card */}
               <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">💻</span>
+                    <Code className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
-                      For Developers
+                      For Engineers
                     </h3>
                     <p className="text-charcoal-600 leading-relaxed mb-3">
-                      Stop hiding your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
+                      Stop sharing your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
                     </p>
                     <p className="text-charcoal-600 leading-relaxed font-medium">
                       Flex <span className="text-sage-500 font-semibold">the product launches</span> that you were a part of and the numbers that it did online.
@@ -225,7 +225,7 @@ export default function Home() {
               <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">🎨</span>
+                    <Palette className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
@@ -245,7 +245,7 @@ export default function Home() {
               <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">📈</span>
+                    <TrendingUp className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
