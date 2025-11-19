@@ -8,7 +8,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X, ArrowLeft } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X, User } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -405,6 +405,19 @@ export default function Home() {
             <nav className="space-y-2">
               <button
                 onClick={() => {
+                  setShowUpdateForm(false);
+                  setShowResumeForm(false);
+                  setShowSocialForm(false);
+                  setShowWalletForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <User className="w-5 h-5" />
+                <span className="font-medium">Profile</span>
+              </button>
+              <button
+                onClick={() => {
                   setShowUpdateForm(!showUpdateForm);
                   setShowResumeForm(false);
                   setShowSocialForm(false);
@@ -539,19 +552,6 @@ export default function Home() {
             ) : (
               // Show only the active form
               <>
-                <button
-                  onClick={() => {
-                    setShowUpdateForm(false);
-                    setShowResumeForm(false);
-                    setShowSocialForm(false);
-                    setShowWalletForm(false);
-                  }}
-                  className="mb-6 flex items-center gap-2 text-charcoal-600 hover:text-charcoal-800 transition-colors"
-                >
-                  <ArrowLeft className="w-5 h-5" />
-                  <span className="font-medium">Back to Profile</span>
-                </button>
-
                 {showUpdateForm && (
                   <div className="mb-8">
                     <UsernameForm
