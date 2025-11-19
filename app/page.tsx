@@ -8,7 +8,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X, ArrowLeft } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -489,89 +489,110 @@ export default function Home() {
             </p>
           </div>
         ) : userProfile ? (
-          // User has a profile - show dashboard
+          // User has a profile - show dashboard or forms
           <div className="text-center max-w-3xl mx-auto w-full">
-            <div className="mb-10">
-              <h1 className="text-5xl font-bold mb-3 heading-handwritten">
-                Welcome back, {userProfile.username}!
-              </h1>
-              <p className="text-lg text-secondary">
-                Edit your profile
-              </p>
-            </div>
-
-            <div className="card p-8 mb-8">
-              <h2 className="text-2xl font-semibold mb-6 heading-handwritten">
-                Your Profile
-              </h2>
-              <div className="text-left space-y-4 mb-8">
-                <div className="flex items-center space-x-3">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Username:</span>
-                  <span className="text-secondary">{userProfile.username}</span>
+            {!showUpdateForm && !showResumeForm && !showSocialForm && !showWalletForm ? (
+              // Show profile dashboard when no form is active
+              <>
+                <div className="mb-10">
+                  <h1 className="text-5xl font-bold mb-3 heading-handwritten">
+                    Welcome back, {userProfile.username}!
+                  </h1>
+                  <p className="text-lg text-secondary">
+                    Edit your profile
+                  </p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Member since:</span>
-                  <span className="text-secondary">
-                    {new Date(userProfile.created_at).toLocaleDateString()}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3 flex-wrap">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Profile URL:</span>
-                  <a 
-                    href={`/${userProfile.username}`}
-                    className="profile-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    /{userProfile.username}
-                  </a>
-                </div>
-              </div>
-              
-              <div className="flex gap-2 flex-wrap justify-center">
-                <a
-                  href={`/${userProfile.username}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-base btn-sage no-underline text-sm px-3 py-2 gap-1.5"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  View Public Profile
-                </a>
-              </div>
-            </div>
 
-            {showUpdateForm && (
-              <div className="mb-8">
-                <UsernameForm
-                  mode="update"
-                  currentUsername={userProfile.username}
-                  onUsernameSet={handleUsernameSet}
-                />
-              </div>
-            )}
-
-            {showResumeForm && (
-              <div className="mb-8">
-                <ResumeForm
-                  onResumeUpdated={() => {
-                    // Optionally refresh or show success message
-                    console.log('Resume updated!')
+                <div className="card p-8 mb-8">
+                  <h2 className="text-2xl font-semibold mb-6 heading-handwritten">
+                    Your Profile
+                  </h2>
+                  <div className="text-left space-y-4 mb-8">
+                    <div className="flex items-center space-x-3">
+                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>Username:</span>
+                      <span className="text-secondary">{userProfile.username}</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>Member since:</span>
+                      <span className="text-secondary">
+                        {new Date(userProfile.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-3 flex-wrap">
+                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>Profile URL:</span>
+                      <a 
+                        href={`/${userProfile.username}`}
+                        className="profile-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        /{userProfile.username}
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-2 flex-wrap justify-center">
+                    <a
+                      href={`/${userProfile.username}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-base btn-sage no-underline text-sm px-3 py-2 gap-1.5"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View Public Profile
+                    </a>
+                  </div>
+                </div>
+              </>
+            ) : (
+              // Show only the active form
+              <>
+                <button
+                  onClick={() => {
+                    setShowUpdateForm(false);
+                    setShowResumeForm(false);
+                    setShowSocialForm(false);
+                    setShowWalletForm(false);
                   }}
-                />
-              </div>
-            )}
+                  className="mb-6 flex items-center gap-2 text-charcoal-600 hover:text-charcoal-800 transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                  <span className="font-medium">Back to Profile</span>
+                </button>
 
-            {showSocialForm && (
-              <div className="mb-8">
-                <SocialLinksForm />
-              </div>
-            )}
+                {showUpdateForm && (
+                  <div className="mb-8">
+                    <UsernameForm
+                      mode="update"
+                      currentUsername={userProfile.username}
+                      onUsernameSet={handleUsernameSet}
+                    />
+                  </div>
+                )}
 
-            {showWalletForm && (
-              <div className="mb-8">
-                <WalletAddressesForm />
-              </div>
+                {showResumeForm && (
+                  <div className="mb-8">
+                    <ResumeForm
+                      onResumeUpdated={() => {
+                        // Optionally refresh or show success message
+                        console.log('Resume updated!')
+                      }}
+                    />
+                  </div>
+                )}
+
+                {showSocialForm && (
+                  <div className="mb-8">
+                    <SocialLinksForm />
+                  </div>
+                )}
+
+                {showWalletForm && (
+                  <div className="mb-8">
+                    <WalletAddressesForm />
+                  </div>
+                )}
+              </>
             )}
 
             {resetError && (
