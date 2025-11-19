@@ -411,10 +411,12 @@ export default function Home() {
                   setShowWalletForm(false);
                   setSidebarOpen(false);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <User className="w-5 h-5 flex-shrink-0" style={{ marginTop: '2px' }} />
-                <span className="font-medium">Profile</span>
+                <span className="font-medium inline-flex items-center gap-2">
+                  <User className="w-5 h-5" />
+                  Profile
+                </span>
               </button>
               <button
                 onClick={() => {
@@ -424,10 +426,12 @@ export default function Home() {
                   setShowWalletForm(false);
                   setSidebarOpen(false);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Edit3 className="w-5 h-5 flex-shrink-0" style={{ marginTop: '2px' }} />
-                <span className="font-medium">Change Username</span>
+                <span className="font-medium inline-flex items-center gap-2">
+                  <Edit3 className="w-5 h-5" />
+                  Username
+                </span>
               </button>
               <button
                 onClick={() => {
@@ -437,10 +441,12 @@ export default function Home() {
                   setShowUpdateForm(false);
                   setSidebarOpen(false);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <FileType className="w-5 h-5 flex-shrink-0" style={{ marginTop: '2px' }} />
-                <span className="font-medium">Manage Resume</span>
+                <span className="font-medium inline-flex items-center gap-2">
+                  <FileType className="w-5 h-5" />
+                  Resume
+                </span>
               </button>
               <button
                 onClick={() => {
@@ -450,10 +456,12 @@ export default function Home() {
                   setShowUpdateForm(false);
                   setSidebarOpen(false);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Share2 className="w-5 h-5 flex-shrink-0" style={{ marginTop: '2px' }} />
-                <span className="font-medium">Manage Social Links</span>
+                <span className="font-medium inline-flex items-center gap-2">
+                  <Share2 className="w-5 h-5" />
+                  Social Links
+                </span>
               </button>
               <button
                 onClick={() => {
@@ -463,10 +471,12 @@ export default function Home() {
                   setShowUpdateForm(false);
                   setSidebarOpen(false);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Wallet className="w-5 h-5 flex-shrink-0" style={{ marginTop: '2px' }} />
-                <span className="font-medium">Manage Wallet Addresses</span>
+                <span className="font-medium inline-flex items-center gap-2">
+                  <Wallet className="w-5 h-5" />
+                  Wallets
+                </span>
               </button>
               
               <div className="pt-4 mt-4 border-t border-sage-200">
@@ -475,10 +485,12 @@ export default function Home() {
                     setShowResetDialog(true);
                     setSidebarOpen(false);
                   }}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
+                  className="w-full px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
                 >
-                  <Trash2 className="w-5 h-5 flex-shrink-0" style={{ marginTop: '2px' }} />
-                  <span className="font-medium">Reset Profile</span>
+                  <span className="font-medium inline-flex items-center gap-2">
+                    <Trash2 className="w-5 h-5" />
+                    Reset Profile
+                  </span>
                 </button>
               </div>
             </nav>

@@ -195,13 +195,13 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                   title="Click to copy EVM address"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <span className="font-mono" style={{ display: 'inline' }}>
+                  <span className="font-mono">
                     {truncateWalletAddress(profile.evm_wallet_address)}
                   </span>
                   {copiedWallet === 'evm' ? (
-                    <Check size={12} className="flex-shrink-0" style={{ color: '#22c55e', display: 'inline' }} />
+                    <Check size={12} className="flex-shrink-0" style={{ color: '#22c55e' }} />
                   ) : (
-                    <Copy size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" style={{ display: 'inline' }} />
+                    <Copy size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                   )}
                 </button>
               )}
@@ -212,13 +212,13 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                   title="Click to copy Solana address"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <span className="font-mono" style={{ display: 'inline' }}>
+                  <span className="font-mono">
                     {truncateWalletAddress(profile.solana_wallet_address)}
                   </span>
                   {copiedWallet === 'solana' ? (
-                    <Check size={12} className="flex-shrink-0" style={{ color: '#22c55e', display: 'inline' }} />
+                    <Check size={12} className="flex-shrink-0" style={{ color: '#22c55e' }} />
                   ) : (
-                    <Copy size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" style={{ display: 'inline' }} />
+                    <Copy size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                   )}
                 </button>
               )}
