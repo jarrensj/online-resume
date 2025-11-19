@@ -394,14 +394,6 @@ export default function Home() {
           </button>
         )}
 
-        {/* Sidebar Overlay */}
-        {sidebarOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity duration-300"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
-
         {/* Sidebar */}
         <div
           className={`fixed top-0 left-0 h-full w-72 bg-matcha-cream border-r-2 border-sage-300 z-40 transform transition-transform duration-300 ease-in-out ${
