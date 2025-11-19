@@ -413,8 +413,10 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <User className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="font-medium">Profile</span>
+                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                  <User className="w-5 h-5" />
+                </div>
+                <span className="font-medium leading-none">Profile</span>
               </button>
               <button
                 onClick={() => {
@@ -426,8 +428,10 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Edit3 className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="font-medium">Change Username</span>
+                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                  <Edit3 className="w-5 h-5" />
+                </div>
+                <span className="font-medium leading-none">Change Username</span>
               </button>
               <button
                 onClick={() => {
@@ -439,8 +443,10 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <FileType className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="font-medium">Manage Resume</span>
+                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                  <FileType className="w-5 h-5" />
+                </div>
+                <span className="font-medium leading-none">Manage Resume</span>
               </button>
               <button
                 onClick={() => {
@@ -452,8 +458,10 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Share2 className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="font-medium">Manage Social Links</span>
+                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                  <Share2 className="w-5 h-5" />
+                </div>
+                <span className="font-medium leading-none">Manage Social Links</span>
               </button>
               <button
                 onClick={() => {
@@ -465,8 +473,10 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Wallet className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="font-medium">Manage Wallet Addresses</span>
+                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                  <Wallet className="w-5 h-5" />
+                </div>
+                <span className="font-medium leading-none">Manage Wallet Addresses</span>
               </button>
               
               <div className="pt-4 mt-4 border-t border-sage-200">
@@ -477,8 +487,10 @@ export default function Home() {
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
                 >
-                  <Trash2 className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <span className="font-medium">Reset Profile</span>
+                  <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+                    <Trash2 className="w-5 h-5" />
+                  </div>
+                  <span className="font-medium leading-none">Reset Profile</span>
                 </button>
               </div>
             </nav>
