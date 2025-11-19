@@ -517,12 +517,6 @@ export default function Home() {
                       <span className="font-medium" style={{ color: 'var(--foreground)' }}>Username:</span>
                       <span className="text-secondary">{userProfile.username}</span>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>Member since:</span>
-                      <span className="text-secondary">
-                        {new Date(userProfile.created_at).toLocaleDateString()}
-                      </span>
-                    </div>
                     <div className="flex items-center space-x-3 flex-wrap">
                       <span className="font-medium" style={{ color: 'var(--foreground)' }}>Profile URL:</span>
                       <a 
