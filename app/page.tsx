@@ -8,7 +8,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X, User } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -29,6 +29,7 @@ export default function Home() {
   const [showResetDialog, setShowResetDialog] = useState(false)
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Fetch user profile when component mounts
   useEffect(() => {
@@ -382,6 +383,120 @@ export default function Home() {
       </SignedOut>
 
       <SignedIn>
+        {/* Hamburger Menu Button */}
+        {userProfile && (
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="fixed top-6 left-6 z-50 p-2 rounded-lg bg-matcha-cream border-2 border-sage-300 hover:bg-sage-100 transition-all duration-200"
+            aria-label="Toggle menu"
+          >
+            {sidebarOpen ? <X className="w-6 h-6 text-charcoal-700" /> : <Menu className="w-6 h-6 text-charcoal-700" />}
+          </button>
+        )}
+
+        {/* Sidebar */}
+        <div
+          className={`fixed top-0 left-0 h-full w-72 bg-matcha-cream border-r-2 border-sage-300 z-40 transform transition-transform duration-300 ease-in-out ${
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="p-6 pt-20">
+            <h2 className="text-xl font-noto font-semibold text-charcoal-800 mb-6">Manage Profile</h2>
+            <nav className="space-y-2">
+              <button
+                onClick={() => {
+                  setShowUpdateForm(false);
+                  setShowResumeForm(false);
+                  setShowSocialForm(false);
+                  setShowWalletForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <span className="font-medium inline-flex items-center gap-2">
+                  <User className="w-5 h-5" />
+                  Profile
+                </span>
+              </button>
+              <button
+                onClick={() => {
+                  setShowUpdateForm(!showUpdateForm);
+                  setShowResumeForm(false);
+                  setShowSocialForm(false);
+                  setShowWalletForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <span className="font-medium inline-flex items-center gap-2">
+                  <Edit3 className="w-5 h-5" />
+                  Username
+                </span>
+              </button>
+              <button
+                onClick={() => {
+                  setShowResumeForm(!showResumeForm);
+                  setShowSocialForm(false);
+                  setShowWalletForm(false);
+                  setShowUpdateForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <span className="font-medium inline-flex items-center gap-2">
+                  <FileType className="w-5 h-5" />
+                  Resume
+                </span>
+              </button>
+              <button
+                onClick={() => {
+                  setShowSocialForm(!showSocialForm);
+                  setShowResumeForm(false);
+                  setShowWalletForm(false);
+                  setShowUpdateForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <span className="font-medium inline-flex items-center gap-2">
+                  <Share2 className="w-5 h-5" />
+                  Social Links
+                </span>
+              </button>
+              <button
+                onClick={() => {
+                  setShowWalletForm(!showWalletForm);
+                  setShowResumeForm(false);
+                  setShowSocialForm(false);
+                  setShowUpdateForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <span className="font-medium inline-flex items-center gap-2">
+                  <Wallet className="w-5 h-5" />
+                  Wallets
+                </span>
+              </button>
+              
+              <div className="pt-4 mt-4 border-t border-sage-200">
+                <button
+                  onClick={() => {
+                    setShowResetDialog(true);
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
+                >
+                  <span className="font-medium inline-flex items-center gap-2">
+                    <Trash2 className="w-5 h-5" />
+                    Reset Profile
+                  </span>
+                </button>
+              </div>
+            </nav>
+          </div>
+        </div>
+
         <div className="px-6 pt-32 pb-12 flex flex-col items-center justify-center">
         {loading ? (
           <div className="text-center">
@@ -391,146 +506,91 @@ export default function Home() {
             </p>
           </div>
         ) : userProfile ? (
-          // User has a profile - show dashboard
+          // User has a profile - show dashboard or forms
           <div className="text-center max-w-3xl mx-auto w-full">
-            <div className="mb-10">
-              <h1 className="text-5xl font-bold mb-3 heading-handwritten">
-                Welcome back, {userProfile.username}!
-              </h1>
-              <p className="text-lg text-secondary">
-                Edit your profile
-              </p>
-            </div>
-
-            <div className="card p-8 mb-8">
-              <h2 className="text-2xl font-semibold mb-6 heading-handwritten">
-                Your Profile
-              </h2>
-              <div className="text-left space-y-4 mb-8">
-                <div className="flex items-center space-x-3">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Username:</span>
-                  <span className="text-secondary">{userProfile.username}</span>
+            {!showUpdateForm && !showResumeForm && !showSocialForm && !showWalletForm ? (
+              // Show profile dashboard when no form is active
+              <>
+                <div className="mb-10">
+                  <h1 className="text-5xl font-bold mb-3 heading-handwritten">
+                    Welcome back, {userProfile.username}!
+                  </h1>
+                  <p className="text-lg text-secondary">
+                    Edit your profile
+                  </p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Member since:</span>
-                  <span className="text-secondary">
-                    {new Date(userProfile.created_at).toLocaleDateString()}
-                  </span>
+
+                <div className="card p-8 mb-8">
+                  <h2 className="text-2xl font-semibold mb-6 heading-handwritten">
+                    Your Profile
+                  </h2>
+                  <div className="text-left space-y-4 mb-8">
+                    <div className="flex items-center space-x-3">
+                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>Username:</span>
+                      <span className="text-secondary">{userProfile.username}</span>
+                    </div>
+                    <div className="flex items-center space-x-3 flex-wrap">
+                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>Profile URL:</span>
+                      <a 
+                        href={`/${userProfile.username}`}
+                        className="profile-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        /{userProfile.username}
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-2 flex-wrap justify-center">
+                    <a
+                      href={`/${userProfile.username}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-base btn-sage no-underline text-sm px-3 py-2 gap-1.5"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View Public Profile
+                    </a>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3 flex-wrap">
-                  <span className="font-medium" style={{ color: 'var(--foreground)' }}>Profile URL:</span>
-                  <a 
-                    href={`/${userProfile.username}`}
-                    className="profile-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    /{userProfile.username}
-                  </a>
-                </div>
-              </div>
-              
-              <div className="flex gap-3 flex-wrap justify-center">
-                <button
-                  onClick={() => {
-                    setShowUpdateForm(!showUpdateForm);
-                    if (!showUpdateForm) {
-                      setShowResumeForm(false);
-                      setShowSocialForm(false);
-                      setShowWalletForm(false);
-                    }
-                  }}
-                  className="btn-base btn-secondary"
-                >
-                  {showUpdateForm ? 'Cancel' : 'Change Username'}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowResumeForm(!showResumeForm);
-                    if (!showResumeForm) {
-                      setShowUpdateForm(false);
-                      setShowSocialForm(false);
-                      setShowWalletForm(false);
-                    }
-                  }}
-                  className="btn-base btn-primary"
-                >
-                  {showResumeForm ? 'Cancel' : 'Manage Resume'}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowSocialForm(!showSocialForm);
-                    if (!showSocialForm) {
-                      setShowUpdateForm(false);
-                      setShowResumeForm(false);
-                      setShowWalletForm(false);
-                    }
-                  }}
-                  className="btn-base btn-info"
-                >
-                  {showSocialForm ? 'Cancel' : 'Manage Social Links'}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowWalletForm(!showWalletForm);
-                    if (!showWalletForm) {
-                      setShowUpdateForm(false);
-                      setShowResumeForm(false);
-                      setShowSocialForm(false);
-                    }
-                  }}
-                  className="btn-base btn-info"
-                >
-                  {showWalletForm ? 'Cancel' : 'Manage Wallet Addresses'}
-                </button>
-                <a
-                  href={`/${userProfile.username}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-base btn-sage no-underline"
-                >
-                  View Public Profile
-                </a>
-                <button
-                  onClick={() => setShowResetDialog(true)}
-                  className="btn-base btn-danger"
-                >
-                  Reset Profile
-                </button>
-              </div>
-            </div>
+              </>
+            ) : (
+              // Show only the active form
+              <>
+                {showUpdateForm && (
+                  <div className="mb-8">
+                    <UsernameForm
+                      mode="update"
+                      currentUsername={userProfile.username}
+                      onUsernameSet={handleUsernameSet}
+                    />
+                  </div>
+                )}
 
-            {showUpdateForm && (
-              <div className="mb-8">
-                <UsernameForm
-                  mode="update"
-                  currentUsername={userProfile.username}
-                  onUsernameSet={handleUsernameSet}
-                />
-              </div>
-            )}
+                {showResumeForm && (
+                  <div className="mb-8">
+                    <ResumeForm
+                      onResumeUpdated={() => {
+                        // Optionally refresh or show success message
+                        console.log('Resume updated!')
+                      }}
+                    />
+                  </div>
+                )}
 
-            {showResumeForm && (
-              <div className="mb-8">
-                <ResumeForm
-                  onResumeUpdated={() => {
-                    // Optionally refresh or show success message
-                    console.log('Resume updated!')
-                  }}
-                />
-              </div>
-            )}
+                {showSocialForm && (
+                  <div className="mb-8">
+                    <SocialLinksForm />
+                  </div>
+                )}
 
-            {showSocialForm && (
-              <div className="mb-8">
-                <SocialLinksForm />
-              </div>
-            )}
-
-            {showWalletForm && (
-              <div className="mb-8">
-                <WalletAddressesForm />
-              </div>
+                {showWalletForm && (
+                  <div className="mb-8">
+                    <WalletAddressesForm />
+                  </div>
+                )}
+              </>
             )}
 
             {resetError && (
