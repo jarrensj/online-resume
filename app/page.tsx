@@ -413,8 +413,8 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <User className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium leading-5">Profile</span>
+                <User className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span className="font-medium">Profile</span>
               </button>
               <button
                 onClick={() => {
@@ -426,8 +426,8 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Edit3 className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium leading-5">Change Username</span>
+                <Edit3 className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span className="font-medium">Change Username</span>
               </button>
               <button
                 onClick={() => {
@@ -439,8 +439,8 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <FileType className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium leading-5">Manage Resume</span>
+                <FileType className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span className="font-medium">Manage Resume</span>
               </button>
               <button
                 onClick={() => {
@@ -452,8 +452,8 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Share2 className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium leading-5">Manage Social Links</span>
+                <Share2 className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span className="font-medium">Manage Social Links</span>
               </button>
               <button
                 onClick={() => {
@@ -465,8 +465,8 @@ export default function Home() {
                 }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
               >
-                <Wallet className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium leading-5">Manage Wallet Addresses</span>
+                <Wallet className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span className="font-medium">Manage Wallet Addresses</span>
               </button>
               
               <div className="pt-4 mt-4 border-t border-sage-200">
@@ -477,8 +477,8 @@ export default function Home() {
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
                 >
-                  <Trash2 className="w-5 h-5 flex-shrink-0" />
-                  <span className="font-medium leading-5">Reset Profile</span>
+                  <Trash2 className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                  <span className="font-medium">Reset Profile</span>
                 </button>
               </div>
             </nav>
