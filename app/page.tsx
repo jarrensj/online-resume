@@ -8,7 +8,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2 } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -430,7 +430,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="flex gap-3 flex-wrap justify-center">
+              <div className="flex gap-2 flex-wrap justify-center">
                 <button
                   onClick={() => {
                     setShowUpdateForm(!showUpdateForm);
@@ -440,8 +440,9 @@ export default function Home() {
                       setShowWalletForm(false);
                     }
                   }}
-                  className="btn-base btn-secondary"
+                  className="btn-base btn-secondary text-sm px-3 py-2 gap-1.5"
                 >
+                  <Edit3 className="w-4 h-4" />
                   {showUpdateForm ? 'Cancel' : 'Change Username'}
                 </button>
                 <button
@@ -453,8 +454,9 @@ export default function Home() {
                       setShowWalletForm(false);
                     }
                   }}
-                  className="btn-base btn-primary"
+                  className="btn-base btn-primary text-sm px-3 py-2 gap-1.5"
                 >
+                  <FileType className="w-4 h-4" />
                   {showResumeForm ? 'Cancel' : 'Manage Resume'}
                 </button>
                 <button
@@ -466,8 +468,9 @@ export default function Home() {
                       setShowWalletForm(false);
                     }
                   }}
-                  className="btn-base btn-info"
+                  className="btn-base btn-info text-sm px-3 py-2 gap-1.5"
                 >
+                  <Share2 className="w-4 h-4" />
                   {showSocialForm ? 'Cancel' : 'Manage Social Links'}
                 </button>
                 <button
@@ -479,22 +482,25 @@ export default function Home() {
                       setShowSocialForm(false);
                     }
                   }}
-                  className="btn-base btn-info"
+                  className="btn-base btn-info text-sm px-3 py-2 gap-1.5"
                 >
+                  <Wallet className="w-4 h-4" />
                   {showWalletForm ? 'Cancel' : 'Manage Wallet Addresses'}
                 </button>
                 <a
                   href={`/${userProfile.username}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-base btn-sage no-underline"
+                  className="btn-base btn-sage no-underline text-sm px-3 py-2 gap-1.5"
                 >
+                  <ExternalLink className="w-4 h-4" />
                   View Public Profile
                 </a>
                 <button
                   onClick={() => setShowResetDialog(true)}
-                  className="btn-base btn-danger"
+                  className="btn-base btn-outline text-xs px-2.5 py-1.5 gap-1 text-red-600 hover:text-red-700 hover:border-red-300"
                 >
+                  <Trash2 className="w-3.5 h-3.5" />
                   Reset Profile
                 </button>
               </div>
