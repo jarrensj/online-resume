@@ -463,6 +463,19 @@ export default function Home() {
                 <Wallet className="w-5 h-5" />
                 <span className="font-medium">Manage Wallet Addresses</span>
               </button>
+              
+              <div className="pt-4 mt-4 border-t border-sage-200">
+                <button
+                  onClick={() => {
+                    setShowResetDialog(true);
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
+                >
+                  <Trash2 className="w-5 h-5" />
+                  <span className="font-medium">Reset Profile</span>
+                </button>
+              </div>
             </nav>
           </div>
         </div>
@@ -516,20 +529,6 @@ export default function Home() {
               </div>
               
               <div className="flex gap-2 flex-wrap justify-center">
-                <button
-                  onClick={() => {
-                    setShowUpdateForm(!showUpdateForm);
-                    if (!showUpdateForm) {
-                      setShowResumeForm(false);
-                      setShowSocialForm(false);
-                      setShowWalletForm(false);
-                    }
-                  }}
-                  className="btn-base btn-secondary text-sm px-3 py-2 gap-1.5"
-                >
-                  <Edit3 className="w-4 h-4" />
-                  {showUpdateForm ? 'Cancel' : 'Change Username'}
-                </button>
                 <a
                   href={`/${userProfile.username}`}
                   target="_blank"
@@ -539,13 +538,6 @@ export default function Home() {
                   <ExternalLink className="w-4 h-4" />
                   View Public Profile
                 </a>
-                <button
-                  onClick={() => setShowResetDialog(true)}
-                  className="btn-base btn-outline text-xs px-2.5 py-1.5 gap-1 text-red-600 hover:text-red-700 hover:border-red-300"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  Reset Profile
-                </button>
               </div>
             </div>
 
