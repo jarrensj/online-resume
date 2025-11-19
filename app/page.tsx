@@ -363,16 +363,16 @@ export default function Home() {
                   <FileText className="w-6 h-6 text-charcoal-600" strokeWidth={1.5} />
                   <span className="font-noto font-medium text-charcoal-800">antiresume</span>
                 </div>
-                <p className="text-sm text-charcoal-600 leading-relaxed">
+                <Link href="/" className="text-sm text-charcoal-600 leading-relaxed hover:text-sage-500 transition-colors">
                   build your antiresume
-                </p>
+                </Link>
               </div>
             </div>
             
             <div className="border-t border-charcoal-200 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center">
-              <p className="text-xs text-charcoal-500 mb-2 sm:mb-0">
+              <Link href="/" className="text-xs text-charcoal-500 mb-2 sm:mb-0 hover:text-sage-500 transition-colors">
                 antiresume.com
-              </p>
+              </Link>
               <div className="flex items-center space-x-1 text-xs text-charcoal-500">
                 <span>Made with sushi</span>
               </div>
