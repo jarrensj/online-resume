@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { use, useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 import PublicTweetCard from '@/components/PublicTweetCard'
 import { Linkedin, Twitter, Instagram, Globe, Mail, Copy, Check } from 'lucide-react'
@@ -39,31 +39,28 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   const [copiedWallet, setCopiedWallet] = useState<'evm' | 'solana' | null>(null)
 
   useEffect(() => {
-    const fetchProfile = async () => {
+    async function fetchProfile() {
       try {
         const response = await fetch(`/api/profile/${resolvedParams.username}`)
-        
-        if (response.status === 404) {
-          notFound()
+        if (!response.ok) {
+          if (response.status === 404) {
+            setProfile(null)
+          } else {
+            setError('Failed to load profile')
+          }
+          setLoading(false)
           return
         }
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch profile')
-        }
-        
         const data = await response.json()
-        setProfile(data.profile)
+        setProfile(data.profile)        
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
+        console.error('Error fetching profile:', err)
+        setError('Failed to load profile')
       } finally {
         setLoading(false)
       }
     }
-
-    if (resolvedParams.username) {
-      fetchProfile()
-    }
+    fetchProfile()
   }, [resolvedParams.username])
 
   if (loading) {
@@ -91,7 +88,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   }
 
   if (!profile) {
-    return notFound()
+    notFound()
   }
 
   const getSocialLinks = () => {
@@ -154,8 +151,8 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   const socialLinks = getSocialLinks()
 
   const truncateWalletAddress = (address: string) => {
-    if (address.length <= 16) return address
-    return `${address.slice(0, 8)}…${address.slice(-8)}`
+    if (address.length <= 10) return address
+    return `${address.slice(0, 4)}…${address.slice(-4)}`
   }
 
   const copyToClipboard = async (text: string, walletType: 'evm' | 'solana') => {
@@ -200,52 +197,41 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
           {/* Wallet Addresses */}
           {(profile.evm_wallet_address || profile.solana_wallet_address) && (
-            <div className="mt-8 max-w-2xl mx-auto">
-              <div className="card p-6" style={{ background: 'var(--background-secondary)' }}>
-                <h2 className="text-xl font-semibold mb-4 text-center heading-handwritten">
-                  Wallet Addresses
-                </h2>
-                <div className="space-y-3">
-                  {profile.evm_wallet_address && (
-                    <div>
-                      <div className="text-sm font-medium text-secondary mb-1">EVM</div>
-                      <button
-                        onClick={() => copyToClipboard(profile.evm_wallet_address!, 'evm')}
-                        className="w-full text-left group relative"
-                        title="Click to copy full address"
-                      >
-                        <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                          <span className="flex-1">{truncateWalletAddress(profile.evm_wallet_address)}</span>
-                          {copiedWallet === 'evm' ? (
-                            <Check size={16} className="text-green-500 flex-shrink-0" />
-                          ) : (
-                            <Copy size={16} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                          )}
-                        </code>
-                      </button>
-                    </div>
+            <div className="mt-4 flex flex-wrap justify-center gap-2 opacity-60">
+              {profile.evm_wallet_address && (
+                <button
+                  onClick={() => copyToClipboard(profile.evm_wallet_address!, 'evm')}
+                  className="group flex flex-row items-center gap-1.5 transition-opacity hover:opacity-100 text-xs"
+                  title="Click to copy EVM address"
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  <span className="font-mono" style={{ display: 'inline' }}>
+                    {truncateWalletAddress(profile.evm_wallet_address)}
+                  </span>
+                  {copiedWallet === 'evm' ? (
+                    <Check size={12} className="flex-shrink-0" style={{ color: '#22c55e', display: 'inline' }} />
+                  ) : (
+                    <Copy size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" style={{ display: 'inline' }} />
                   )}
-                  {profile.solana_wallet_address && (
-                    <div>
-                      <div className="text-sm font-medium text-secondary mb-1">Solana</div>
-                      <button
-                        onClick={() => copyToClipboard(profile.solana_wallet_address!, 'solana')}
-                        className="w-full text-left group relative"
-                        title="Click to copy full address"
-                      >
-                        <code className="text-sm bg-opacity-50 px-2 py-1 rounded inline-flex items-center gap-2 transition-colors group-hover:bg-opacity-70 cursor-pointer" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
-                          <span className="flex-1">{truncateWalletAddress(profile.solana_wallet_address)}</span>
-                          {copiedWallet === 'solana' ? (
-                            <Check size={16} className="text-green-500 flex-shrink-0" />
-                          ) : (
-                            <Copy size={16} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                          )}
-                        </code>
-                      </button>
-                    </div>
+                </button>
+              )}
+              {profile.solana_wallet_address && (
+                <button
+                  onClick={() => copyToClipboard(profile.solana_wallet_address!, 'solana')}
+                  className="group flex flex-row items-center gap-1.5 transition-opacity hover:opacity-100 text-xs"
+                  title="Click to copy Solana address"
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  <span className="font-mono" style={{ display: 'inline' }}>
+                    {truncateWalletAddress(profile.solana_wallet_address)}
+                  </span>
+                  {copiedWallet === 'solana' ? (
+                    <Check size={12} className="flex-shrink-0" style={{ color: '#22c55e', display: 'inline' }} />
+                  ) : (
+                    <Copy size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" style={{ display: 'inline' }} />
                   )}
-                </div>
-              </div>
+                </button>
+              )}
             </div>
           )}
         </div>

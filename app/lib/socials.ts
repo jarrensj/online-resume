@@ -1,3 +1,5 @@
+import { ensureHttpsProtocol } from './utils'
+
 export type SocialFieldKey = 'linkedin' | 'twitter_handle' | 'ig_handle' | 'website'
 
 export const SOCIAL_FIELD_KEYS: SocialFieldKey[] = ['linkedin', 'twitter_handle', 'ig_handle', 'website']
@@ -13,7 +15,16 @@ export const sanitizeSocialFields = (payload: Record<string, unknown>): Sanitize
 
       if (typeof value === 'string') {
         const trimmed = value.trim()
-        result[key] = trimmed.length > 0 ? trimmed : null
+        if (trimmed.length > 0) {
+          // Automatically add https:// protocol to URL fields if missing
+          if (key === 'website' || key === 'linkedin') {
+            result[key] = ensureHttpsProtocol(trimmed)
+          } else {
+            result[key] = trimmed
+          }
+        } else {
+          result[key] = null
+        }
       } else {
         result[key] = null
       }

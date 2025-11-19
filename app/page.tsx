@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
 import { useState, useEffect } from 'react'
 import UsernameForm from '@/components/UsernameForm'
@@ -8,6 +9,7 @@ import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import EmailForm from '@/components/EmailForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -102,29 +104,290 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen px-6 pt-32 pb-12 flex flex-col items-center justify-center" style={{ background: 'var(--background)' }}>
+    <main className="min-h-screen" style={{ background: 'var(--background)' }}>
       <SignedOut>
-        <div className="text-center max-w-md mx-auto">
-          <div className="mb-8">
-            <h1 className="text-5xl font-bold mb-4 heading-handwritten">
-              Welcome!
+        {/* Hero Section */}
+        <section className="py-20 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Decorative icons */}
+            <div className="flex justify-center items-center space-x-12 mb-8 opacity-60">
+              <FileText className="w-6 h-6 text-charcoal-400 hand-drawn" strokeWidth={1} />
+              <Sparkles className="w-8 h-8 text-sage-400 hand-drawn" strokeWidth={1} />
+              <Users className="w-6 h-6 text-charcoal-400 hand-drawn" strokeWidth={1} />
+            </div>
+
+            {/* Main content */}
+            <h1 className="text-4xl md:text-6xl font-noto font-light text-charcoal-800 mb-6 leading-tight">
+              Better than a resume.<br />
+              <span className="font-medium text-sage-500">Show what&apos;s real.</span>
             </h1>
-            <p className="text-lg text-secondary">
-              Create your resume
+            
+            <p className="text-xl text-charcoal-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              People can lie on their resume. The antiresume is different — it&apos;s build out of genuine interactions, public and real wins, and concrete online evidence of how great you are.
             </p>
+
+            {/* CTA Button */}
+            <div className="mb-16">
+              <SignInButton>
+                <button className="bg-charcoal-700 hover:bg-charcoal-800 text-matcha-cream font-zen text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                  Show your antiresume
+                </button>
+              </SignInButton>
+            </div>
+
+            {/* Subtle decorative line */}
+            <div className="w-16 h-px bg-charcoal-300 mx-auto opacity-60"></div>
           </div>
-          
-          <div className="space-y-4">
-            <SignInButton>
-              <button className="w-full btn-base btn-primary px-8 py-3">
-                Sign In to Start
-              </button>
-            </SignInButton>
+        </section>
+
+        {/* What is an antiresume Section */}
+        <section className="py-16 px-6">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-12">
+              What&apos;s in an antiresume?
+            </h2>
+            
+            <div className="space-y-8">
+              {/* Component 1 */}
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-10 h-10 bg-sage-200 rounded-xl flex items-center justify-center">
+                  <span className="text-sage-500 font-noto font-medium">1</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-2">
+                    Your actual work
+                  </h3>
+                  <p className="text-charcoal-600 leading-relaxed">
+                    Not bullet points about responsibilities — links to posts about real projects, code repositories, and things you&apos;ve shipped.
+                  </p>
+                </div>
+              </div>
+
+              {/* Component 2 */}
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-10 h-10 bg-sage-200 rounded-xl flex items-center justify-center">
+                  <span className="text-sage-500 font-noto font-medium">2</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-2">
+                    Social proof that matters
+                  </h3>
+                  <p className="text-charcoal-600 leading-relaxed">
+                    Embed tweets from people who&apos;ve worked with you, used your products, or genuinely support your work.
+                  </p>
+                </div>
+              </div>
+
+              {/* Component 3 */}
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-10 h-10 bg-sage-200 rounded-xl flex items-center justify-center">
+                  <span className="text-sage-500 font-noto font-medium">3</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-2">
+                    Your digital footprint
+                  </h3>
+                  <p className="text-charcoal-600 leading-relaxed">
+                    Show your social links and what you&apos;ve shipped. Flex your digital footprint and public and real you.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <section className="py-16 px-6 bg-sage-100/40">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
+              For Builders
+            </h2>
+            <p className="text-center text-charcoal-600 mb-12 max-w-2xl mx-auto">
+              Whether you&apos;re engineering, designing, or trading — show your wins (and losses) the way they deserve to be shared.
+            </p>
+
+            <div className="space-y-6">
+              {/* Engineers Card */}
+              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
+                    <Code className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
+                      For Engineers
+                    </h3>
+                    <p className="text-charcoal-600 leading-relaxed mb-3">
+                      Stop sharing your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
+                    </p>
+                    <p className="text-charcoal-600 leading-relaxed font-medium">
+                      Flex <span className="text-sage-500 font-semibold">the product launches</span> that you were a part of and the numbers that it did online.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Designers Card */}
+              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
+                    <Palette className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
+                      For Designers
+                    </h3>
+                    <p className="text-charcoal-600 leading-relaxed mb-3">
+                      Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral, and public online testimonials posted from clients who couldn&apos;t be happier.
+                    </p>
+                    <p className="text-charcoal-600 leading-relaxed font-medium">
+                      Show your work and the numbers that it did online and the <span className="text-sage-500 font-semibold">real reactions</span> from amazing people.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Traders Card */}
+              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
+                      For Traders
+                    </h3>
+                    <p className="text-charcoal-600 leading-relaxed mb-3">
+                      Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you but show it all with real post evidence online where you shared it all in real-time and with the post receipts. That can&apos;t be faked. 
+                    </p>
+                    <p className="text-charcoal-600 leading-relaxed font-medium">
+                      <span className="text-sage-500 font-semibold">Flex your online receipts</span> where you were right on a thesis so early. 
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-6 bg-matcha-light/30">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
+              Why antiresume?
+            </h2>
+            <p className="text-center text-charcoal-600 mb-12 max-w-2xl mx-auto">
+              Your online presence tells the real story. Show what you&apos;ve actually built and who genuinely believes in you.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="w-16 h-16 bg-sage-100 rounded-2xl flex items-center justify-center">
+                    <FileText className="w-8 h-8 text-sage-500" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-3">
+                  Real Projects
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Display what you&apos;ve actually built. Link to your demo posts, the product launches, and just what you&apos;ve shipped.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="w-16 h-16 bg-sage-100 rounded-2xl flex items-center justify-center">
+                    <Users className="w-8 h-8 text-sage-500" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-3">
+                  Genuine Vouches
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Share posts from people who actually believe in you and your character and your work.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="w-16 h-16 bg-sage-100 rounded-2xl flex items-center justify-center">
+                    <Shield className="w-8 h-8 text-sage-500" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-3">
+                  Authentic Story
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Your online presence is verifiable. No inflated titles, just real work and real impact.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Example antiresumes Section */}
+        <section className="py-12 px-6 bg-sage-50/50">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl font-noto font-light text-charcoal-800 mb-6">
+              Example antiresumes
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </Link>
+              <Link
+                href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </Link>
+              <Link
+                href="/jarrensj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-matcha-cream hover:bg-sage-100 text-charcoal-800 font-zen px-6 py-3 rounded-xl border-2 border-sage-300 hover:border-sage-400 transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                /jarrensj
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-charcoal-200 bg-matcha-light/30">
+          <div className="max-w-4xl mx-auto px-6 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="md:col-span-1">
+                <div className="flex items-center space-x-2 mb-4">
+                  <FileText className="w-6 h-6 text-charcoal-600" strokeWidth={1.5} />
+                  <span className="font-noto font-medium text-charcoal-800">antiresume</span>
+                </div>
+                <Link href="/" className="text-sm text-charcoal-600 leading-relaxed hover:text-sage-500 transition-colors">
+                  build your antiresume
+                </Link>
+              </div>
+            </div>
+            
+            <div className="border-t border-charcoal-200 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center">
+              <Link href="/" className="text-xs text-charcoal-500 mb-2 sm:mb-0 hover:text-sage-500 transition-colors">
+                antiresume.com
+              </Link>
+              <div className="flex items-center space-x-1 text-xs text-charcoal-500">
+                <span>Made with sushi</span>
+              </div>
+            </div>
+          </div>
+        </footer>
       </SignedOut>
 
       <SignedIn>
+        <div className="px-6 pt-32 pb-12 flex flex-col items-center justify-center">
         {loading ? (
           <div className="text-center">
             <div className="animate-spin rounded-full h-10 w-10 border-2 mx-auto loading-spinner"></div>
@@ -311,6 +574,7 @@ export default function Home() {
             <UsernameForm onUsernameSet={handleUsernameSet} />
           </div>
         )}
+        </div>
       </SignedIn>
 
       {/* Reset Profile Confirmation Dialog */}

@@ -5,17 +5,32 @@
   --background: #faf7f2;
   --background-secondary: #f5f1ea;
   --background-card: #fefcf8;
+  --matcha-cream: #faf7f2;
+  --matcha-light: #f5f1ea;
   
   /* Gentle charcoal gray text */
   --foreground: #4a4a4a;
   --foreground-secondary: #6b6b6b;
   --foreground-light: #8a8a8a;
+  --charcoal-800: #444444;
+  --charcoal-700: #4a4a4a;
+  --charcoal-600: #6b6b6b;
+  --charcoal-500: #8a8a8a;
+  --charcoal-400: #a0a0a0;
+  --charcoal-300: #c0c0c0;
+  --charcoal-200: #e0e0e0;
   
   /* Soft accent colors */
   --accent-green: #7a9b7e;
   --accent-brown: #a68b5b;
   --accent-sage: #9db5a1;
   --accent-warm: #c4a484;
+  --sage-500: #7a9b7e;
+  --sage-400: #9db5a1;
+  --sage-300: #b5c9b8;
+  --sage-200: #d4e1d6;
+  --sage-100: #e8f0ea;
+  --matcha-100: #d9e5d3;
   
   /* Borders and dividers */
   --border-soft: #e8e0d6;
@@ -33,6 +48,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-handwritten: var(--font-geist-mono);
+  --font-noto: 'Noto Sans JP', var(--font-geist-sans), system-ui, sans-serif;
+  --font-zen: 'Zen Kaku Gothic New', var(--font-geist-sans), system-ui, sans-serif;
 }
 
 /* Remove dark mode for consistent warm aesthetic */
@@ -699,3 +716,108 @@ h4 { font-size: 1.5rem; }
   background: var(--accent-sage);
 }
 
+.font-noto {
+  font-family: var(--font-noto);
+}
+
+.font-zen {
+  font-family: var(--font-zen);
+}
+
+.text-charcoal-800 {
+  color: var(--charcoal-800);
+}
+
+.text-charcoal-700 {
+  color: var(--charcoal-700);
+}
+
+.text-charcoal-600 {
+  color: var(--charcoal-600);
+}
+
+.text-charcoal-500 {
+  color: var(--charcoal-500);
+}
+
+.text-charcoal-400 {
+  color: var(--charcoal-400);
+}
+
+.text-sage-500 {
+  color: var(--sage-500);
+}
+
+.text-sage-400 {
+  color: var(--sage-400);
+}
+
+.text-matcha-cream {
+  color: var(--matcha-cream);
+}
+
+.bg-matcha-cream {
+  background-color: var(--matcha-cream);
+}
+
+.bg-matcha-light {
+  background-color: var(--matcha-light);
+}
+
+.bg-charcoal-700 {
+  background-color: var(--charcoal-700);
+}
+
+.bg-charcoal-800 {
+  background-color: var(--charcoal-800);
+}
+
+.bg-sage-100 {
+  background-color: var(--sage-100);
+}
+
+.bg-sage-200 {
+  background-color: var(--sage-200);
+}
+
+.bg-sage-400 {
+  background-color: var(--sage-400);
+}
+
+.bg-matcha-100 {
+  background-color: var(--matcha-100);
+}
+
+.border-charcoal-200 {
+  border-color: var(--charcoal-200);
+}
+
+.border-sage-400 {
+  border-color: var(--sage-400);
+}
+
+.hover\:bg-charcoal-800:hover {
+  background-color: var(--charcoal-800);
+}
+
+.hand-drawn {
+  filter: url(#rough);
+}
+
+/* Hand-drawn effect styles */
+.sketch-border {
+  position: relative;
+}
+
+.sketch-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--charcoal-800);
+  border-radius: inherit;
+  opacity: 0.6;
+  transform: rotate(-0.5deg);
+}

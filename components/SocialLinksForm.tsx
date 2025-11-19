@@ -1,6 +1,7 @@
 'use client'
 
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ensureHttpsProtocol } from '@/app/lib/utils'
 
 type SocialFieldKey = 'linkedin' | 'twitter_handle' | 'ig_handle' | 'website'
 
@@ -66,12 +67,59 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
     setError('')
   }
 
+  const handleBlur = (field: SocialFieldKey) => (event: ChangeEvent<HTMLInputElement>) => {
+    // Auto-add https:// protocol to URL fields when user leaves the input
+    if (field === 'website' || field === 'linkedin') {
+      const value = event.target.value.trim()
+      if (value) {
+        setSocials((prev) => ({
+          ...prev,
+          [field]: ensureHttpsProtocol(value),
+        }))
+      }
+    }
+  }
+
+  const isValidUrl = (urlString: string): boolean => {
+    try {
+      const url = new URL(urlString)
+      // Check if it has a valid protocol and a domain with at least a TLD
+      return (url.protocol === 'http:' || url.protocol === 'https:') && 
+             url.hostname.includes('.') &&
+             url.hostname.length > 3
+    } catch {
+      return false
+    }
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     setSubmitting(true)
     setError('')
     setSuccess('')
+
+    // Validate URL fields before submitting
+    const websiteValue = socials.website.trim()
+    const linkedinValue = socials.linkedin.trim()
+
+    if (websiteValue) {
+      const normalizedWebsite = ensureHttpsProtocol(websiteValue)
+      if (!isValidUrl(normalizedWebsite)) {
+        setError('Please enter a valid website URL (e.g., example.com or https://example.com)')
+        setSubmitting(false)
+        return
+      }
+    }
+
+    if (linkedinValue) {
+      const normalizedLinkedin = ensureHttpsProtocol(linkedinValue)
+      if (!isValidUrl(normalizedLinkedin)) {
+        setError('Please enter a valid LinkedIn URL (e.g., linkedin.com/in/yourprofile)')
+        setSubmitting(false)
+        return
+      }
+    }
 
     const payload = (Object.keys(socials) as SocialFieldKey[]).reduce<Record<string, string>>((acc, key) => {
       acc[key] = socials[key].trim()
@@ -136,10 +184,11 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
               LinkedIn
             </label>
             <input
-              type="url"
+              type="text"
               id="linkedin"
               value={socials.linkedin}
               onChange={handleChange('linkedin')}
+              onBlur={handleBlur('linkedin')}
               placeholder="https://linkedin.com/in/yourprofile"
               className="input-field"
               disabled={submitting}
@@ -183,10 +232,11 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
               Website
             </label>
             <input
-              type="url"
+              type="text"
               id="website"
               value={socials.website}
               onChange={handleChange('website')}
+              onBlur={handleBlur('website')}
               placeholder="https://antiresume.com"
               className="input-field"
               disabled={submitting}
