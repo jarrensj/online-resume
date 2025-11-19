@@ -8,7 +8,7 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2 } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X } from 'lucide-react'
 
 interface UserProfile {
   id: string
@@ -29,6 +29,7 @@ export default function Home() {
   const [showResetDialog, setShowResetDialog] = useState(false)
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Fetch user profile when component mounts
   useEffect(() => {
@@ -382,6 +383,77 @@ export default function Home() {
       </SignedOut>
 
       <SignedIn>
+        {/* Hamburger Menu Button */}
+        {userProfile && (
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="fixed top-6 left-6 z-50 p-2 rounded-lg bg-matcha-cream border-2 border-sage-300 hover:bg-sage-100 transition-all duration-200"
+            aria-label="Toggle menu"
+          >
+            {sidebarOpen ? <X className="w-6 h-6 text-charcoal-700" /> : <Menu className="w-6 h-6 text-charcoal-700" />}
+          </button>
+        )}
+
+        {/* Sidebar Overlay */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity duration-300"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
+        {/* Sidebar */}
+        <div
+          className={`fixed top-0 left-0 h-full w-72 bg-matcha-cream border-r-2 border-sage-300 z-40 transform transition-transform duration-300 ease-in-out ${
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="p-6 pt-20">
+            <h2 className="text-xl font-noto font-semibold text-charcoal-800 mb-6">Manage Profile</h2>
+            <nav className="space-y-2">
+              <button
+                onClick={() => {
+                  setShowResumeForm(!showResumeForm);
+                  setShowSocialForm(false);
+                  setShowWalletForm(false);
+                  setShowUpdateForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <FileType className="w-5 h-5" />
+                <span className="font-medium">Manage Resume</span>
+              </button>
+              <button
+                onClick={() => {
+                  setShowSocialForm(!showSocialForm);
+                  setShowResumeForm(false);
+                  setShowWalletForm(false);
+                  setShowUpdateForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <Share2 className="w-5 h-5" />
+                <span className="font-medium">Manage Social Links</span>
+              </button>
+              <button
+                onClick={() => {
+                  setShowWalletForm(!showWalletForm);
+                  setShowResumeForm(false);
+                  setShowSocialForm(false);
+                  setShowUpdateForm(false);
+                  setSidebarOpen(false);
+                }}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+              >
+                <Wallet className="w-5 h-5" />
+                <span className="font-medium">Manage Wallet Addresses</span>
+              </button>
+            </nav>
+          </div>
+        </div>
+
         <div className="px-6 pt-32 pb-12 flex flex-col items-center justify-center">
         {loading ? (
           <div className="text-center">
@@ -444,48 +516,6 @@ export default function Home() {
                 >
                   <Edit3 className="w-4 h-4" />
                   {showUpdateForm ? 'Cancel' : 'Change Username'}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowResumeForm(!showResumeForm);
-                    if (!showResumeForm) {
-                      setShowUpdateForm(false);
-                      setShowSocialForm(false);
-                      setShowWalletForm(false);
-                    }
-                  }}
-                  className="btn-base btn-primary text-sm px-3 py-2 gap-1.5"
-                >
-                  <FileType className="w-4 h-4" />
-                  {showResumeForm ? 'Cancel' : 'Manage Resume'}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowSocialForm(!showSocialForm);
-                    if (!showSocialForm) {
-                      setShowUpdateForm(false);
-                      setShowResumeForm(false);
-                      setShowWalletForm(false);
-                    }
-                  }}
-                  className="btn-base btn-info text-sm px-3 py-2 gap-1.5"
-                >
-                  <Share2 className="w-4 h-4" />
-                  {showSocialForm ? 'Cancel' : 'Manage Social Links'}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowWalletForm(!showWalletForm);
-                    if (!showWalletForm) {
-                      setShowUpdateForm(false);
-                      setShowResumeForm(false);
-                      setShowSocialForm(false);
-                    }
-                  }}
-                  className="btn-base btn-info text-sm px-3 py-2 gap-1.5"
-                >
-                  <Wallet className="w-4 h-4" />
-                  {showWalletForm ? 'Cancel' : 'Manage Wallet Addresses'}
                 </button>
                 <a
                   href={`/${userProfile.username}`}
