@@ -20,6 +20,13 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
     setUsername(currentUsername)
   }, [currentUsername, mode])
 
+  const handleBlur = () => {
+    // Remove @ symbol from username if present
+    if (username.trim().startsWith('@')) {
+      setUsername(username.trim().slice(1))
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
@@ -90,7 +97,8 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
+            onBlur={handleBlur}
+            placeholder="yourhandle"
             className="input-field"
             disabled={loading}
             maxLength={50}
