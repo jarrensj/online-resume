@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { UserX, Home, Search } from 'lucide-react'
+import { UserX, Home } from 'lucide-react'
 
 export default function NotFound() {
   const [isHoveringButton, setIsHoveringButton] = useState(false)
