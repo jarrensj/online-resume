@@ -98,7 +98,7 @@ export default function UsernameForm({ onUsernameSet, mode = 'create', currentUs
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             onBlur={handleBlur}
-            placeholder="yourhandle"
+            placeholder="username"
             className="input-field"
             disabled={loading}
             maxLength={50}
