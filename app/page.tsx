@@ -137,7 +137,7 @@ export default function Home() {
         </section>
 
         {/* What is an antiresume Section */}
-        <section className="py-20 px-6 bg-gradient-to-b from-matcha-cream to-sage-50/30">
+        <section className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-noto font-light text-charcoal-800 text-center mb-4">
               What&apos;s in an antiresume?
@@ -193,7 +193,7 @@ export default function Home() {
         </section>
 
         {/* For Builders Section - Bento Grid Style */}
-        <section className="py-20 px-6 bg-sage-50/50">
+        <section className="py-20 px-6">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-noto font-light text-charcoal-800 text-center mb-4">
               For Builders
@@ -261,7 +261,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 px-6 bg-matcha-light/30">
+        <section className="py-16 px-6">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
               Why antiresume?
@@ -317,7 +317,7 @@ export default function Home() {
         </section>
 
         {/* Example antiresumes Section */}
-        <section className="py-12 px-6 bg-sage-50/50">
+        <section className="py-12 px-6">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl font-noto font-light text-charcoal-800 mb-6">
               Example antiresumes
@@ -352,7 +352,7 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-charcoal-200 bg-matcha-light/30">
+        <footer className="border-t border-charcoal-200">
           <div className="max-w-4xl mx-auto px-6 py-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="md:col-span-1">
