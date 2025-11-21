@@ -38,10 +38,10 @@ export default function DashboardSidebar({
   ]
 
   const buttonBaseClasses =
-    'w-full px-4 py-3 rounded-lg transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800'
-  const buttonHoverClasses = 'hover:bg-sage-100'
+    'w-full px-3 py-2.5 rounded-xl transition-colors duration-200 text-left text-charcoal-600 hover:text-charcoal-800'
+  const buttonHoverClasses = 'hover:bg-sage-50'
   const dangerClasses =
-    'text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors duration-200'
+    'text-red-500 hover:text-red-600 hover:bg-red-50 transition-colors duration-200'
 
   return (
     <div
@@ -50,20 +50,20 @@ export default function DashboardSidebar({
       }`}
     >
       <div className="p-6 pt-20">
-        <h2 className="text-xl font-noto font-semibold text-charcoal-800 mb-6">
+        <h2 className="text-lg font-noto font-semibold text-charcoal-800 mb-5 tracking-tight">
           Manage Profile
         </h2>
 
-        <nav className="space-y-2">
+        <nav className="space-y-1.5">
           {navItems.map(({ label, icon: Icon, onClick }) => (
             <button
               key={label}
               onClick={onClick}
               className={`${buttonBaseClasses} ${buttonHoverClasses}`}
             >
-              <span className="w-full inline-flex items-center gap-3">
-                <Icon className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium">{label}</span>
+              <span className="w-full inline-flex items-center gap-2.5">
+                <Icon className="w-4 h-4 flex-shrink-0 text-sage-600" />
+                <span className="font-medium text-sm tracking-tight">{label}</span>
               </span>
             </button>
           ))}
@@ -71,11 +71,11 @@ export default function DashboardSidebar({
           <div className="pt-4 mt-4 border-t border-sage-200">
             <button
               onClick={onResetClick}
-              className={`w-full px-4 py-3 rounded-lg text-left ${dangerClasses}`}
+              className={`w-full px-3 py-2.5 rounded-xl text-left text-sm font-medium ${dangerClasses}`}
             >
-              <span className="w-full inline-flex items-center gap-3">
-                <Trash2 className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium">Reset Profile</span>
+              <span className="w-full inline-flex items-center gap-2.5">
+                <Trash2 className="w-4 h-4 flex-shrink-0 text-red-500" />
+                <span className="tracking-tight">Reset Profile</span>
               </span>
             </button>
           </div>
