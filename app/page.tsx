@@ -34,43 +34,24 @@ export default function Home() {
 
   const closeSidebar = () => setSidebarOpen(false)
 
-  const handleProfileNav = () => {
-    setShowUpdateForm(false)
-    setShowResumeForm(false)
-    setShowSocialForm(false)
-    setShowWalletForm(false)
-    closeSidebar()
+  type SidebarSection = 'profile' | 'username' | 'resume' | 'social' | 'wallet'
+
+  const getActiveSection = (): SidebarSection => {
+    if (showUpdateForm) return 'username'
+    if (showResumeForm) return 'resume'
+    if (showSocialForm) return 'social'
+    if (showWalletForm) return 'wallet'
+    return 'profile'
   }
 
-  const handleUsernameNav = () => {
-    setShowUpdateForm(prev => !prev)
-    setShowResumeForm(false)
-    setShowSocialForm(false)
-    setShowWalletForm(false)
-    closeSidebar()
-  }
+  const handleSectionNav = (section: SidebarSection) => {
+    const activeSection = getActiveSection()
+    const nextSection = activeSection === section ? 'profile' : section
 
-  const handleResumeNav = () => {
-    setShowResumeForm(prev => !prev)
-    setShowSocialForm(false)
-    setShowWalletForm(false)
-    setShowUpdateForm(false)
-    closeSidebar()
-  }
-
-  const handleSocialNav = () => {
-    setShowSocialForm(prev => !prev)
-    setShowResumeForm(false)
-    setShowWalletForm(false)
-    setShowUpdateForm(false)
-    closeSidebar()
-  }
-
-  const handleWalletNav = () => {
-    setShowWalletForm(prev => !prev)
-    setShowResumeForm(false)
-    setShowSocialForm(false)
-    setShowUpdateForm(false)
+    setShowUpdateForm(nextSection === 'username')
+    setShowResumeForm(nextSection === 'resume')
+    setShowSocialForm(nextSection === 'social')
+    setShowWalletForm(nextSection === 'wallet')
     closeSidebar()
   }
 
@@ -444,11 +425,11 @@ export default function Home() {
 
           <DashboardSidebar
             sidebarOpen={sidebarOpen}
-            onProfileClick={handleProfileNav}
-            onUsernameClick={handleUsernameNav}
-            onResumeClick={handleResumeNav}
-            onSocialLinksClick={handleSocialNav}
-            onWalletsClick={handleWalletNav}
+            onProfileClick={() => handleSectionNav('profile')}
+            onUsernameClick={() => handleSectionNav('username')}
+            onResumeClick={() => handleSectionNav('resume')}
+            onSocialLinksClick={() => handleSectionNav('social')}
+            onWalletsClick={() => handleSectionNav('wallet')}
             onResetClick={handleResetNav}
           />
 
