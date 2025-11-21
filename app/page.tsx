@@ -192,9 +192,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* For Builders Section - Bento Grid Style */}
+        {/* For Builders Section */}
         <section className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-noto font-light text-charcoal-800 text-center mb-4">
               For Builders
             </h2>
@@ -202,59 +202,52 @@ export default function Home() {
               Whether you&apos;re engineering, designing, or trading — show your wins (and losses) the way they deserve to be shared.
             </p>
 
-            {/* Bento Grid Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Engineers Card - Large Featured */}
-              <div className="lg:row-span-2 bg-gradient-to-br from-matcha-cream to-sage-100 shadow-md rounded-3xl p-8 lg:p-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
-                <div className="flex flex-col h-full">
-                  <div className="w-16 h-16 bg-charcoal-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <Code className="w-8 h-8 text-matcha-cream" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-3xl lg:text-4xl font-noto font-medium text-charcoal-800 mb-4">
-                    For Engineers
-                  </h3>
-                  <div className="flex-1 space-y-4">
-                    <p className="text-lg text-charcoal-600 leading-relaxed">
-                      Stop sharing your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
-                    </p>
-                    <div className="bg-matcha-cream/70 backdrop-blur-sm border border-sage-400 rounded-2xl p-4">
-                      <p className="text-charcoal-700 leading-relaxed font-medium">
-                        Flex <span className="text-sage-500 font-bold">the product launches</span> that you were a part of and the numbers that it did online.
-                      </p>
-                    </div>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Engineers Card */}
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Code className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
+                  For Engineers
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed mb-3">
+                  Stop sharing your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
+                </p>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Flex <span className="text-sage-500 font-semibold">the product launches</span> that you were a part of and the numbers that it did online.
+                </p>
               </div>
 
               {/* Designers Card */}
-              <div className="bg-gradient-to-br from-matcha-cream to-matcha-light shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Palette className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-noto font-medium text-charcoal-800 mb-3">
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
                   For Designers
                 </h3>
-                <p className="text-charcoal-600 leading-relaxed mb-4">
-                  Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral.
+                <p className="text-charcoal-600 leading-relaxed mb-3">
+                  Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral, and public online testimonials posted from clients who couldn&apos;t be happier.
                 </p>
-                <p className="text-charcoal-700 leading-relaxed font-medium text-sm">
-                  Show the <span className="text-sage-500 font-bold">real reactions</span> from amazing people.
+                <p className="text-charcoal-600 leading-relaxed">
+                  Show your work and the numbers that it did online and the <span className="text-sage-500 font-semibold">real reactions</span> from amazing people.
                 </p>
               </div>
 
               {/* Traders Card */}
-              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-700 shadow-lg rounded-3xl p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
-                <div className="w-14 h-14 bg-sage-400 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                  <TrendingUp className="w-7 h-7 text-charcoal-800" strokeWidth={2} />
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-noto font-medium mb-3 text-white">
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
                   For Traders
                 </h3>
-                <p className="text-white/95 leading-relaxed mb-4">
-                  Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you — with real post receipts. That can&apos;t be faked.
+                <p className="text-charcoal-600 leading-relaxed mb-3">
+                  Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you but show it all with real post evidence online where you shared it all in real-time and with the post receipts. That can&apos;t be faked.
                 </p>
-                <p className="text-white/90 leading-relaxed font-medium text-sm">
-                  <span className="text-sage-400 font-bold">Flex your online receipts</span> where you were right on a thesis so early.
+                <p className="text-charcoal-600 leading-relaxed">
+                  <span className="text-sage-500 font-semibold">Flex your online receipts</span> where you were right on a thesis so early.
                 </p>
               </div>
             </div>
