@@ -243,17 +243,17 @@ export default function Home() {
               </div>
 
               {/* Traders Card */}
-              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-700 shadow-lg rounded-3xl p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group text-matcha-cream">
+              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-700 shadow-lg rounded-3xl p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
                 <div className="w-14 h-14 bg-sage-400 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <TrendingUp className="w-7 h-7 text-charcoal-800" strokeWidth={2} />
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-noto font-medium mb-3">
+                <h3 className="text-2xl lg:text-3xl font-noto font-medium mb-3 text-white">
                   For Traders
                 </h3>
-                <p className="text-matcha-cream/90 leading-relaxed mb-4">
+                <p className="text-white/95 leading-relaxed mb-4">
                   Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you — with real post receipts. That can&apos;t be faked.
                 </p>
-                <p className="text-matcha-cream leading-relaxed font-medium text-sm">
+                <p className="text-white/90 leading-relaxed font-medium text-sm">
                   <span className="text-sage-400 font-bold">Flex your online receipts</span> where you were right on a thesis so early.
                 </p>
               </div>
