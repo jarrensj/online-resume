@@ -8,7 +8,8 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X, User } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, ExternalLink, Menu, X } from 'lucide-react'
+import DashboardSidebar from '@/components/DashboardSidebar'
 
 interface UserProfile {
   id: string
@@ -30,6 +31,34 @@ export default function Home() {
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const closeSidebar = () => setSidebarOpen(false)
+
+  type SidebarSection = 'profile' | 'username' | 'resume' | 'social' | 'wallet'
+
+  const getActiveSection = (): SidebarSection => {
+    if (showUpdateForm) return 'username'
+    if (showResumeForm) return 'resume'
+    if (showSocialForm) return 'social'
+    if (showWalletForm) return 'wallet'
+    return 'profile'
+  }
+
+  const handleSectionNav = (section: SidebarSection) => {
+    const activeSection = getActiveSection()
+    const nextSection = activeSection === section ? 'profile' : section
+
+    setShowUpdateForm(nextSection === 'username')
+    setShowResumeForm(nextSection === 'resume')
+    setShowSocialForm(nextSection === 'social')
+    setShowWalletForm(nextSection === 'wallet')
+    closeSidebar()
+  }
+
+  const handleResetNav = () => {
+    setShowResetDialog(true)
+    closeSidebar()
+  }
 
   // Fetch user profile when component mounts
   useEffect(() => {
@@ -394,108 +423,15 @@ export default function Home() {
           </button>
         )}
 
-        {/* Sidebar */}
-        <div
-          className={`fixed top-0 left-0 h-full w-72 bg-matcha-cream border-r-2 border-sage-300 z-40 transform transition-transform duration-300 ease-in-out ${
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          <div className="p-6 pt-20">
-            <h2 className="text-xl font-noto font-semibold text-charcoal-800 mb-6">Manage Profile</h2>
-            <nav className="space-y-2">
-              <button
-                onClick={() => {
-                  setShowUpdateForm(false);
-                  setShowResumeForm(false);
-                  setShowSocialForm(false);
-                  setShowWalletForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <User className="w-5 h-5" />
-                  Profile
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowUpdateForm(!showUpdateForm);
-                  setShowResumeForm(false);
-                  setShowSocialForm(false);
-                  setShowWalletForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <Edit3 className="w-5 h-5" />
-                  Username
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowResumeForm(!showResumeForm);
-                  setShowSocialForm(false);
-                  setShowWalletForm(false);
-                  setShowUpdateForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <FileType className="w-5 h-5" />
-                  Resume
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowSocialForm(!showSocialForm);
-                  setShowResumeForm(false);
-                  setShowWalletForm(false);
-                  setShowUpdateForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <Share2 className="w-5 h-5" />
-                  Social Links
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowWalletForm(!showWalletForm);
-                  setShowResumeForm(false);
-                  setShowSocialForm(false);
-                  setShowUpdateForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <Wallet className="w-5 h-5" />
-                  Wallets
-                </span>
-              </button>
-              
-              <div className="pt-4 mt-4 border-t border-sage-200">
-                <button
-                  onClick={() => {
-                    setShowResetDialog(true);
-                    setSidebarOpen(false);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
-                >
-                  <span className="font-medium inline-flex items-center gap-2">
-                    <Trash2 className="w-5 h-5" />
-                    Reset Profile
-                  </span>
-                </button>
-              </div>
-            </nav>
-          </div>
-        </div>
+          <DashboardSidebar
+            sidebarOpen={sidebarOpen}
+            onProfileClick={() => handleSectionNav('profile')}
+            onUsernameClick={() => handleSectionNav('username')}
+            onResumeClick={() => handleSectionNav('resume')}
+            onSocialLinksClick={() => handleSectionNav('social')}
+            onWalletsClick={() => handleSectionNav('wallet')}
+            onResetClick={handleResetNav}
+          />
 
         <div className="px-6 pt-32 pb-12 flex flex-col items-center justify-center">
         {loading ? (
