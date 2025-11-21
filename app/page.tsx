@@ -8,7 +8,8 @@ import ResumeForm from '@/components/ResumeForm'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import SocialLinksForm from '@/components/SocialLinksForm'
 import WalletAddressesForm from '@/components/WalletAddressesForm'
-import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, Edit3, FileType, Share2, Wallet, ExternalLink, Trash2, Menu, X, User } from 'lucide-react'
+import { FileText, Users, Shield, Sparkles, Code, Palette, TrendingUp, ExternalLink, Menu, X } from 'lucide-react'
+import DashboardSidebar from '@/components/DashboardSidebar'
 
 interface UserProfile {
   id: string
@@ -30,6 +31,53 @@ export default function Home() {
   const [resetLoading, setResetLoading] = useState(false)
   const [resetError, setResetError] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const closeSidebar = () => setSidebarOpen(false)
+
+  const handleProfileNav = () => {
+    setShowUpdateForm(false)
+    setShowResumeForm(false)
+    setShowSocialForm(false)
+    setShowWalletForm(false)
+    closeSidebar()
+  }
+
+  const handleUsernameNav = () => {
+    setShowUpdateForm(prev => !prev)
+    setShowResumeForm(false)
+    setShowSocialForm(false)
+    setShowWalletForm(false)
+    closeSidebar()
+  }
+
+  const handleResumeNav = () => {
+    setShowResumeForm(prev => !prev)
+    setShowSocialForm(false)
+    setShowWalletForm(false)
+    setShowUpdateForm(false)
+    closeSidebar()
+  }
+
+  const handleSocialNav = () => {
+    setShowSocialForm(prev => !prev)
+    setShowResumeForm(false)
+    setShowWalletForm(false)
+    setShowUpdateForm(false)
+    closeSidebar()
+  }
+
+  const handleWalletNav = () => {
+    setShowWalletForm(prev => !prev)
+    setShowResumeForm(false)
+    setShowSocialForm(false)
+    setShowUpdateForm(false)
+    closeSidebar()
+  }
+
+  const handleResetNav = () => {
+    setShowResetDialog(true)
+    closeSidebar()
+  }
 
   // Fetch user profile when component mounts
   useEffect(() => {
@@ -394,108 +442,15 @@ export default function Home() {
           </button>
         )}
 
-        {/* Sidebar */}
-        <div
-          className={`fixed top-0 left-0 h-full w-72 bg-matcha-cream border-r-2 border-sage-300 z-40 transform transition-transform duration-300 ease-in-out ${
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          <div className="p-6 pt-20">
-            <h2 className="text-xl font-noto font-semibold text-charcoal-800 mb-6">Manage Profile</h2>
-              <nav className="space-y-2">
-                <button
-                  onClick={() => {
-                    setShowUpdateForm(false);
-                    setShowResumeForm(false);
-                    setShowSocialForm(false);
-                    setShowWalletForm(false);
-                    setSidebarOpen(false);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-                >
-                  <span className="w-full inline-flex items-center gap-3">
-                    <User className="w-5 h-5 flex-shrink-0" />
-                    <span className="font-medium">Profile</span>
-                  </span>
-                </button>
-                <button
-                  onClick={() => {
-                    setShowUpdateForm(!showUpdateForm);
-                    setShowResumeForm(false);
-                    setShowSocialForm(false);
-                    setShowWalletForm(false);
-                    setSidebarOpen(false);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-                >
-                  <span className="w-full inline-flex items-center gap-3">
-                    <Edit3 className="w-5 h-5 flex-shrink-0" />
-                    <span className="font-medium">Username</span>
-                  </span>
-                </button>
-                <button
-                  onClick={() => {
-                    setShowResumeForm(!showResumeForm);
-                    setShowSocialForm(false);
-                    setShowWalletForm(false);
-                    setShowUpdateForm(false);
-                    setSidebarOpen(false);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-                >
-                  <span className="w-full inline-flex items-center gap-3">
-                    <FileType className="w-5 h-5 flex-shrink-0" />
-                    <span className="font-medium">Resume</span>
-                  </span>
-                </button>
-                <button
-                  onClick={() => {
-                    setShowSocialForm(!showSocialForm);
-                    setShowResumeForm(false);
-                    setShowWalletForm(false);
-                    setShowUpdateForm(false);
-                    setSidebarOpen(false);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-                >
-                  <span className="w-full inline-flex items-center gap-3">
-                    <Share2 className="w-5 h-5 flex-shrink-0" />
-                    <span className="font-medium">Social Links</span>
-                  </span>
-                </button>
-                <button
-                  onClick={() => {
-                    setShowWalletForm(!showWalletForm);
-                    setShowResumeForm(false);
-                    setShowSocialForm(false);
-                    setShowUpdateForm(false);
-                    setSidebarOpen(false);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-                >
-                  <span className="w-full inline-flex items-center gap-3">
-                    <Wallet className="w-5 h-5 flex-shrink-0" />
-                    <span className="font-medium">Wallets</span>
-                  </span>
-                </button>
-
-                <div className="pt-4 mt-4 border-t border-sage-200">
-                  <button
-                    onClick={() => {
-                      setShowResetDialog(true);
-                      setSidebarOpen(false);
-                    }}
-                    className="w-full px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
-                  >
-                    <span className="w-full inline-flex items-center gap-3">
-                      <Trash2 className="w-5 h-5 flex-shrink-0" />
-                      <span className="font-medium">Reset Profile</span>
-                    </span>
-                  </button>
-                </div>
-              </nav>
-          </div>
-        </div>
+          <DashboardSidebar
+            sidebarOpen={sidebarOpen}
+            onProfileClick={handleProfileNav}
+            onUsernameClick={handleUsernameNav}
+            onResumeClick={handleResumeNav}
+            onSocialLinksClick={handleSocialNav}
+            onWalletsClick={handleWalletNav}
+            onResetClick={handleResetNav}
+          />
 
         <div className="px-6 pt-32 pb-12 flex flex-col items-center justify-center">
         {loading ? (
