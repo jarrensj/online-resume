@@ -14,7 +14,10 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json() as Record<string, unknown>
     const rawUsername = typeof body.username === "string" ? body.username : ""
-    const trimmedUsername = rawUsername.trim()
+    // Remove @ symbol from username if present, then trim
+    const trimmedUsername = rawUsername.trim().startsWith('@') 
+      ? rawUsername.trim().slice(1) 
+      : rawUsername.trim()
     
     if (!trimmedUsername) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 })
@@ -109,7 +112,10 @@ export async function PUT(request: NextRequest) {
 
     const body = await request.json() as Record<string, unknown>
     const rawUsername = typeof body.username === "string" ? body.username : ""
-    const trimmedUsername = rawUsername.trim()
+    // Remove @ symbol from username if present, then trim
+    const trimmedUsername = rawUsername.trim().startsWith('@') 
+      ? rawUsername.trim().slice(1) 
+      : rawUsername.trim()
     
     if (!trimmedUsername) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 })

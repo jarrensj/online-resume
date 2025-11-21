@@ -78,6 +78,16 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
         }))
       }
     }
+    // Remove @ symbol from Twitter and Instagram handles if present
+    if (field === 'twitter_handle' || field === 'ig_handle') {
+      const value = event.target.value.trim()
+      if (value) {
+        setSocials((prev) => ({
+          ...prev,
+          [field]: value.startsWith('@') ? value.slice(1) : value,
+        }))
+      }
+    }
   }
 
   const isValidUrl = (urlString: string): boolean => {
@@ -204,7 +214,8 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
               id="twitter_handle"
               value={socials.twitter_handle}
               onChange={handleChange('twitter_handle')}
-              placeholder="@yourhandle"
+              onBlur={handleBlur('twitter_handle')}
+              placeholder="yourhandle"
               className="input-field"
               disabled={submitting}
               maxLength={50}
@@ -220,7 +231,8 @@ export default function SocialLinksForm({ onSocialsUpdated }: SocialLinksFormPro
               id="ig_handle"
               value={socials.ig_handle}
               onChange={handleChange('ig_handle')}
-              placeholder="@yourhandle"
+              onBlur={handleBlur('ig_handle')}
+              placeholder="yourhandle"
               className="input-field"
               disabled={submitting}
               maxLength={50}

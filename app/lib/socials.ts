@@ -19,8 +19,9 @@ export const sanitizeSocialFields = (payload: Record<string, unknown>): Sanitize
           // Automatically add https:// protocol to URL fields if missing
           if (key === 'website' || key === 'linkedin') {
             result[key] = ensureHttpsProtocol(trimmed)
-          } else {
-            result[key] = trimmed
+          } else if (key === 'twitter_handle' || key === 'ig_handle') {
+            // Remove @ symbol from Twitter and Instagram handles if present
+            result[key] = trimmed.startsWith('@') ? trimmed.slice(1) : trimmed
           }
         } else {
           result[key] = null
