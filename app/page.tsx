@@ -166,135 +166,124 @@ export default function Home() {
         </section>
 
         {/* What is an antiresume Section */}
-        <section className="py-16 px-6">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-12">
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-noto font-light text-charcoal-800 text-center mb-4">
               What&apos;s in an antiresume?
             </h2>
+            <p className="text-center text-charcoal-600 mb-16 max-w-2xl mx-auto">
+              Three core elements that prove your worth
+            </p>
             
-            <div className="space-y-8">
-              {/* Component 1 */}
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-10 h-10 bg-sage-200 rounded-xl flex items-center justify-center">
-                  <span className="text-sage-500 font-noto font-medium">1</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Card 1 */}
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <FileText className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
-                <div>
-                  <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-2">
-                    Your actual work
-                  </h3>
-                  <p className="text-charcoal-600 leading-relaxed">
-                    Not bullet points about responsibilities — links to posts about real projects, code repositories, and things you&apos;ve shipped.
-                  </p>
-                </div>
+                <div className="text-sage-500 font-noto font-medium text-sm mb-3 tracking-wider">01</div>
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
+                  Your actual work
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Not bullet points about responsibilities — links to posts about real projects, code repositories, and things you&apos;ve shipped.
+                </p>
               </div>
 
-              {/* Component 2 */}
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-10 h-10 bg-sage-200 rounded-xl flex items-center justify-center">
-                  <span className="text-sage-500 font-noto font-medium">2</span>
+              {/* Card 2 */}
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
-                <div>
-                  <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-2">
-                    Social proof that matters
-                  </h3>
-                  <p className="text-charcoal-600 leading-relaxed">
-                    Embed tweets from people who&apos;ve worked with you, used your products, or genuinely support your work.
-                  </p>
-                </div>
+                <div className="text-sage-500 font-noto font-medium text-sm mb-3 tracking-wider">02</div>
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
+                  Social proof that matters
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Embed tweets from people who&apos;ve worked with you, used your products, or genuinely support your work.
+                </p>
               </div>
 
-              {/* Component 3 */}
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-10 h-10 bg-sage-200 rounded-xl flex items-center justify-center">
-                  <span className="text-sage-500 font-noto font-medium">3</span>
+              {/* Card 3 */}
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Sparkles className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
-                <div>
-                  <h3 className="text-xl font-noto font-medium text-charcoal-800 mb-2">
-                    Your digital footprint
-                  </h3>
-                  <p className="text-charcoal-600 leading-relaxed">
-                    Show your social links and what you&apos;ve shipped. Flex your digital footprint and public and real you.
-                  </p>
-                </div>
+                <div className="text-sage-500 font-noto font-medium text-sm mb-3 tracking-wider">03</div>
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
+                  Your digital footprint
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Show your social links and what you&apos;ve shipped. Flex your digital footprint and public and real you.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16 px-6 bg-sage-100/40">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
+        {/* For Builders Section */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-noto font-light text-charcoal-800 text-center mb-4">
               For Builders
             </h2>
-            <p className="text-center text-charcoal-600 mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-charcoal-600 mb-16 max-w-2xl mx-auto leading-relaxed">
               Whether you&apos;re engineering, designing, or trading — show your wins (and losses) the way they deserve to be shared.
             </p>
 
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Engineers Card */}
-              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
-                    <Code className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
-                      For Engineers
-                    </h3>
-                    <p className="text-charcoal-600 leading-relaxed mb-3">
-                      Stop sharing your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
-                    </p>
-                    <p className="text-charcoal-600 leading-relaxed font-medium">
-                      Flex <span className="text-sage-500 font-semibold">the product launches</span> that you were a part of and the numbers that it did online.
-                    </p>
-                  </div>
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Code className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
+                  For Engineers
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed mb-3">
+                  Stop sharing your best work in a PDF. Share the posts about your side projects blowing up, the shares by other legendary people, and the comments from people saying your code changed their life.
+                </p>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Flex <span className="text-sage-500 font-semibold">the product launches</span> that you were a part of and the numbers that it did online.
+                </p>
               </div>
 
               {/* Designers Card */}
-              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
-                    <Palette className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
-                      For Designers
-                    </h3>
-                    <p className="text-charcoal-600 leading-relaxed mb-3">
-                      Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral, and public online testimonials posted from clients who couldn&apos;t be happier.
-                    </p>
-                    <p className="text-charcoal-600 leading-relaxed font-medium">
-                      Show your work and the numbers that it did online and the <span className="text-sage-500 font-semibold">real reactions</span> from amazing people.
-                    </p>
-                  </div>
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Palette className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
+                  For Designers
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed mb-3">
+                  Traditional portfolios are static and boring. Share the public comments where people are blown away with your designs, posts of your designs going viral, and public online testimonials posted from clients who couldn&apos;t be happier.
+                </p>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Show your work and the numbers that it did online and the <span className="text-sage-500 font-semibold">real reactions</span> from amazing people.
+                </p>
               </div>
 
               {/* Traders Card */}
-              <div className="bg-matcha-cream border-2 border-sage-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-sage-200 rounded-xl flex items-center justify-center">
-                    <TrendingUp className="w-6 h-6 text-sage-500" strokeWidth={1.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-3">
-                      For Traders
-                    </h3>
-                    <p className="text-charcoal-600 leading-relaxed mb-3">
-                      Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you but show it all with real post evidence online where you shared it all in real-time and with the post receipts. That can&apos;t be faked. 
-                    </p>
-                    <p className="text-charcoal-600 leading-relaxed font-medium">
-                      <span className="text-sage-500 font-semibold">Flex your online receipts</span> where you were right on a thesis so early. 
-                    </p>
-                  </div>
+              <div className="bg-matcha-cream shadow-md rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
+                <h3 className="text-2xl font-noto font-medium text-charcoal-800 mb-4">
+                  For Traders
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed mb-3">
+                  Share your insane wins when you 10x a position. Share your brutal losses when the market humbled you but show it all with real post evidence online where you shared it all in real-time and with the post receipts. That can&apos;t be faked.
+                </p>
+                <p className="text-charcoal-600 leading-relaxed">
+                  <span className="text-sage-500 font-semibold">Flex your online receipts</span> where you were right on a thesis so early.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16 px-6 bg-matcha-light/30">
+        <section className="py-16 px-6">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-noto font-light text-charcoal-800 text-center mb-4">
               Why antiresume?
@@ -350,7 +339,7 @@ export default function Home() {
         </section>
 
         {/* Example antiresumes Section */}
-        <section className="py-12 px-6 bg-sage-50/50">
+        <section className="py-12 px-6">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl font-noto font-light text-charcoal-800 mb-6">
               Example antiresumes
@@ -385,7 +374,7 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-charcoal-200 bg-matcha-light/30">
+        <footer className="border-t border-charcoal-200">
           <div className="max-w-4xl mx-auto px-6 py-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="md:col-span-1">

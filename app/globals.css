@@ -821,3 +821,20 @@ h4 { font-size: 1.5rem; }
   opacity: 0.6;
   transform: rotate(-0.5deg);
 }
+
+/* Sage gradient backgrounds */
+.bg-sage-50\/30 {
+  background-color: rgba(232, 240, 234, 0.3);
+}
+
+.bg-sage-50\/50 {
+  background-color: rgba(232, 240, 234, 0.5);
+}
+
+.bg-sage-100\/40 {
+  background-color: rgba(232, 240, 234, 0.4);
+}
+
+.bg-matcha-light\/30 {
+  background-color: rgba(245, 241, 234, 0.3);
+}
