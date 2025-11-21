@@ -148,7 +148,7 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Card 1 */}
-              <div className="bg-matcha-cream border-2 border-sage-300 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+              <div className="bg-matcha-cream border border-sage-200/50 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
                 <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <FileText className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
@@ -162,7 +162,7 @@ export default function Home() {
               </div>
 
               {/* Card 2 */}
-              <div className="bg-matcha-cream border-2 border-sage-300 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+              <div className="bg-matcha-cream border border-sage-200/50 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
                 <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Users className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
@@ -176,7 +176,7 @@ export default function Home() {
               </div>
 
               {/* Card 3 */}
-              <div className="bg-matcha-cream border-2 border-sage-300 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+              <div className="bg-matcha-cream border border-sage-200/50 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
                 <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Sparkles className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
@@ -205,7 +205,7 @@ export default function Home() {
             {/* Bento Grid Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Engineers Card - Large Featured */}
-              <div className="lg:row-span-2 bg-gradient-to-br from-matcha-cream to-sage-100 border-2 border-sage-300 rounded-3xl p-8 lg:p-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
+              <div className="lg:row-span-2 bg-gradient-to-br from-matcha-cream to-sage-100 border border-sage-200/40 rounded-3xl p-8 lg:p-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
                 <div className="flex flex-col h-full">
                   <div className="w-16 h-16 bg-charcoal-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                     <Code className="w-8 h-8 text-matcha-cream" strokeWidth={1.5} />
@@ -227,7 +227,7 @@ export default function Home() {
               </div>
 
               {/* Designers Card */}
-              <div className="bg-gradient-to-br from-matcha-cream to-matcha-light border-2 border-sage-300 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+              <div className="bg-gradient-to-br from-matcha-cream to-matcha-light border border-sage-200/40 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                 <div className="w-14 h-14 bg-sage-200 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <Palette className="w-7 h-7 text-sage-500" strokeWidth={1.5} />
                 </div>
@@ -243,7 +243,7 @@ export default function Home() {
               </div>
 
               {/* Traders Card */}
-              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-700 border-2 border-charcoal-600 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group text-matcha-cream">
+              <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-700 border border-charcoal-600/30 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group text-matcha-cream">
                 <div className="w-14 h-14 bg-sage-400 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <TrendingUp className="w-7 h-7 text-charcoal-800" strokeWidth={2} />
                 </div>
