@@ -402,98 +402,86 @@ export default function Home() {
         >
           <div className="p-6 pt-20">
             <h2 className="text-xl font-noto font-semibold text-charcoal-800 mb-6">Manage Profile</h2>
-            <nav className="space-y-2">
-              <button
-                onClick={() => {
-                  setShowUpdateForm(false);
-                  setShowResumeForm(false);
-                  setShowSocialForm(false);
-                  setShowWalletForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <User className="w-5 h-5" />
-                  Profile
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowUpdateForm(!showUpdateForm);
-                  setShowResumeForm(false);
-                  setShowSocialForm(false);
-                  setShowWalletForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <Edit3 className="w-5 h-5" />
-                  Username
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowResumeForm(!showResumeForm);
-                  setShowSocialForm(false);
-                  setShowWalletForm(false);
-                  setShowUpdateForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <FileType className="w-5 h-5" />
-                  Resume
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowSocialForm(!showSocialForm);
-                  setShowResumeForm(false);
-                  setShowWalletForm(false);
-                  setShowUpdateForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <Share2 className="w-5 h-5" />
-                  Social Links
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowWalletForm(!showWalletForm);
-                  setShowResumeForm(false);
-                  setShowSocialForm(false);
-                  setShowUpdateForm(false);
-                  setSidebarOpen(false);
-                }}
-                className="w-full px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
-              >
-                <span className="font-medium inline-flex items-center gap-2">
-                  <Wallet className="w-5 h-5" />
-                  Wallets
-                </span>
-              </button>
-              
-              <div className="pt-4 mt-4 border-t border-sage-200">
+              <nav className="space-y-2">
                 <button
                   onClick={() => {
-                    setShowResetDialog(true);
+                    setShowUpdateForm(false);
+                    setShowResumeForm(false);
+                    setShowSocialForm(false);
+                    setShowWalletForm(false);
                     setSidebarOpen(false);
                   }}
-                  className="w-full px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
                 >
-                  <span className="font-medium inline-flex items-center gap-2">
-                    <Trash2 className="w-5 h-5" />
-                    Reset Profile
-                  </span>
+                  <User className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium">Profile</span>
                 </button>
-              </div>
-            </nav>
+                <button
+                  onClick={() => {
+                    setShowUpdateForm(!showUpdateForm);
+                    setShowResumeForm(false);
+                    setShowSocialForm(false);
+                    setShowWalletForm(false);
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                >
+                  <Edit3 className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium">Username</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setShowResumeForm(!showResumeForm);
+                    setShowSocialForm(false);
+                    setShowWalletForm(false);
+                    setShowUpdateForm(false);
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                >
+                  <FileType className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium">Resume</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setShowSocialForm(!showSocialForm);
+                    setShowResumeForm(false);
+                    setShowWalletForm(false);
+                    setShowUpdateForm(false);
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                >
+                  <Share2 className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium">Social Links</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setShowWalletForm(!showWalletForm);
+                    setShowResumeForm(false);
+                    setShowSocialForm(false);
+                    setShowUpdateForm(false);
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sage-100 transition-colors duration-200 text-left text-charcoal-700 hover:text-charcoal-800"
+                >
+                  <Wallet className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium">Wallets</span>
+                </button>
+
+                <div className="pt-4 mt-4 border-t border-sage-200">
+                  <button
+                    onClick={() => {
+                      setShowResetDialog(true);
+                      setSidebarOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-left text-red-600 hover:text-red-700"
+                  >
+                    <Trash2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium">Reset Profile</span>
+                  </button>
+                </div>
+              </nav>
           </div>
         </div>
 
